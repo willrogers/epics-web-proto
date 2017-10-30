@@ -2,7 +2,7 @@
 {
   "name": "EpicsWebProto",
   "version": "0.0.1",
-  "description": "Read a pv from EPICS",
+  "description": "Read a pv from EPICS, using React-Redux",
   "main": "index.js",
   "scripts": {
     "compile": "webpack",
@@ -58,6 +58,6 @@
     "karma-webpack": "^2.0.4",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
-    "sinon": "^3.2.1",
+    "sinon": "^3.2.1"
   }
 }

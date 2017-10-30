@@ -14,6 +14,7 @@ Setup:
 
 
 Dependencies:
+
     App:
         React
         Redux
