@@ -11,8 +11,10 @@ module.exports = {
     },
     module: {
         rules: [
-            {   test: /\.js$/,
-                include: [path.resolve(__dirname, 'client')],
+            {
+                /* These are the directories on which we run babel-loader */
+                test: /\.js$/,
+                include: [path.resolve(__dirname, 'client'), path.resolve(__dirname, 'tests')],
                 exclude: [/node_modules/],
                 use:['babel-loader']
             },
