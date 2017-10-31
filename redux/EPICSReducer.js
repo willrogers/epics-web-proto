@@ -3,23 +3,20 @@ import {
 } from '../client/actions/EPICSActions.js';
 
 const initialState = {
-    pvName: null,
-    pvValue: null
+    epicsData: {}
 };
 
 //Default params initialises state when nothing is passed
 function EPICSWebReducer(state = initialState, action){
+    console.log('reducer: the action type is ' + action.type);
     switch(action.type){
 
         case RECEIVE_PV_UPDATE:
-
-            Object.assign({}, state, {
-                pvName: action.payload.pvName,
-                pvValue: action.payload.pvValue
-            })
-
+            /* Set state according to what's in the action */
+            state.epicsData[action.payload.pvName] = action.payload.pvValue;
+            return state;
         default:
-            return state
+            return state;
     }
 }
 

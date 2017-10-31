@@ -8,6 +8,6 @@ export default class DivComponent extends React.Component{
     }
 
     render(){
-        return(<div> {this.props.EPICSValue} </div>);
+        return(<div>The value is {this.props.EPICSValue} </div>);
     }
 }
