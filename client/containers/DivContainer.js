@@ -1,11 +1,15 @@
 import React from 'react';
+import DivComponent from '../components/DivComponent.js';
+import {SuperContainer} from './SuperContainer.js'
 
-import {DivComponent} from '../components/DivComponent.js';
+export class DivContainer extends SuperContainer{
 
-export class DivContainer extends React.Component{
+    constructor(props){
+        super(props);
+    }
 
     render(){
-        return <DivComponent/>;
+        return(<DivComponent/>);
     }
 
 }

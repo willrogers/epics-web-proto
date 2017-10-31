@@ -10,5 +10,4 @@ export default class DivComponent extends React.Component{
     render(){
         return(<div> {this.props.EPICSValue} </div>);
     }
-
 }

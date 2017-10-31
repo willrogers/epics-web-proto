@@ -13,7 +13,7 @@ class App extends React.Component{
     }
 }
 
-document.addEventLIstener ('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', ()=>{
     ReactDOM.render(
         <App/>,
         document.getElementById('mount')
