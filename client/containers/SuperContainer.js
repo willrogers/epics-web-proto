@@ -1,14 +1,14 @@
 import React from 'react';
 
 import {subscribeToPV, receivePVUpdate} from '../actions/EPICSActions.js';
-import {store} from '../../redux/EPICSStore.js'
+import {store} from '../../redux/EPICSStore.js';
 
 var currentId = 0;
 
 export class SuperContainer extends React.Component{
 
     constructor(props){
-        super(props)
+        super(props);
         currentId++;
         this.state = {EPICSValue: null, PV: null};
         this.hookToStore();
@@ -27,7 +27,7 @@ export class SuperContainer extends React.Component{
     hookToStore(){
         store.subscribe(()=>{
             this.setState({ EPICSValue: store.getState().epicsData['pv']});
-        })
+        });
     }
 
 }

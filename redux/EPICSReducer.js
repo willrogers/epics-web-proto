@@ -11,12 +11,12 @@ function EPICSWebReducer(state = initialState, action){
     console.log('reducer: the action type is ' + action.type);
     switch(action.type){
 
-        case RECEIVE_PV_UPDATE:
-            /* Set state according to what's in the action */
-            state.epicsData[action.payload.pvName] = action.payload.pvValue;
-            return state;
-        default:
-            return state;
+    case RECEIVE_PV_UPDATE:
+        /* Set state according to what's in the action */
+        state.epicsData[action.payload.pvName] = action.payload.pvValue;
+        return state;
+    default:
+        return state;
     }
 }
 

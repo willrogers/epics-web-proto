@@ -1,6 +1,6 @@
 import React from 'react';
 import DivComponent from '../components/DivComponent.js';
-import {SuperContainer} from './SuperContainer.js'
+import {SuperContainer} from './SuperContainer.js';
 
 export class DivContainer extends SuperContainer{
 

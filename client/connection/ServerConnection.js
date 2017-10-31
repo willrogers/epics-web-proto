@@ -4,7 +4,7 @@
 //onMessage: create an action to dispatch to the store
 
 //Dummy Server to begin with:
-import {store} from '../../redux/EPICSStore.js'
+import {store} from '../../redux/EPICSStore.js';
 
 import {
     RECEIVE_PV_UPDATE,
@@ -24,6 +24,6 @@ export default class ServerConnection{
                 pvValue: 1234567
             }
         });
-    };
+    }
 
 }
