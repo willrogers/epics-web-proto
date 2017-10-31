@@ -8,28 +8,37 @@ A simple web page to display an EPICS PV using the Redux design pattern, express
 
 
 Setup:
-    From the command line, enter: 
+    From the command line, enter the commands: 
 
         npm install
+        npm start
+
+        Navigate to http://localhost:3000/ in your browser
 
 
 Dependencies:
 
     App:
         React
-        Redux
-        Flux
+        Redux: Not sure what this provides as it is mostly pattern
+        Flux: Provides the dispatcher functionality
 
     Testing:
-        Karma
+        Karma: Config located in './karma.conf.js'
         Mocha
         Chai
-        Eslint
+        Eslint: Config located in './.eslintrc'
         Sinon
         Enzyme
 
     Development:
-        Webpack
-        Babel
+        Webpack: Config located in './webpack.config.js'
+        Babel: Config located in './.babelrc'
 
 
+Architecture:
+    Flux: A design pattern created by Facebook. Key idea is unidirectional flow of data, allowing for easy debugging as there is a clear chain of actions leading to any error.
+
+    Redux: This introduces the idea of a single, global store to hold your state. Reducers are used to return new data, based on the old data along with a new request to change it. This allows us to keep an immutable store. Couples with Flux
+
+    React: This is a UI framework that allows us to update specific elements of a web page with particular efficiency. A DOM is kept in memeory (Virtual Dom), which is  

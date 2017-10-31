@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export class DivComponent extends React.Component{
+export default class DivComponent extends React.Component{
 
     constructor(props){
         super(props);
