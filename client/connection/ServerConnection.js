@@ -11,12 +11,12 @@ import {
     receivePVUpdate
 } from '../actions/EPICSActions.js';
 
-export default class ServerConnection{
+export default class ServerConnection {
 
-    constructor(){
+    constructor() {
     }
 
-    subscribePV(){
+    subscribePV() {
         store.dispatch({
             type: RECEIVE_PV_UPDATE,
             payload: {

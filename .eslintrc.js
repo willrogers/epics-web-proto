@@ -24,6 +24,7 @@ module.exports = {
         "quotes": [ "error", "single" ],
         "semi": [ "error", "always" ],
         "space-before-function-paren": [ "warn", "never" ],
+        "space-before-blocks": [ "warn", "always" ],
         "no-trailing-spaces": [ "warn" ]
     }
 };

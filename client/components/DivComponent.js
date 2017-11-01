@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-export default class DivComponent extends React.Component{
+export default class DivComponent extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    render(){
+    render() {
         return(<div>The value is {this.props.EPICSValue} </div>);
     }
 }

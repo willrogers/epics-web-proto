@@ -7,9 +7,9 @@ const initialState = {
 };
 
 //Default params initialises state when nothing is passed
-function EPICSWebReducer(state = initialState, action){
+function EPICSWebReducer(state = initialState, action) {
     console.log('reducer: the action type is ' + action.type);
-    switch(action.type){
+    switch(action.type) {
 
     case RECEIVE_PV_UPDATE:
         /* Set state according to what's in the action */

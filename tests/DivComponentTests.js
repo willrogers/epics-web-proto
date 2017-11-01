@@ -6,10 +6,10 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {expect} from 'chai';
 
-describe('DivComponent', function(){
+describe('DivComponent', function() {
     var shallowDiv = shallow(<DivComponent EPICSValue="hello"/>);
 
-    it('Should render a div', function(){
+    it('Should render a div', function() {
         expect(shallowDiv.type()).to.equal('div');
     });
 });
