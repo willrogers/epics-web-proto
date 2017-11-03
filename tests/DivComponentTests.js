@@ -1,7 +1,7 @@
 import DivComponent from '../client/components/DivComponent.js';
-
+/*eslint-disable no-unused-vars*/
 import React from 'react';
-
+/*eslint-disable no-unused-vars*/
 
 import {shallow} from 'enzyme';
 import {expect} from 'chai';
