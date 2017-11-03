@@ -2,7 +2,7 @@ import React from 'react';
 
 import {store} from '../../redux/EPICSStore.js';
 import {ServerConnection} from '../connection/ServerConnection.js';
-import {createSubscription} from '../actions/EPICSActions';
+import {createConnection} from '../actions/EPICSActions';
 
 
 var currentId = 0;
@@ -18,7 +18,7 @@ export class SuperContainer extends React.Component {
 
     componentDidMount() {
         /* send off an action to avoid having to set up the EPICS connection */
-        createSubscription();
+        createConnection();
     }
 
     returnId() {
@@ -28,9 +28,9 @@ export class SuperContainer extends React.Component {
     //Register the component to listen to the store. This triggers when 
     //the store has changed.
     hookToStore() {
-        var self = this;
+
         store.subscribe(()=>{
-            self.setState({ EPICSValue: store.getState().epicsData['pv']});
+            this.setState({ EPICSValue: store.getState().epicsData['pv']});
         });
     }
 

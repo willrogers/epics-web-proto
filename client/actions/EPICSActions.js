@@ -2,7 +2,7 @@ import {store} from '../../redux/EPICSStore.js';
 
 //Action types
 export const UPDATE_PV = 'UPDATE_PV';
-export const CREATE_SUBSCRIPTION = 'CREATE_SUBSCRIPTION';
+export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 
 
 //Action creators

@@ -21,7 +21,7 @@ function EPICSWebReducer(state = initialState, action) {
     default:
         return state;
 
-    case CREATE_SUBSCRIPTION:
+    case CREATE_CONNECTION:
         if(state.connectionObject === null) {
             state.connectionObject = new ServerConnection();
         }
