@@ -1,16 +1,25 @@
 import {store} from '../../redux/EPICSStore.js';
+import {ServerConnection} from '../connection/ServerConnection.js'
 
 //Action types
-export const RECEIVE_PV_UPDATE = 'RECEIVE_PV_UPDATE';
-export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
+export const UPDATE_PV = 'UPDATE_PV';
+export const CREATE_SUBSCRIPTION = 'CREATE_SUBSCRIPTION';
+
 
 //Action creators
-export function receivePVUpdate(newValue) {
-
+export function updatePV(newValue) {
     const update = store.dispatch({
-        type: RECEIVE_PV_UPDATE,
+        type: UPDATE_PV,
         payload: { pvName: 'pv', pvValue: newValue }
     });
-
     return update;
+}
+
+
+export function createSubscription() {
+    const update = store.dispatch({
+        type: CREATE_SUBSCRIPTION,
+        payload: new ServerConnection()
+    });
+
 }

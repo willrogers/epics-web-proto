@@ -4,7 +4,7 @@
 //onMessage: create an action to dispatch to the store
 
 //import {store} from '../../redux/EPICSStore.js';
-import {receivePVUpdate} from '../actions/EPICSActions.js';
+import {updatePV} from '../actions/EPICSActions.js';
 
 
 const webSockAddress = 'ws://localhost:8080/ws';
@@ -28,7 +28,7 @@ export class ServerConnection {
         this.connection.onmessage = (message)=>{
             var response = JSON.parse(message.data);
             var newMalcolmValue = response.value;
-            receivePVUpdate(newMalcolmValue);
+            updatePV(newMalcolmValue);
         };
     }
 
