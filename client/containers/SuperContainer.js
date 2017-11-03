@@ -28,8 +28,9 @@ export class SuperContainer extends React.Component {
     //Register the component to listen to the store. This triggers when 
     //the store has changed.
     hookToStore() {
+        var self = this;
         store.subscribe(()=>{
-            this.setState({ EPICSValue: store.getState().epicsData['pv']});
+            self.setState({ EPICSValue: store.getState().epicsData['pv']});
         });
     }
 
