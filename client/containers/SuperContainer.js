@@ -5,9 +5,9 @@ import {ServerConnection} from '../connection/ServerConnection.js';
 
 var currentId = 0;
 
-export class SuperContainer extends React.Component{
+export class SuperContainer extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         currentId++;
         this.state = {EPICSValue: null, PV: null};
@@ -15,18 +15,18 @@ export class SuperContainer extends React.Component{
         this.EPICSConnection = new ServerConnection();
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.EPICSConnection.createSubscription();
 
         /* send off an action to avoid having to set up the EPICS connection */
         //receivePVUpdate(100);
     }
 
-    returnId(){
+    returnId() {
         return currentId;
     }
 
-    hookToStore(){
+    hookToStore() {
         store.subscribe(()=>{
             this.setState({ EPICSValue: store.getState().epicsData['pv']});
         });

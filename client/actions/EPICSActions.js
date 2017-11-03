@@ -5,7 +5,7 @@ export const RECEIVE_PV_UPDATE = 'RECEIVE_PV_UPDATE';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 
 //Action creators
-export function receivePVUpdate(newValue){
+export function receivePVUpdate(newValue) {
 
     const update = store.dispatch({
         type: RECEIVE_PV_UPDATE,
@@ -14,6 +14,3 @@ export function receivePVUpdate(newValue){
 
     return update;
 }
-
-
-

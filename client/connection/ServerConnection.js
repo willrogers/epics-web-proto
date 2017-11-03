@@ -14,7 +14,7 @@ const subscriptionJSON = JSON.stringify({
     'path' : [ 'SIGNAL', 'signal', 'value' ]
 });
 
-export class ServerConnection{
+export class ServerConnection {
 
     constructor(){
         this.connection = new WebSocket(webSockAddress);
@@ -23,7 +23,7 @@ export class ServerConnection{
         };
     }
 
-    createSubscription(){
+    createSubscription() {
         this.connection.send(subscriptionJSON);
         this.connection.onmessage = (message)=>{
             var response = JSON.parse(message.data);
@@ -31,6 +31,5 @@ export class ServerConnection{
             receivePVUpdate(newMalcolmValue);
         };
     }
-
 
 }

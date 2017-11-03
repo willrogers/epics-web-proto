@@ -6,7 +6,11 @@ module.exports = {
         "mocha": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        /* Avoid complaints about unused React import. */
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -24,6 +28,7 @@ module.exports = {
         "quotes": [ "error", "single" ],
         "semi": [ "error", "always" ],
         "space-before-function-paren": [ "warn", "never" ],
+        "space-before-blocks": [ "warn", "always" ],
         "no-trailing-spaces": [ "warn" ]
     }
 };

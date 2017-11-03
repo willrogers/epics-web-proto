@@ -4,13 +4,13 @@ import React from 'react';
 import DivComponent from '../components/DivComponent.js';
 import {SuperContainer} from './SuperContainer.js';
 
-export class DivContainer extends SuperContainer{
+export class DivContainer extends SuperContainer {
 
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    render(){
+    render() {
         return(<DivComponent EPICSValue={this.state.EPICSValue}/>);
     }
 
