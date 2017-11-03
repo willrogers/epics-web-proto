@@ -1,7 +1,5 @@
 import React from 'react';
-
 import {store} from '../../redux/EPICSStore.js';
-import {ServerConnection} from '../connection/ServerConnection.js';
 import {createConnection} from '../actions/EPICSActions';
 
 
@@ -18,14 +16,14 @@ export class SuperContainer extends React.Component {
 
     componentDidMount() {
         /* send off an action to avoid having to set up the EPICS connection */
-        createConnection();
+        connectToServer();
     }
 
     returnId() {
         return currentId;
     }
 
-    //Register the component to listen to the store. This triggers when 
+    //Register the component to listen to the store. This triggers when
     //the store has changed.
     hookToStore() {
 

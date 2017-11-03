@@ -1,9 +1,10 @@
 import {
     UPDATE_PV,
-    CREATE_CONNECTION
+    CREATE_CONNECTION,
+    SUBSCRIBE_TO_PV
 } from '../client/actions/EPICSActions.js';
 
-import {ServerConnection} from '../client/connection/ServerConnection.js'
+import {ServerConnection} from '../client/connection/ServerConnection.js';
 
 const initialState = {
     epicsData: {},
@@ -16,16 +17,30 @@ function EPICSWebReducer(state = initialState, action) {
 
     case UPDATE_PV:
         /* Set state according to what's in the action */
-        state.epicsData[action.payload.pvName] = action.payload.pvValue;
-        return state;
-    default:
-        return state;
+        // state.epicsData[action.payload.pvName] = action.payload.pvValue;
+        // return state;
 
+        var newEpicsData = Object.assign({}, state.epicsData);
+        newEpicsData[action.payload.pvName] = action.payload.pvValue;
+
+        return Object.assign({}, state,{
+            epicsData: newEpicsData
+        });
+
+    
     case CREATE_CONNECTION:
         if(state.connectionObject === null) {
-            state.connectionObject = new ServerConnection();
+            return Object.assign({}, state, {
+                connectionObject: new ServerConnection()
+            });
         }
 
+    case SUBSCRIBE_TO_PV:
+        connection = store.connectionObject();
+        connection.createSubscription(action.payload.pvName);
+
+    default:
+        return state;
     }
 }
 
