@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {subscribeToPV, receivePVUpdate} from '../actions/EPICSActions.js';
 import {store} from '../../redux/EPICSStore.js';
+import {ServerConnection} from '../connection/ServerConnection.js';
 
 var currentId = 0;
 
@@ -12,12 +12,14 @@ export class SuperContainer extends React.Component{
         currentId++;
         this.state = {EPICSValue: null, PV: null};
         this.hookToStore();
+        this.EPICSConnection = new ServerConnection();
     }
 
     componentDidMount(){
-        subscribeToPV(this.state.PV, currentId);
+        this.EPICSConnection.createSubscription();
+
         /* send off an action to avoid having to set up the EPICS connection */
-        receivePVUpdate(100);
+        //receivePVUpdate(100);
     }
 
     returnId(){

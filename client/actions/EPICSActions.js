@@ -1,4 +1,3 @@
-import ServerConnection from '../connection/ServerConnection.js';
 import {store} from '../../redux/EPICSStore.js';
 
 //Action types
@@ -16,19 +15,5 @@ export function receivePVUpdate(newValue){
     return update;
 }
 
-export function subscribeToPV(desiredPV, componentID){
 
-    var server = new ServerConnection();
-    server.subscribePV();
-    /*
-    return
-        dispatch({
-            type: SUBSCRIBE_TO_PV,
-            payload: {
-                PV: desiredPV,
-                ID: componentID
-            }
-        });
-    */
-}
 
