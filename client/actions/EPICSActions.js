@@ -6,31 +6,24 @@ export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 
 //Action creators
-export function updatePV(newValue) {
+export function updatePV(newValue, pvName) {
     const updateAction = store.dispatch({
         type: UPDATE_PV,
-        payload: { pvName: 'pv', pvValue: newValue }
+        payload: {pvName: pvName, pvValue: newValue}
     });
     return updateAction;
 }
 
-
 export function connectToServer(comp) {
-
-    console.log("comp in EpicsActions - connectToServer: ")
-    console.log(comp)
-
     const connectAction = store.dispatch({
         type: CREATE_CONNECTION,
         payload: {component: comp}
     });
-    
-    console.log("connectAction output from connectToServer");
-    console.log(connectAction);
     return connectAction;
 }
 
-
+//TODO currently connection and subscription are handled as one.
+//We need to split this apart with this currently unused function:
 export function subscribe(desiredPVName) {
     const subscribeAction = store.dispatch({
         type: SUBSCRIBE_TO_PV,

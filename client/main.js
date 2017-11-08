@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom';
 import {DivContainer} from './containers/DivContainer.js';
 
 class App extends React.Component {
-
     render() {
         return(
-
-            <div>                
-                <div id="signal">
-                    <DivContainer block="SIGNAL" property="signal" />
-                </div>
-                <div>
-                </div>
+            <div>
+                <DivContainer block="ADC" property="adc"/>
+                <DivContainer block="SIGNAL" property="signal"/>
+                <DivContainer block="TEMPERATURE" property="temp1"/>
             </div>
         );
     }

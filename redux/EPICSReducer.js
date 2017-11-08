@@ -1,7 +1,6 @@
 import {
     UPDATE_PV,
-    CREATE_CONNECTION,
-    SUBSCRIBE_TO_PV
+    CREATE_CONNECTION
 } from '../client/actions/EPICSActions.js';
 
 import {ServerConnection} from '../client/connection/ServerConnection.js';
@@ -16,26 +15,27 @@ function EPICSWebReducer(state = initialState, action) {
     switch(action.type) {
 
     case UPDATE_PV:
-        /* Set state according to what's in the action */
+        // Set state according to what's in the action
         var newEpicsData = Object.assign({}, state.epicsData);
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
-
         return Object.assign({}, state,{
             epicsData: newEpicsData
         });
 
     case CREATE_CONNECTION:
         if(state.connectionObject === null) {
-            console.log("payload.comp in reducer.CREATE_CONNECTION")
-            console.log(action.payload.component)
-            return Object.assign({}, state, {
-                connectionObject: new ServerConnection(action.payload.component)
-            });
+            //return Object.assign({}, state, {
+            new ServerConnection(action.payload.component);
+            //});
+            // Here, we are throwing the connection object away.
+            // The component that listens to the return from malcolm is the reason that
+            // it persists.
+            //
+            // TODO: figure out how to keep the WS and reuse it.
+            //
+            return state;
         }
-
-    case SUBSCRIBE_TO_PV:
-        connection = store.connectionObject();
-        connection.createSubscription(action.payload.pvName);
+        break;
 
     default:
         return state;
