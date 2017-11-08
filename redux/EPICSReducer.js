@@ -17,9 +17,6 @@ function EPICSWebReducer(state = initialState, action) {
 
     case UPDATE_PV:
         /* Set state according to what's in the action */
-        // state.epicsData[action.payload.pvName] = action.payload.pvValue;
-        // return state;
-
         var newEpicsData = Object.assign({}, state.epicsData);
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
 
@@ -27,11 +24,12 @@ function EPICSWebReducer(state = initialState, action) {
             epicsData: newEpicsData
         });
 
-    
     case CREATE_CONNECTION:
         if(state.connectionObject === null) {
+            console.log("payload.comp in reducer.CREATE_CONNECTION")
+            console.log(action.payload.component)
             return Object.assign({}, state, {
-                connectionObject: new ServerConnection()
+                connectionObject: new ServerConnection(action.payload.component)
             });
         }
 

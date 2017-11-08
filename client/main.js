@@ -6,8 +6,13 @@ class App extends React.Component {
 
     render() {
         return(
-            <div>
-                <DivContainer/>
+
+            <div>                
+                <div id="signal">
+                    <DivContainer block="SIGNAL" property="signal" />
+                </div>
+                <div>
+                </div>
             </div>
         );
     }

@@ -15,10 +15,18 @@ export function updatePV(newValue) {
 }
 
 
-export function connectToServer() {
+export function connectToServer(comp) {
+
+    console.log("comp in EpicsActions - connectToServer: ")
+    console.log(comp)
+
     const connectAction = store.dispatch({
-        type: CREATE_CONNECTION
+        type: CREATE_CONNECTION,
+        payload: {component: comp}
     });
+    
+    console.log("connectAction output from connectToServer");
+    console.log(connectAction);
     return connectAction;
 }
 
