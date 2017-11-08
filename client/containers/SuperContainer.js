@@ -1,7 +1,9 @@
 import React from 'react';
-
 import {store} from '../../redux/EPICSStore.js';
-import {ServerConnection} from '../connection/ServerConnection.js';
+import {connectToServer} from '../actions/EPICSActions';
+import PropTypes from 'prop-types';
+
+
 
 var currentId = 0;
 
@@ -9,27 +11,27 @@ export class SuperContainer extends React.Component {
 
     constructor(props) {
         super(props);
+        this.id = currentId;
         currentId++;
         this.state = {EPICSValue: null, PV: null};
         this.hookToStore();
-        this.EPICSConnection = new ServerConnection();
     }
 
     componentDidMount() {
-        this.EPICSConnection.createSubscription();
-
-        /* send off an action to avoid having to set up the EPICS connection */
-        //receivePVUpdate(100);
+        connectToServer(this);
     }
 
-    returnId() {
-        return currentId;
-    }
-
+    //Register the component to listen to the store. This triggers when
+    //the store has changed.
     hookToStore() {
         store.subscribe(()=>{
-            this.setState({ EPICSValue: store.getState().epicsData['pv']});
+            this.setState({ EPICSValue: store.getState().epicsData[this.props.property]});
         });
     }
 
+    render() {
+        return null;
+    }
 }
+
+SuperContainer.propTypes = { property: PropTypes.string };

@@ -1,35 +1,41 @@
-//Malcolm stuffs
-//Holds a websocket connection
-//Will get called on component instantiation to make a subscription
-//onMessage: create an action to dispatch to the store
-
-//import {store} from '../../redux/EPICSStore.js';
-import {receivePVUpdate} from '../actions/EPICSActions.js';
-
-
+import {updatePV} from '../actions/EPICSActions.js';
 const webSockAddress = 'ws://localhost:8080/ws';
-const subscriptionJSON = JSON.stringify({
-    'typeid' : 'malcolm:core/Subscribe:1.0',
-    'id' : 1,
-    'path' : [ 'SIGNAL', 'signal', 'value' ]
-});
+const malcolmSubscribeMethod = 'malcolm:core/Subscribe:1.0';
 
 export class ServerConnection {
 
-    constructor(){
+    constructor(comp) {
+        this.componentObject = comp;
+        this.createConnection();
+    }
+
+    createConnection() {
         this.connection = new WebSocket(webSockAddress);
-        this.connection.onopen = ()=>{
+        this.connection.onopen = ()=> {
             this.createSubscription();
         };
     }
 
+    //TODO: Make a subscription action to go round the loop as well.
     createSubscription() {
-        this.connection.send(subscriptionJSON);
+        this.connection.send(this.generateSubscriptionJSON());
         this.connection.onmessage = (message)=>{
             var response = JSON.parse(message.data);
-            var newMalcolmValue = response.value;
-            receivePVUpdate(newMalcolmValue);
+            var newMalcolmValue = response.value.value;
+            updatePV(newMalcolmValue, this.componentObject.props.property);
         };
+    }
+
+    generateSubscriptionJSON() {
+        var subJSON = JSON.stringify({
+            'typeid': malcolmSubscribeMethod,
+            'id': this.componentObject.id,
+            'path': [
+                this.componentObject.props.block,
+                this.componentObject.props.property
+            ]
+        });
+        return subJSON;
     }
 
 }

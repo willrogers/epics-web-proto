@@ -11,7 +11,9 @@ export class DivContainer extends SuperContainer {
     }
 
     render() {
-        return(<DivComponent EPICSValue={this.state.EPICSValue}/>);
+        return(
+            <DivComponent EPICSValue={this.state.EPICSValue} />
+        );
     }
 
 }
