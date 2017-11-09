@@ -7,7 +7,7 @@ import {ServerConnection} from '../client/connection/ServerConnection.js';
 
 const initialState = {
     epicsData: {},
-    connectionObject: null //There can only be one
+    connectionObject: null 
 };
 
 //Default params initialises state when nothing is passed
@@ -24,9 +24,11 @@ function EPICSWebReducer(state = initialState, action) {
 
     case CREATE_CONNECTION:
         if(state.connectionObject === null) {
+
             //return Object.assign({}, state, {
             new ServerConnection(action.payload.component);
             //});
+
             // Here, we are throwing the connection object away.
             // The component that listens to the return from malcolm is the reason that
             // it persists.

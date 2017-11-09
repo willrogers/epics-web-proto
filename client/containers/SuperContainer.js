@@ -21,6 +21,7 @@ export class SuperContainer extends React.Component {
         connectToServer(this);
     }
 
+
     //Register the component to listen to the store. This triggers when
     //the store has changed.
     hookToStore() {
