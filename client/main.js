@@ -1,8 +1,16 @@
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {DivContainer} from './containers/DivContainer.js';
+import {connectToServer} from './actions/EPICSActions.js'
 
 class App extends React.Component {
+
+    componentWillMount(){
+        connectToServer();
+    }
+
     render() {
         return(
             <div>
