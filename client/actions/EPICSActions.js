@@ -7,7 +7,7 @@ export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 
 //Action creators
 export function updatePV(newValue, pvName) {
-    const updateAction = epicsStore.dispatch({
+    const updateAction = store.dispatch({
         type: UPDATE_PV,
         payload: {pvName: pvName, pvValue: newValue}
     });
