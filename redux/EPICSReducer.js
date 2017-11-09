@@ -32,7 +32,7 @@ function EPICSReducer(state = initialState, action) {
         case CREATE_CONNECTION:
         if(state.connectionObject === null) {
             return Object.assign({}, state, {
-                connectionObject: new ServerConnection()
+                connectionObject: new ServerConnection(action.payload.url)
             });
         }
         break;

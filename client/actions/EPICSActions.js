@@ -14,9 +14,11 @@ export function updatePV(newValue, pvName) {
     return updateAction;
 }
 
-export function connectToServer() {
+export function connectToServer(websocket_url) {
     const connectAction = store.dispatch({
-        type: CREATE_CONNECTION
+        type: CREATE_CONNECTION,
+        payload: {url: websocket_url}
+
     });
     return connectAction;
 }

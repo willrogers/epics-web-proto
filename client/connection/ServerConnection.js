@@ -1,11 +1,10 @@
 import {updatePV} from '../actions/EPICSActions.js';
-const webSockAddress = 'ws://pc0088:8080/ws';
 const malcolmSubscribeMethod = 'malcolm:core/Subscribe:1.0';
 
 export class ServerConnection {
 
-    constructor() {
-        this.wsConnection = new WebSocket(webSockAddress);
+    constructor(websocket_url) {
+        this.wsConnection = new WebSocket(websocket_url);
         /* Store the pvs and ids, so that when a message comes back with a
          * particular id, we know which pv to associate it with. */
         this.pvIds = {};
