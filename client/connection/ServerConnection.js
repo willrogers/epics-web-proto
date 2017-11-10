@@ -1,5 +1,6 @@
 import {updatePV} from '../actions/EPICSActions.js';
 const malcolmSubscribeMethod = 'malcolm:core/Subscribe:1.0';
+const malcolmUnsubscribeMethod = 'malcolm:core/Unsubscribe:1.0';
 
 export class ServerConnection {
 
@@ -20,14 +21,14 @@ export class ServerConnection {
             for (var i = 0; i < this.cachedSubscribeRequests.length; i++) {
                 this.wsConnection.send(this.cachedSubscribeRequests[i]);
             }
-        }
+        };
     }
 
     createSubscription(comp) {
         var subscribeRequest = this.generateSubscriptionJSON(comp);
         /* If the websocket is ready, send the message. Otherwise, add to the
          * list of messages to be sent. */
-        if (this.wsConnection.readState === 1) {
+        if (this.wsConnection.readyState === 1) {
             this.wsConnection.send(subscribeRequest);
         } else {
             this.cachedSubscribeRequests.push(subscribeRequest);
@@ -48,4 +49,19 @@ export class ServerConnection {
         return subJSON;
     }
 
+    unsubscribe(id) {
+        var unsubJSON = this.generateUnsubJSON(id);
+        if (this.wsConnection.readyState === 1) {
+            this.wsConnection.send(unsubJSON);
+        }
+    }
+
+    generateUnsubJSON(id) {
+        //Create the following JSON and convert it to a malcolm-friendly string
+        const unsubJSON = JSON.stringify({
+            'typeid': malcolmUnsubscribeMethod,
+            'id': id
+        });
+        return unsubJSON;
+    }
 }

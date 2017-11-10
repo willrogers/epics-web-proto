@@ -1,6 +1,6 @@
 import React from 'react';
 import {store} from '../../redux/EPICSStore.js';
-import {subscribeToPV} from '../actions/EPICSActions';
+import {subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions';
 import PropTypes from 'prop-types';
 
 var currentId = 0;
@@ -17,15 +17,27 @@ export class SuperContainer extends React.Component {
 
     componentDidMount() {
         subscribeToPV(this);
+        var self = this;
+        window.addEventListener('beforeunload', function() {
+            unsubscribeToPV(self.id);
+        });
     }
+
+    // componentWillUnmount(){
+    //     var self = this;
+    //     window.removeEventListener('beforeunload', function(){
+    //         unsubscribeToPV(self.id)
+    //     });
+    // }
 
     //Register the component to listen to the store. This triggers when
     //the store has changed.
     hookToStore() {
-        
         store.subscribe(()=>{
             if (typeof store.getState() !== 'undefined') {
-                this.setState({EPICSValue: store.getState().epicsData[this.props.property]});
+                this.setState(
+                    {EPICSValue: store.getState().epicsData[this.props.property]}
+                );
             }
         });
     }
