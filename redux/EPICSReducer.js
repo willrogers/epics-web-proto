@@ -1,14 +1,15 @@
 import {
     UPDATE_PV,
     CREATE_CONNECTION,
-    SUBSCRIBE_TO_PV
+    SUBSCRIBE_TO_PV,
+    UNSUBSCRIBE_TO_PV
 } from '../client/actions/EPICSActions.js';
 
 import {ServerConnection} from '../client/connection/ServerConnection.js'
 
 const initialState = {
     epicsData: {},
-    connectionObject: null 
+    connectionObject: null
 };
 
 //Default params initialises state when nothing is passed
@@ -19,6 +20,12 @@ function EPICSReducer(state = initialState, action) {
         if(state.connectionObject !== null){
             var connection = state.connectionObject
             connection.createSubscription(action.payload.component);
+        }
+
+        case UNSUBSCRIBE_TO_PV:
+        if(1 === 1 ){
+            var connection = state.connectionObject
+            connection.unsubscribe(action.payload.unsubID)
         }
 
         case UPDATE_PV:
@@ -36,6 +43,8 @@ function EPICSReducer(state = initialState, action) {
             });
         }
         break;
+
+
 
         default:
         return state;

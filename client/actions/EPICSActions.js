@@ -4,6 +4,7 @@ import {store} from '../../redux/EPICSStore.js';
 export const UPDATE_PV = 'UPDATE_PV';
 export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
+export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 
 //Action creators
 export function updatePV(newValue, pvName) {
@@ -18,7 +19,6 @@ export function connectToServer(websocket_url) {
     const connectAction = store.dispatch({
         type: CREATE_CONNECTION,
         payload: {url: websocket_url}
-
     });
     return connectAction;
 }
@@ -29,4 +29,12 @@ export function subscribeToPV(comp) {
         payload: {component: comp}
     });
     return subscribeAction;
+}
+
+export function unsubscribeToPV(id) {
+    const unsubscribeAction = store.dispatch({
+        type: UNSUBSCRIBE_TO_PV,
+        payload: {unsubID: id}
+    });
+    return unsubscribeAction;
 }
