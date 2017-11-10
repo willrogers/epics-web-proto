@@ -1,4 +1,4 @@
 import {createStore} from 'redux';
-import EPICSWebReducer from './EPICSReducer.js';
-export const store = createStore(EPICSWebReducer);
+import EPICSReducer from './EPICSReducer.js';
+export const store = createStore(EPICSReducer);
 

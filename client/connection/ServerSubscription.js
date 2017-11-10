@@ -1,23 +1,13 @@
-import {updatePV} from '../actions/EPICSActions.js';
-const webSockAddress = 'ws://localhost:8080/ws';
 const malcolmSubscribeMethod = 'malcolm:core/Subscribe:1.0';
 
-export class ServerConnection {
+export class ServerSubscription {
 
-    constructor(comp) {
-        this.componentObject = comp;
-        this.createConnection();
-    }
-
-    createConnection() {
-        this.connection = new WebSocket(webSockAddress);
-        this.connection.onopen = ()=> {
-            this.createSubscription();
-        };
+    constructor(){
+        console.log("I am a serverSubscription")
     }
 
     //TODO: Make a subscription action to go round the loop as well.
-    createSubscription() {
+    createSubscription(comp) {
         this.connection.send(this.generateSubscriptionJSON());
         this.connection.onmessage = (message)=>{
             var response = JSON.parse(message.data);
@@ -25,8 +15,6 @@ export class ServerConnection {
             updatePV(newMalcolmValue, this.componentObject.props.property);
         };
     }
-
-    unsubscribe(){} 
 
     generateSubscriptionJSON() {
         var subJSON = JSON.stringify({
@@ -39,7 +27,4 @@ export class ServerConnection {
         });
         return subJSON;
     }
-
-
-
 }
