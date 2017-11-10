@@ -14,20 +14,19 @@ export function updatePV(newValue, pvName) {
     return updateAction;
 }
 
-export function connectToServer(comp) {
+export function connectToServer(websocket_url) {
     const connectAction = store.dispatch({
         type: CREATE_CONNECTION,
-        payload: {component: comp}
+        payload: {url: websocket_url}
+
     });
     return connectAction;
 }
 
-//TODO currently connection and subscription are handled as one.
-//We need to split this apart with this currently unused function:
-export function subscribe(desiredPVName) {
+export function subscribeToPV(comp) {
     const subscribeAction = store.dispatch({
         type: SUBSCRIBE_TO_PV,
-        payload: {pvName: desiredPVName}
+        payload: {component: comp}
     });
     return subscribeAction;
 }
