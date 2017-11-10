@@ -26,6 +26,8 @@ export class ServerConnection {
         };
     }
 
+    unsubscribe(){} 
+
     generateSubscriptionJSON() {
         var subJSON = JSON.stringify({
             'typeid': malcolmSubscribeMethod,
@@ -37,5 +39,7 @@ export class ServerConnection {
         });
         return subJSON;
     }
+
+
 
 }
