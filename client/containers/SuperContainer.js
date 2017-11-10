@@ -9,6 +9,7 @@ export class SuperContainer extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log("SuperCont Constr")
         this.id = currentId;
         currentId++;
         this.state = {EPICSValue: null, PV: null};

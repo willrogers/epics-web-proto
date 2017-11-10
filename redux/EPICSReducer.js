@@ -5,7 +5,7 @@ import {
     UNSUBSCRIBE_TO_PV
 } from '../client/actions/EPICSActions.js';
 
-import {ServerConnection} from '../client/connection/ServerConnection.js'
+import {ServerConnection} from '../client/connection/ServerConnection.js';
 
 const initialState = {
     epicsData: {},
@@ -16,37 +16,39 @@ const initialState = {
 function EPICSReducer(state = initialState, action) {
     switch(action.type) {
 
-        case SUBSCRIBE_TO_PV:
-        if(state.connectionObject !== null){
-            var connection = state.connectionObject
+    case SUBSCRIBE_TO_PV:
+        if(state.connectionObject !== null) {
+            var connection = state.connectionObject;
             connection.createSubscription(action.payload.component);
+        } else {
+            return state;
         }
 
         case UNSUBSCRIBE_TO_PV:
-        if(1 === 1 ){
-            var connection = state.connectionObject
-            connection.unsubscribe(action.payload.unsubID)
+        if(state.connectionObject !== null) {
+            var connection = state.connectionObject;
+            connection.unsubscribe(action.payload.unsubID);
+        } else {
+            return state;
         }
-
-        case UPDATE_PV:
+        
+    case UPDATE_PV:
         var newEpicsData = Object.assign({}, state.epicsData);
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
         return Object.assign({}, state,{
             epicsData: newEpicsData
         });
-        break;
 
-        case CREATE_CONNECTION:
+    case CREATE_CONNECTION:
         if(state.connectionObject === null) {
             return Object.assign({}, state, {
                 connectionObject: new ServerConnection(action.payload.url)
             });
+        } else {
+            return state;
         }
-        break;
 
-
-
-        default:
+    default:
         return state;
     }
 }
