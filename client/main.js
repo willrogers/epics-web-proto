@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {DivContainer} from './containers/DivContainer.js';
-import {connectToServer} from './actions/EPICSActions.js'
+import {connectToServer} from './actions/EPICSActions.js';
 
 const WEBSOCKET_ADDRESS = 'ws://pc0088:8080/ws';
 
 class App extends React.Component {
 
-    componentWillMount(){
+    componentWillMount() {
         connectToServer(WEBSOCKET_ADDRESS);
     }
 
