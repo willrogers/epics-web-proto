@@ -2,7 +2,7 @@
 // Generated on Wed Jul 12 2017 15:45:57 GMT+0100 (BST)
 
 // Import webpack config from its own config file.
-var webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config.js');
 
 
 module.exports = function(config) {

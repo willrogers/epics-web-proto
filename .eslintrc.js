@@ -29,6 +29,7 @@ module.exports = {
         "semi": [ "error", "always" ],
         "space-before-function-paren": [ "warn", "never" ],
         "space-before-blocks": [ "warn", "always" ],
-        "no-trailing-spaces": [ "warn" ]
+        "no-trailing-spaces": [ "warn" ],
+        "no-var": ["warn"]
     }
 };

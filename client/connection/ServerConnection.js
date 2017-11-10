@@ -11,21 +11,21 @@ export class ServerConnection {
         this.pvIds = {};
         this.cachedSubscribeRequests = [];
         this.wsConnection.onmessage = (message)=>{
-            var response = JSON.parse(message.data);
-            var newMalcolmValue = response.value.value;
+            const response = JSON.parse(message.data);
+            const newMalcolmValue = response.value.value;
             /* Figure out the correct pv given the response id */
             updatePV(newMalcolmValue, this.pvIds[response.id]);
         };
         this.wsConnection.onopen = () => {
             /* When the websocket opens, send all the messages that have been cached */
-            for (var i = 0; i < this.cachedSubscribeRequests.length; i++) {
+            for (let i = 0; i < this.cachedSubscribeRequests.length; i++) {
                 this.wsConnection.send(this.cachedSubscribeRequests[i]);
             }
         };
     }
 
     createSubscription(comp) {
-        var subscribeRequest = this.generateSubscriptionJSON(comp);
+        const subscribeRequest = this.generateSubscriptionJSON(comp);
         /* If the websocket is ready, send the message. Otherwise, add to the
          * list of messages to be sent. */
         if (this.wsConnection.readyState === 1) {
@@ -36,7 +36,7 @@ export class ServerConnection {
     }
 
     generateSubscriptionJSON(comp) {
-        var subJSON = JSON.stringify({
+        const subJSON = JSON.stringify({
             'typeid': malcolmSubscribeMethod,
             'id': comp.id,
             'path': [
@@ -50,7 +50,7 @@ export class ServerConnection {
     }
 
     unsubscribe(id) {
-        var unsubJSON = this.generateUnsubJSON(id);
+        const unsubJSON = this.generateUnsubJSON(id);
         if (this.wsConnection.readyState === 1) {
             this.wsConnection.send(unsubJSON);
         }

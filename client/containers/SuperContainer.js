@@ -3,7 +3,7 @@ import {store} from '../../redux/EPICSStore.js';
 import {subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions';
 import PropTypes from 'prop-types';
 
-var currentId = 0;
+let currentId = 0;
 
 export class SuperContainer extends React.Component {
 
@@ -17,7 +17,7 @@ export class SuperContainer extends React.Component {
 
     componentDidMount() {
         subscribeToPV(this);
-        var self = this;
+        let self = this;
         window.addEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
         });
