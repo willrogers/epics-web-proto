@@ -5,3 +5,6 @@ bundle.js
 # Vim temporary files
 *.swp
 *.swo
+
+# Webstorm temp files
+.idea/workspace.xml
