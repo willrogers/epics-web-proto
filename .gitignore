@@ -1,2 +1,7 @@
+# Npm files
 node_modules
 bundle.js
+
+# Vim temporary files
+*.swp
+*.swo
