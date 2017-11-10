@@ -18,20 +18,16 @@ function EPICSReducer(state = initialState, action) {
 
     case SUBSCRIBE_TO_PV:
         if(state.connectionObject !== null) {
-            var connection = state.connectionObject;
-            connection.createSubscription(action.payload.component);
-        } else {
-            return state;
+            state.connectionObject.createSubscription(action.payload.component);
         }
+        return state;
 
-        case UNSUBSCRIBE_TO_PV:
+    case UNSUBSCRIBE_TO_PV:
         if(state.connectionObject !== null) {
-            var connection = state.connectionObject;
-            connection.unsubscribe(action.payload.unsubID);
-        } else {
-            return state;
+            state.connectionObject.unsubscribe(action.payload.unsubID);
         }
-        
+        return state;
+
     case UPDATE_PV:
         var newEpicsData = Object.assign({}, state.epicsData);
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
@@ -44,9 +40,8 @@ function EPICSReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 connectionObject: new ServerConnection(action.payload.url)
             });
-        } else {
-            return state;
         }
+        return state;
 
     default:
         return state;

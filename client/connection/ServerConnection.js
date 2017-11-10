@@ -21,7 +21,7 @@ export class ServerConnection {
             for (var i = 0; i < this.cachedSubscribeRequests.length; i++) {
                 this.wsConnection.send(this.cachedSubscribeRequests[i]);
             }
-        }
+        };
     }
 
     createSubscription(comp) {
@@ -46,7 +46,6 @@ export class ServerConnection {
         });
         /* Associate this pv with the correct id */
         this.pvIds[comp.id] = comp.props.property;
-        console.log(subJSON)
         return subJSON;
     }
 
@@ -54,7 +53,7 @@ export class ServerConnection {
         var unsubJSON = this.generateUnsubJSON(id);
         if (this.wsConnection.readyState === 1) {
             this.wsConnection.send(unsubJSON);
-       }
+        }
     }
 
     generateUnsubJSON(id) {
@@ -63,7 +62,6 @@ export class ServerConnection {
             'typeid': malcolmUnsubscribeMethod,
             'id': id
         });
-        console.log(unsubJSON)
         return unsubJSON;
     }
 }

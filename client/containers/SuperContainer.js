@@ -9,7 +9,6 @@ export class SuperContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log("SuperCont Constr")
         this.id = currentId;
         currentId++;
         this.state = {EPICSValue: null, PV: null};
@@ -19,8 +18,8 @@ export class SuperContainer extends React.Component {
     componentDidMount() {
         subscribeToPV(this);
         var self = this;
-        window.addEventListener('beforeunload', function(){
-            unsubscribeToPV(self.id)
+        window.addEventListener('beforeunload', function() {
+            unsubscribeToPV(self.id);
         });
     }
 
