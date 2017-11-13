@@ -12,7 +12,11 @@ export class GaugeContainer extends SuperContainer {
         ie not the react component inheritence that would normally use
         props */
         return(
-            <GaugeComponent EPICSValue={this.state.EPICSValue} />
+            <GaugeComponent
+                EPICSValue={this.state.EPICSValue}
+                width={this.props.width}
+                height={this.props.height}
+            />
         );
     }
 }
