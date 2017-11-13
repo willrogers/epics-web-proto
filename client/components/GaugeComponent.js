@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const canvasStyle ={border: '1px solid #000000',};
+const canvasStyle ={border: '1px solid #000000'};
 
 export default class GaugeComponent extends React.Component {
     constructor(props) {
@@ -12,7 +12,6 @@ export default class GaugeComponent extends React.Component {
         this.canvas = this.refs.gaugeRef;
         this.context = this.canvas.getContext('2d');
         this.defineDimensions();
-        //super.componentDidMount();
     }
 
     componentWillUpdate() {
@@ -71,7 +70,7 @@ export default class GaugeComponent extends React.Component {
     drawNeedle(epicsVal){
         this.context.beginPath();
         this.context.lineWidth='3';
-        this.context.strokeStyle= this.needleColour;
+        this.context.strokeStyle = this.needleColour;
         this.context.moveTo((epicsVal), 130);
         this.context.lineTo((epicsVal), 10);
         this.context.stroke();

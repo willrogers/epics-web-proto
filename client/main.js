@@ -18,7 +18,7 @@ class App extends React.Component {
                 <DivContainer block="ADC" property="adc"/>
                 <DivContainer block="SIGNAL" property="signal"/>
                 <DivContainer block="TEMPERATURE" property="temp1"/>
-                <GaugeContainer block="COUNTDOWN" property="countdown" width="1000" height="150"/>
+                <GaugeContainer block="TEMPERATURE" property="temp1" width="1000" height="150"/>
             </div>
         );
     }
