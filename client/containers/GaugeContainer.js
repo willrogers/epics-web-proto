@@ -1,10 +1,10 @@
 import React from 'react';
 import GaugeComponent from '../components/GaugeComponent.js';
-import {SuperContainer} from './SuperContainer.js'
+import {SuperContainer} from './SuperContainer.js';
 
 export class GaugeContainer extends SuperContainer {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {

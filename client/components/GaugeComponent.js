@@ -5,7 +5,7 @@ const canvasStyle ={border: '1px solid #000000'};
 
 export default class GaugeComponent extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     componentDidMount() {
@@ -18,9 +18,12 @@ export default class GaugeComponent extends React.Component {
     }
 
     drawGauge() {
-        for (let i = this.xAxisBuffer; i < this.rightSideEnd; i ++){
+        for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i ++) {
 
-            if (i == this.quarterMark) {
+            if(i == this.startMark)
+                this.drawMarker(i);
+
+            else if (i == this.quarterMark) {
                 this.drawMarker(i);
 
             } else if (i == this.halfMark) {
@@ -29,24 +32,27 @@ export default class GaugeComponent extends React.Component {
             } else if (i == this.threeQaurterMark) {
                 this.drawMarker(i);
 
-            } else if (i%this.onePipInPixels == 0){
+            }else if (i == this.finishMark) {
+                this.drawMarker(i);
+
+            } else if (i%this.onePipInPixels == 0) {
                 this.drawPip(i);
             }
         }
-        this.drawNeedle(this.props.EPICSValue)
+        this.drawNeedle(this.props.EPICSValue);
     }
 
     drawPip(pipLoc) {
         this.context.beginPath();
         this.context.linewidth = this.pipWidth;
         this.context.strokeStyle = this.pipColour;
-        this.context.moveTo(pipLoc, 100)
-        this.context.lineTo(pipLoc, 130)
+        this.context.moveTo(pipLoc, 100);
+        this.context.lineTo(pipLoc, 130);
         this.context.stroke();
     }
 
     //Draw the marker at the supplied location, call annotate when done.
-    drawMarker(markerLoc){
+    drawMarker(markerLoc) {
         this.context.beginPath();
         this.context.lineWidth='1';
         this.context.strokeStyle= this.markerColour;
@@ -57,17 +63,17 @@ export default class GaugeComponent extends React.Component {
     }
 
     //Annotate the marker with the appropriate numeric value.
-    annotateMarker(annoLoc){
+    annotateMarker(annoLoc) {
         this.context.fillText(''+(this.calculateAnnoConversion(annoLoc)), annoLoc, 140);
     }
 
-    calculateAnnoConversion(annoPixel){
+    calculateAnnoConversion(annoPixel) {
         const annoConvert = (annoPixel - this.xAxisBuffer)/this.ratio;
         return annoConvert;
     }
 
     //Draw the needle using the supplied EPICSValue
-    drawNeedle(epicsVal){
+    drawNeedle(epicsVal) {
         this.context.beginPath();
         this.context.lineWidth='3';
         this.context.strokeStyle = this.needleColour;
@@ -76,10 +82,9 @@ export default class GaugeComponent extends React.Component {
         this.context.stroke();
     }
 
-    calculateNeedleLocation(eValue){
+    calculateNeedleLocation(eValue) {
         let needleLocation = ((((eValue-this.minVal)/(this.maxVal-this.minVal))*(this.internalXAxis)) +
             this.xAxisBuffer);
-        console.log(needleLocation);
         return needleLocation;
     }
 
@@ -105,13 +110,15 @@ export default class GaugeComponent extends React.Component {
 
         this.minVal = this.props.minVal;
         this.maxVal = this.props.maxVal;
-        this.valueDomainSpace = (this.maxVal - this.minVal)
+        this.valueDomainSpace = (this.maxVal - this.minVal);
         this.ratio = this.internalXAxis/(this.maxVal-this.minVal);
 
         //Define the quarterly values
+        this.startMark = this.xAxisBuffer;
         this.quarterMark = (this.xAxisBuffer + this.internalXAxis*0.25);
         this.halfMark = (this.xAxisBuffer + this.internalXAxis*0.5);
         this.threeQaurterMark = (this.xAxisBuffer + this.internalXAxis*0.75);
+        this.finishMark = (this.internalXAxis + this.xAxisBuffer);
 
         //Define start/height of each pip
         this.pipTopCoord = (this.internalYAxis * 0.2);
@@ -135,7 +142,7 @@ export default class GaugeComponent extends React.Component {
                 style={canvasStyle}
             >
             </canvas>
-        )
+        );
     }
 }
 

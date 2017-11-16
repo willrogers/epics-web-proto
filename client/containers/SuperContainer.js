@@ -23,10 +23,10 @@ export class SuperContainer extends React.Component {
         });
     }
 
-    componentWillUnmount(){
-        var self = this;
-        window.removeEventListener('beforeunload', function(){
-            unsubscribeToPV(self.id)
+    componentWillUnmount() {
+        let self = this;
+        window.removeEventListener('beforeunload', function() {
+            unsubscribeToPV(self.id);
         });
     }
 
