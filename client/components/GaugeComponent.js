@@ -9,9 +9,7 @@ export default class GaugeComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.canvas = this.refs.gaugeRef;
-        this.context = this.canvas.getContext('2d');
-        this.defineDimensions();
+        this.defineClassConstants();
     }
 
     componentWillUpdate() {
@@ -20,22 +18,19 @@ export default class GaugeComponent extends React.Component {
     }
 
     drawGauge() {
-        for(let i = 0 ; i < this.canvas.width ; i += this.pipSpace) {
-            switch(i){
-                case this.quarterMark:
-                    this.drawMarker(i);
-                    break;
+        for (let i = this.xAxisBuffer; i < this.rightSideEnd; i ++){
 
-                case this.halfMark:
-                    this.drawMarker(i);
-                    break;
+            if (i == this.quarterMark) {
+                this.drawMarker(i);
 
-                case this.threeQaurterMark:
-                    this.drawMarker(i);
-                    break;
+            } else if (i == this.halfMark) {
+                this.drawMarker(i);
 
-                default:
-                    this.drawPip(i);
+            } else if (i == this.threeQaurterMark) {
+                this.drawMarker(i);
+
+            } else if (i%this.onePipInPixels == 0){
+                this.drawPip(i);
             }
         }
         this.drawNeedle(this.props.EPICSValue)
@@ -63,7 +58,12 @@ export default class GaugeComponent extends React.Component {
 
     //Annotate the marker with the appropriate numeric value.
     annotateMarker(annoLoc){
-        this.context.fillText(''+(annoLoc)+'', annoLoc, 140);
+        this.context.fillText(''+(this.calculateAnnoConversion(annoLoc)), annoLoc, 140);
+    }
+
+    calculateAnnoConversion(annoPixel){
+        const annoConvert = (annoPixel - this.xAxisBuffer)/this.ratio;
+        return annoConvert;
     }
 
     //Draw the needle using the supplied EPICSValue
@@ -71,42 +71,59 @@ export default class GaugeComponent extends React.Component {
         this.context.beginPath();
         this.context.lineWidth='3';
         this.context.strokeStyle = this.needleColour;
-        this.context.moveTo((epicsVal), 130);
-        this.context.lineTo((epicsVal), 10);
+        this.context.moveTo(this.calculateNeedleLocation(epicsVal), 130);
+        this.context.lineTo(this.calculateNeedleLocation(epicsVal), 10);
         this.context.stroke();
     }
 
-    defineDimensions() {
+    calculateNeedleLocation(eValue){
+        let needleLocation = ((((eValue-this.minVal)/(this.maxVal-this.minVal))*(this.internalXAxis)) +
+            this.xAxisBuffer);
+        console.log(needleLocation);
+        return needleLocation;
+    }
+
+    defineClassConstants() {
+        //Canvas definition
+        this.canvas = this.refs.gaugeRef;
+        this.context = this.canvas.getContext('2d');
+
+        this.internalXAxis = this.canvas.width*0.8;
+        this.internalYAxis = this.canvas.height*0.8;
+        this.xAxisBuffer = this.canvas.width*0.1;
+        this.yAxisBuffer = this.canvas.height*0.1;
+        this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
+        this.onePipInPixels = 25;
+
         //Style constants
         this.pipWidth = 0.5;
         this.markerWidth = 1;
         this.needleWidth= 3;
-        this.pipColour = '#0f0f0f';
+        this.pipColour = '#515151';
         this.markerColour = '#000000';
         this.needleColour = '#ff0000';
 
-        //Define the quarterly values
-        this.quarterMark = (this.canvas.width * 0.25);
-        this.halfMark = (this.canvas.width * 0.5);
-        this.threeQaurterMark = (this.canvas.width * 0.75);
+        this.minVal = this.props.minVal;
+        this.maxVal = this.props.maxVal;
+        this.valueDomainSpace = (this.maxVal - this.minVal)
+        this.ratio = this.internalXAxis/(this.maxVal-this.minVal);
 
-        //10% buffer at bottom of page for annotations
-        this.annotationBuffer = (this.canvas.height * 0.1);
+        //Define the quarterly values
+        this.quarterMark = (this.xAxisBuffer + this.internalXAxis*0.25);
+        this.halfMark = (this.xAxisBuffer + this.internalXAxis*0.5);
+        this.threeQaurterMark = (this.xAxisBuffer + this.internalXAxis*0.75);
 
         //Define start/height of each pip
-        this.pipTopCoord = (this.canvas.height * 0.2);
-        this.pipBaseCoord = (this.canvas.height - this.annotationBuffer);
+        this.pipTopCoord = (this.internalYAxis * 0.2);
+        this.pipBaseCoord = (this.internalYAxis - this.yAxisBuffer);
 
         //Define start/height of each marker
-        this.markerTopCoord = (this.canvas.height * 0.5);
-        this.markerBaseCoord = (this.canvas.height - this.annotationBuffer);
+        this.markerTopCoord = (this.internalYAxis * 0.5);
+        this.markerBaseCoord = (this.internalYAxis - this.yAxisBuffer);
 
         //Define start/height of the needle
-        this.needleTopCoord = (this.canvas.height * 0.9);
-        this.needleBaseCoord = (this.canvas.height - this.annotationBuffer);
-
-        //Pip space is 0.5% of total canvas size
-        this.pipSpace = (this.canvas.width * 0.005);
+        this.needleTopCoord = (this.internalYAxis * 0.9);
+        this.needleBaseCoord = (this.internalYAxis - this.yAxisBuffer);
     }
 
     render() {

@@ -16,6 +16,8 @@ export class GaugeContainer extends SuperContainer {
                 EPICSValue={this.state.EPICSValue}
                 width={this.props.width}
                 height={this.props.height}
+                minVal={this.props.minVal}
+                maxVal={this.props.maxVal}
             />
         );
     }
