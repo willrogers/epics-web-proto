@@ -12,38 +12,26 @@ export default class GaugeComponent extends React.Component {
         this.defineClassConstants();
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
+        console.log('Update')
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawGauge();
     }
 
     drawGauge() {
-        for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i++) {
-            this.optionallyPlaceMarkers(i)
-        }
+        this.drawMarker(this.startMark);
+        this.drawMarker(this.quarterMark);
+        this.drawMarker(this.halfMark);
+        this.drawMarker(this.threeQuarterMark);
+        this.drawMarker(this.finishMark);
         this.drawNeedle(this.props.EPICSValue);
-    }
 
-    optionallyPlaceMarkers(i) {
-        if (i == this.startMark) {
-            this.drawMarker(i);
-
-        } else if (i == this.quarterMark) {
-            this.drawMarker(i);
-
-        } else if (i == this.halfMark) {
-            this.drawMarker(i);
-
-        } else if (i == this.threeQaurterMark) {
-            this.drawMarker(i);
-
-        } else if (i == this.finishMark) {
-            this.drawMarker(i);
-
-        } else if (i % this.onePipInPixels == 0) {
-            this.drawPip(i);
+        for(let i = 0; i <= this.pipLocations.length; i++){
+            this.drawPip(this.pipLocations[i]);
         }
+
     }
+
 
     drawPip(pipLoc) {
         this.context.beginPath();
@@ -86,8 +74,8 @@ export default class GaugeComponent extends React.Component {
     }
 
     calculateNeedleLocation(eValue) {
-        let needleLocation = ((((eValue - this.minVal) / (this.maxVal - this.minVal)) * (this.internalXAxis)) +
-            this.xAxisBuffer);
+        let needleLocation =
+            ((((eValue - this.minVal) / (this.maxVal - this.minVal)) * (this.internalXAxis)) + this.xAxisBuffer);
         return needleLocation;
     }
 
@@ -96,11 +84,34 @@ export default class GaugeComponent extends React.Component {
         this.context = this.canvas.getContext('2d');
 
         this.internalXAxis = this.canvas.width * 0.8;
+        console.log('internalXAxis is a  ' + typeof this.internalXAxis)
         this.internalYAxis = this.canvas.height * 0.8;
         this.xAxisBuffer = this.canvas.width * 0.1;
         this.yAxisBuffer = this.canvas.height * 0.1;
         this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
         this.onePipInPixels = 25;
+
+        //Define the quarterly marker values
+        this.startMark = this.xAxisBuffer;
+        this.quarterMark = (this.xAxisBuffer + this.internalXAxis * 0.25);
+        this.halfMark = (this.xAxisBuffer + this.internalXAxis * 0.5);
+        this.threeQuarterMark = (this.xAxisBuffer + this.internalXAxis * 0.75);
+        this.finishMark = (this.internalXAxis + this.xAxisBuffer);
+
+        console.log('halfMark is a ' + typeof this.halfMark)
+
+        //define pipLocations
+        this.pipLocations = [];
+        for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i+= this.onePipInPixels) {
+
+            console.log(i);
+            console.log(this.startMark);
+            if ((i!==this.startMark) || (i!==this.quarterMark) || (i!==this.halfMark) || (i!==this.threeQuarterMark) || (i!==this.finishMark)) {
+                this.pipLocations.push(i);
+            }
+
+        }
+        console.log('2nd element in pipLocations is a ' + typeof this.pipLocations[1]);
 
         //Style constants
         this.pipWidth = 0.5;
@@ -114,13 +125,6 @@ export default class GaugeComponent extends React.Component {
         this.maxVal = this.props.maxVal;
         this.valueDomainSpace = (this.maxVal - this.minVal);
         this.ratio = this.internalXAxis / (this.maxVal - this.minVal);
-
-        //Define the quarterly values
-        this.startMark = this.xAxisBuffer;
-        this.quarterMark = (this.xAxisBuffer + this.internalXAxis * 0.25);
-        this.halfMark = (this.xAxisBuffer + this.internalXAxis * 0.5);
-        this.threeQaurterMark = (this.xAxisBuffer + this.internalXAxis * 0.75);
-        this.finishMark = (this.internalXAxis + this.xAxisBuffer);
 
         //Define start/height of each pip
         this.pipTopCoord = (this.internalYAxis * 0.2);
