@@ -13,7 +13,7 @@ export default class GaugeComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('Update')
+        console.log('Update');
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawGauge();
     }
@@ -26,7 +26,7 @@ export default class GaugeComponent extends React.Component {
         this.drawMarker(this.finishMark);
         this.drawNeedle(this.props.EPICSValue);
 
-        for(let i = 0; i <= this.pipLocations.length; i++){
+        for(let i = 0; i <= this.pipLocations.length; i++) {
             this.drawPip(this.pipLocations[i]);
         }
 
@@ -66,7 +66,7 @@ export default class GaugeComponent extends React.Component {
     //Draw the needle using the supplied EPICSValue
     drawNeedle(epicsVal) {
         this.context.beginPath();
-        this.context.lineWidth = '3';
+        this.context.lineWidth = this.needleWidth;
         this.context.strokeStyle = this.needleColour;
         this.context.moveTo(this.calculateNeedleLocation(epicsVal), 130);
         this.context.lineTo(this.calculateNeedleLocation(epicsVal), 10);
@@ -84,7 +84,6 @@ export default class GaugeComponent extends React.Component {
         this.context = this.canvas.getContext('2d');
 
         this.internalXAxis = this.canvas.width * 0.8;
-        console.log('internalXAxis is a  ' + typeof this.internalXAxis)
         this.internalYAxis = this.canvas.height * 0.8;
         this.xAxisBuffer = this.canvas.width * 0.1;
         this.yAxisBuffer = this.canvas.height * 0.1;
@@ -98,20 +97,14 @@ export default class GaugeComponent extends React.Component {
         this.threeQuarterMark = (this.xAxisBuffer + this.internalXAxis * 0.75);
         this.finishMark = (this.internalXAxis + this.xAxisBuffer);
 
-        console.log('halfMark is a ' + typeof this.halfMark)
-
         //define pipLocations
         this.pipLocations = [];
         for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i+= this.onePipInPixels) {
-
-            console.log(i);
-            console.log(this.startMark);
             if ((i!==this.startMark) || (i!==this.quarterMark) || (i!==this.halfMark) || (i!==this.threeQuarterMark) || (i!==this.finishMark)) {
                 this.pipLocations.push(i);
             }
-
         }
-        console.log('2nd element in pipLocations is a ' + typeof this.pipLocations[1]);
+        console.log(this.pipLocations)
 
         //Style constants
         this.pipWidth = 0.5;
@@ -121,22 +114,11 @@ export default class GaugeComponent extends React.Component {
         this.markerColour = '#000000';
         this.needleColour = '#ff0000';
 
+        //Gauge conversion stuff
         this.minVal = this.props.minVal;
         this.maxVal = this.props.maxVal;
-        this.valueDomainSpace = (this.maxVal - this.minVal);
         this.ratio = this.internalXAxis / (this.maxVal - this.minVal);
 
-        //Define start/height of each pip
-        this.pipTopCoord = (this.internalYAxis * 0.2);
-        this.pipBaseCoord = (this.internalYAxis - this.yAxisBuffer);
-
-        //Define start/height of each marker
-        this.markerTopCoord = (this.internalYAxis * 0.5);
-        this.markerBaseCoord = (this.internalYAxis - this.yAxisBuffer);
-
-        //Define start/height of the needle
-        this.needleTopCoord = (this.internalYAxis * 0.9);
-        this.needleBaseCoord = (this.internalYAxis - this.yAxisBuffer);
     }
 
     render() {
