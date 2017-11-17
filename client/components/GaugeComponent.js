@@ -90,7 +90,6 @@ export default class GaugeComponent extends React.Component {
 
     defineClassConstants() {
         //Canvas definition
-        this.canvas = this.refs.gaugeRef;
         this.context = this.canvas.getContext('2d');
 
         this.internalXAxis = this.canvas.width*0.8;
@@ -136,11 +135,10 @@ export default class GaugeComponent extends React.Component {
     render() {
         return (
             <canvas
-                ref={'gaugeRef'}
+                ref={canvas => this.canvas = canvas}git status
                 width={this.props.width}
                 height={this.props.height}
-                style={canvasStyle}
-            >
+                style={canvasStyle}>
             </canvas>
         );
     }
