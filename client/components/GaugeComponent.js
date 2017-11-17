@@ -136,7 +136,7 @@ export default class GaugeComponent extends React.Component {
     render() {
         return (
             <canvas
-                ref="gaugeRef"
+                ref={'gaugeRef'}
                 width={this.props.width}
                 height={this.props.height}
                 style={canvasStyle}
@@ -147,3 +147,9 @@ export default class GaugeComponent extends React.Component {
 }
 
 GaugeComponent.propTypes = { EPICSValue: PropTypes.number };
+GaugeComponent.propTypes = { width: PropTypes.string };
+GaugeComponent.propTypes = { height: PropTypes.string };
+GaugeComponent.propTypes = { property: PropTypes.string };
+GaugeComponent.propTypes = { block: PropTypes.string };
+GaugeComponent.propTypes = { minVal: PropTypes.string };
+GaugeComponent.propTypes = { maxVal: PropTypes.string };
