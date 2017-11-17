@@ -23,12 +23,12 @@ export class SuperContainer extends React.Component {
         });
     }
 
-    // componentWillUnmount(){
-    //     var self = this;
-    //     window.removeEventListener('beforeunload', function(){
-    //         unsubscribeToPV(self.id)
-    //     });
-    // }
+    componentWillUnmount() {
+        let self = this;
+        window.removeEventListener('beforeunload', function() {
+            unsubscribeToPV(self.id);
+        });
+    }
 
     //Register the component to listen to the store. This triggers when
     //the store has changed.
