@@ -6,7 +6,8 @@ import {expect} from 'chai';
 
 describe('GaugeComponent', function() {
     const shallowGauge = shallow(
-        <GaugeComponent EPICSValue={'hello'}
+        <GaugeComponent
+            EPICSValue={'hello'}
             width={'1000'}
             height={'150'}
             minVal={'0'}
@@ -23,7 +24,7 @@ describe('GaugeComponent', function() {
 
     const deepGauge2 = mount(
         <GaugeComponent
-            EPICSValue={'150'}
+            EPICSValue={'200'}
             width={'700'}
             height={'150'}
             minVal={'15'}
@@ -41,15 +42,14 @@ describe('GaugeComponent', function() {
         expect(deepGauge1.instance().finishMark).to.equal(900);
     });
 
-    it('Should create and populate array', function() {
-        expect(deepGauge1.instance().pipLocations[0]).to.equal(100);
-        expect(deepGauge1.instance().pipLocations[1]).to.equal(125);
-        expect(deepGauge1.instance().pipLocations[2]).to.equal(150);
-        expect(deepGauge1.instance().pipLocations[32]).to.equal(900);
+    it('Should create and populate an array', function() {
+        expect(deepGauge1.instance().pipLocations[0]).to.equal(125);
+        expect(deepGauge1.instance().pipLocations[1]).to.equal(150);
+        expect(deepGauge1.instance().pipLocations[2]).to.equal(175);
+        expect(deepGauge1.instance().pipLocations[27]).to.equal(875);
 
-
-        expect(deepGauge1.instance().pipLocations.length).to.equal(33);
-        expect(deepGauge2.instance().pipLocations.length).to.equal(23);
+        expect(deepGauge1.instance().pipLocations.length).to.equal(28);
+        expect(deepGauge2.instance().pipLocations.length).to.equal(22);
     });
 
 });

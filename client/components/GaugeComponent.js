@@ -13,7 +13,6 @@ export default class GaugeComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('Update');
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawGauge();
     }
@@ -26,12 +25,11 @@ export default class GaugeComponent extends React.Component {
         this.drawMarker(this.finishMark);
         this.drawNeedle(this.props.EPICSValue);
 
-        for(let i = 0; i <= this.pipLocations.length; i++) {
-            this.drawPip(this.pipLocations[i]);
+        for (let x in this.pipLocations) {
+            this.drawPip(this.pipLocations[x]);
         }
 
     }
-
 
     drawPip(pipLoc) {
         this.context.beginPath();
@@ -39,8 +37,8 @@ export default class GaugeComponent extends React.Component {
         this.context.strokeStyle = this.pipColour;
         this.context.moveTo(pipLoc, 100);
         this.context.lineTo(pipLoc, 130);
-        this.context.closePath();
         this.context.stroke();
+        this.context.closePath();
     }
 
     //Draw the marker at the supplied location, call annotate when done.
@@ -50,8 +48,8 @@ export default class GaugeComponent extends React.Component {
         this.context.strokeStyle = this.markerColour;
         this.context.moveTo(markerLoc, 50);
         this.context.lineTo(markerLoc, 130);
-        this.context.closePath();
         this.context.stroke();
+        this.context.closePath();
         this.annotateMarker(markerLoc);
     }
 
@@ -72,8 +70,8 @@ export default class GaugeComponent extends React.Component {
         this.context.strokeStyle = this.needleColour;
         this.context.moveTo(this.calculateNeedleLocation(epicsVal), 130);
         this.context.lineTo(this.calculateNeedleLocation(epicsVal), 10);
-        this.context.closePath();
         this.context.stroke();
+        this.context.closePath();
     }
 
     calculateNeedleLocation(eValue) {
@@ -86,12 +84,24 @@ export default class GaugeComponent extends React.Component {
         //Canvas definition
         this.context = this.canvas.getContext('2d');
 
+        //Internal Dimension definition
         this.internalXAxis = this.canvas.width * 0.8;
-        this.internalYAxis = this.canvas.height * 0.8;
         this.xAxisBuffer = this.canvas.width * 0.1;
-        this.yAxisBuffer = this.canvas.height * 0.1;
         this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
         this.onePipInPixels = 25;
+
+        //Style constants
+        this.pipWidth = 0.5;
+        this.markerWidth = 1;
+        this.needleWidth = 1.5;
+        this.pipColour = '#cccccc';
+        this.markerColour = '#000000';
+        this.needleColour = '#ff0000';
+
+        //Gauge conversion stuff
+        this.minVal = this.props.minVal;
+        this.maxVal = this.props.maxVal;
+        this.ratio = this.internalXAxis / (this.maxVal - this.minVal);
 
         //Define the quarterly marker values
         this.startMark = this.xAxisBuffer;
@@ -102,25 +112,15 @@ export default class GaugeComponent extends React.Component {
 
         //define pipLocations
         this.pipLocations = [];
-        for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i+= this.onePipInPixels) {
-            if ((i!==this.startMark) || (i!==this.quarterMark) || (i!==this.halfMark) || (i!==this.threeQuarterMark) || (i!==this.finishMark)) {
+        for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i += this.onePipInPixels) {
+            if ((i !== this.startMark)
+                    && (i !== this.quarterMark)
+                    && (i !== this.halfMark)
+                    && (i !== this.threeQuarterMark)
+                    && (i !== this.finishMark)) {
                 this.pipLocations.push(i);
             }
         }
-        console.log(this.pipLocations)
-
-        //Style constants
-        this.pipWidth = '10';
-        this.markerWidth = '1';
-        this.needleWidth = '2';
-        this.pipColour = '#515151';
-        this.markerColour = '#000000';
-        this.needleColour = '#ff0000';
-
-        //Gauge conversion stuff
-        this.minVal = this.props.minVal;
-        this.maxVal = this.props.maxVal;
-        this.ratio = this.internalXAxis / (this.maxVal - this.minVal);
 
     }
 
