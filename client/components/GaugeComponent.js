@@ -24,11 +24,9 @@ export default class GaugeComponent extends React.Component {
         this.drawMarker(this.threeQuarterMark);
         this.drawMarker(this.finishMark);
         this.drawNeedle(this.props.EPICSValue);
-
         for (let x in this.pipLocations) {
             this.drawPip(this.pipLocations[x]);
         }
-
     }
 
     drawPip(pipLoc) {
@@ -59,8 +57,7 @@ export default class GaugeComponent extends React.Component {
     }
 
     calculateAnnoConversion(annoPixel) {
-        const annoConvert = (annoPixel - this.xAxisBuffer) / this.ratio;
-        return annoConvert;
+        return (annoPixel - this.xAxisBuffer) / this.ratio;
     }
 
     //Draw the needle using the supplied EPICSValue
@@ -75,9 +72,7 @@ export default class GaugeComponent extends React.Component {
     }
 
     calculateNeedleLocation(eValue) {
-        let needleLocation =
-            ((((eValue - this.minVal) / (this.maxVal - this.minVal)) * (this.internalXAxis)) + this.xAxisBuffer);
-        return needleLocation;
+        return((((eValue - this.minVal) / (this.maxVal - this.minVal)) * (this.internalXAxis)) + this.xAxisBuffer);
     }
 
     defineClassConstants() {
