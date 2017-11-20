@@ -39,16 +39,18 @@ export default class GaugeComponent extends React.Component {
         this.context.strokeStyle = this.pipColour;
         this.context.moveTo(pipLoc, 100);
         this.context.lineTo(pipLoc, 130);
+        this.context.closePath();
         this.context.stroke();
     }
 
     //Draw the marker at the supplied location, call annotate when done.
     drawMarker(markerLoc) {
         this.context.beginPath();
-        this.context.lineWidth = '1';
+        this.context.lineWidth = this.markerWidth;
         this.context.strokeStyle = this.markerColour;
         this.context.moveTo(markerLoc, 50);
         this.context.lineTo(markerLoc, 130);
+        this.context.closePath();
         this.context.stroke();
         this.annotateMarker(markerLoc);
     }
@@ -70,6 +72,7 @@ export default class GaugeComponent extends React.Component {
         this.context.strokeStyle = this.needleColour;
         this.context.moveTo(this.calculateNeedleLocation(epicsVal), 130);
         this.context.lineTo(this.calculateNeedleLocation(epicsVal), 10);
+        this.context.closePath();
         this.context.stroke();
     }
 
@@ -107,9 +110,9 @@ export default class GaugeComponent extends React.Component {
         console.log(this.pipLocations)
 
         //Style constants
-        this.pipWidth = 0.5;
-        this.markerWidth = 1;
-        this.needleWidth = 3;
+        this.pipWidth = '10';
+        this.markerWidth = '1';
+        this.needleWidth = '2';
         this.pipColour = '#515151';
         this.markerColour = '#000000';
         this.needleColour = '#ff0000';
