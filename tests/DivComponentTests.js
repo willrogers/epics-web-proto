@@ -7,7 +7,7 @@ import {expect} from 'chai';
 describe('DivComponent', function() {
     const shallowDiv = shallow(<DivComponent EPICSValue="hello"/>);
 
-    it('Should render a ', function() {
+    it('Should render a div', function() {
         expect(shallowDiv.type()).to.equal('div');
     });
 });
