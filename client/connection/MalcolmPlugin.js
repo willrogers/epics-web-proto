@@ -61,20 +61,14 @@ export class MalcolmConnection {
     }
 
     unsub(id) {
-
-        console.log('id in unsub: ');
-        console.log(id);
-
         const unsubJSON = JSON.stringify({
             'typeid': unsubMethod,
             'id': id
         });
 
-
-        console.log('unsub json');
-        console.log(unsubJSON);
-
-        this.malcConnection.send(unsubJSON);
+        if(this.malcConnection.readyState===1) {
+            this.malcConnection.send(unsubJSON);
+        }
     }
 
     //Pass to the action creator
