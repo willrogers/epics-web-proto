@@ -1,21 +1,14 @@
 
 //Server implementation/plugin is defined here
-import MalcolmConnection from './MalcolmPlugin.js';
+import {MalcolmConnection} from './MalcolmPlugin.js';
+import {updatePV} from '../actions/EPICSActions.js';
 
-
-import updatePV from '../actions/EPICSActions.js';
-const WebSockURL = 'ws://pc0088:8080/ws';
-
-export class ServerInterface {
+export  class ServerInterface {
 
     constructor() {
         this.serverConnection = new MalcolmConnection();
-    }
 
-    // connectToServer() {
-    //     //Done automatically
-    //     this.serverConnection.connect(WebSockURL);
-    // }
+    }
 
     createSubscription(component) {
         // call the sub method for the given plugin and pass it the comp that

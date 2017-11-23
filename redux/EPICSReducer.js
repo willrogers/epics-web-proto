@@ -5,7 +5,7 @@ import {
     UNSUBSCRIBE_TO_PV
 } from '../client/actions/EPICSActions.js';
 
-import {ServerConnection} from '../client/connection/ServerConnection.js';
+import {ServerInterface} from '../client/connection/ServerInterface.js';
 
 const initialState = {
     epicsData: {},
@@ -24,6 +24,9 @@ function EPICSReducer(state = initialState, action) {
     }
 
     case UNSUBSCRIBE_TO_PV: {
+        console.log("unsub in reducer")
+        console.log(state.connectionObject)
+        console.log("----")
         if (state.connectionObject !== null) {
             state.connectionObject.unsubscribe(action.payload.unsubID);
         }
@@ -41,7 +44,7 @@ function EPICSReducer(state = initialState, action) {
     case CREATE_CONNECTION: {
         if (state.connectionObject === null) {
             return Object.assign({}, state, {
-                connectionObject: new ServerConnection(action.payload.url)
+                connectionObject: new ServerInterface()
             });
         }
         return state;
