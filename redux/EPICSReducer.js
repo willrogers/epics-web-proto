@@ -9,7 +9,7 @@ import {ServerInterface} from '../client/connection/ServerInterface.js';
 
 const initialState = {
     epicsData: {},
-    connectionObject: null
+    connectionObject: new ServerInterface() // Can I make it here?
 };
 
 //Default params initialises state when nothing is passed
@@ -18,24 +18,23 @@ function EPICSReducer(state = initialState, action) {
 
     case SUBSCRIBE_TO_PV: {
         if (state.connectionObject !== null) {
-            state.connectionObject.createSubscription(action.payload.component);
+            state.connectionObject.monitorPV(action.payload.component);
         }
         return state;
     }
 
     case UNSUBSCRIBE_TO_PV: {
-        console.log("unsub in reducer")
-        console.log(state.connectionObject)
-        console.log("----")
         if (state.connectionObject !== null) {
-            state.connectionObject.unsubscribe(action.payload.unsubID);
+            state.connectionObject.destroyMonitor(action.payload.unsubID);
         }
         return state;
     }
 
     case UPDATE_PV: {
         const newEpicsData = Object.assign({}, state.epicsData);
+
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
+
         return Object.assign({}, state, {
             epicsData: newEpicsData
         });
