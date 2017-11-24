@@ -25,13 +25,13 @@ export function connectToServer() {
     });
 }
 
-export function subscribeToPV(id, block, property) {
+export function subscribeToPV(comp) {
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,
         payload: {
-            id: id,
-            block: block,
-            property: property
+            id: comp.id,
+            block: comp.block,
+            property: comp.property
         }
     });
 }
