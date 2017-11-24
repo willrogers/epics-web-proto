@@ -16,7 +16,7 @@ export class SuperContainer extends React.Component {
     }
 
     componentDidMount() {
-        subscribeToPV(this);
+        subscribeToPV(this.id, this.props.block, this.props.property);
         let self = this;
         window.addEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
@@ -48,4 +48,5 @@ export class SuperContainer extends React.Component {
 }
 
 //We expect the SuperContainer's props to the be strings
+SuperContainer.propTypes = {property: PropTypes.object};
 SuperContainer.propTypes = {property: PropTypes.string};

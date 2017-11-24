@@ -11,7 +11,10 @@ export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 export function updatePV(newValue, pvName) {
     return store.dispatch({
         type: UPDATE_PV,
-        payload: {pvName: pvName, pvValue: newValue}
+        payload: {
+            pvName: pvName,
+            pvValue: newValue
+        }
     });
 }
 
@@ -22,10 +25,14 @@ export function connectToServer() {
     });
 }
 
-export function subscribeToPV(comp) {
+export function subscribeToPV(id, block, property) {
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,
-        payload: {component: comp}
+        payload: {
+            id: id,
+            block: block,
+            property: property
+        }
     });
 }
 

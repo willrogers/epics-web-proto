@@ -16,8 +16,8 @@ export class ServerInterface {
     }
 
     //Listen to a PV
-    monitorPV(component) {
-        this.serverConnection.subscribe(component.id, component.props.block, component.props.property);
+    monitorPV(id, property, block) {
+        this.serverConnection.subscribe(id, block, property);
     }
 
     //Stop listening to a PV
