@@ -11,11 +11,9 @@ describe('MalcolmPlugin', function() {
     const spyCallback = sinon.spy();
     const testPlugin = new MalcolmConnection(spyCallback, WebSocketURL);
 
-    it('have a constructor', function(){
-        expect(testPlugin.instance().constructor()).exists(true);
+    it('should be an object', function(){
+        expect(testPlugin.subscribe().exists()).to.be(true);
     });
-
-
 
     it('Should call the callback passed to it with data from Malcolm', function() {
         //Not sure how to 'fake' a message from malcolm, we have come across this
