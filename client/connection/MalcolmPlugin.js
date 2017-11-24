@@ -1,5 +1,3 @@
-const webSocketURL = 'ws://pc0088:8080/ws';
-
 const subMethod = 'malcolm:core/Subscribe:1.0';
 const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
 const putMethod = 'malcolm:core/Put:1.0';
@@ -8,9 +6,7 @@ const returnMethod = 'malcolm:core/Return:1.0';
 
 export class MalcolmConnection {
 
-
-    constructor(callback) {
-
+    constructor(callback, webSocketURL) {
 
         //Callback supplied by serverInterface - allows for receipt
         // of values from malc
@@ -43,7 +39,6 @@ export class MalcolmConnection {
     }
 
     //To close the WebSocket and cease communication. Called on app shutdown
-    //
     disconnect() {
         this.malcConnection.close();
     }

@@ -11,7 +11,7 @@ export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 export function updatePV(newValue, pvName) {
     return store.dispatch({
         type: UPDATE_PV,
-        payload: {
+        payload:{
             pvName: pvName,
             pvValue: newValue
         }
@@ -19,24 +19,22 @@ export function updatePV(newValue, pvName) {
 }
 
 //No payload: Connection details are handled by plugin
-export function connectToServer() {
+export function connectToServer(URL) {
     return store.dispatch({
         type: CREATE_CONNECTION,
+        payload:{
+            webSocketURL: URL
+        }
     });
 }
 
 export function subscribeToPV(comp) {
-
-    const compId = comp.id;
-    const block = comp.props.block;
-    const property = comp.props.property
-
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,
-        payload: {
-            id: compId,
-            block: block,
-            property: property
+        payload:{
+            id: comp.id,
+            block: comp.props.block,
+            property: comp.props.property
         }
     });
 }
@@ -44,7 +42,9 @@ export function subscribeToPV(comp) {
 export function unsubscribeToPV(id) {
     return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
-        payload: {unsubID: id}
+        payload:{
+            unsubID: id
+        }
     });
 }
 

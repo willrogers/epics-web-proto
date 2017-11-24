@@ -50,7 +50,7 @@ function EPICSReducer(state = initialState, action) {
     case CREATE_CONNECTION: {
         if (state.connectionObject === null) {
             return Object.assign({}, state, {
-                connectionObject: new ServerInterface()
+                connectionObject: new ServerInterface(action.payload.webSocketURL)
             });
         }
         return state;

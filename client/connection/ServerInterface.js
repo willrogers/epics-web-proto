@@ -9,10 +9,11 @@ import {MalcolmConnection} from './MalcolmPlugin.js';
 export class ServerInterface {
 
     //Create a new connection using the chosen plugin
-    constructor() {
+    constructor(webSocketURL) {
+
         //Create your plugin as server connection and pass it the
         //receiveUpdate callback
-        this.serverConnection = new MalcolmConnection(this.receiveUpdate);
+        this.serverConnection = new MalcolmConnection(this.receiveUpdate, webSocketURL);
     }
 
     //Listen to a PV
