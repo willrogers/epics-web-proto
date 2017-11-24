@@ -12,7 +12,7 @@ export class ServerInterface {
     monitorPV(component) {
         // call the sub method for the given plugin and pass it the comp that
         // wants to subscribe.
-        this.serverConnection.subscribe(component);
+        this.serverConnection.subscribe(component.id, component.props.block, component.props.property);
     }
 
     destroyMonitor(id) {

@@ -9,7 +9,6 @@ const returnMethod = 'malcolm:core/Return:1.0';
 export class MalcolmConnection {
 
     constructor(callback) {
-
         this.callback = callback;
         //Open the WS Connection
         this.malcConnection = new WebSocket(webSocketURL);
@@ -39,17 +38,16 @@ export class MalcolmConnection {
         this.malcConnection.close();
     }
 
-    subscribe(component) {
+    subscribe(id, pathBlock, pathProperty) {
 
-        this.pvIds[component.id] = component.props.property;
+        //
+        this.pvIds[id] = pathProperty;
 
         //create subscriptionJSON
         const subscribeRequest = JSON.stringify({
-
             'typeid': subMethod,
-            'id': component.id,
-            'path': [component.props.block, component.props.property]
-
+            'id': id,
+            'path': [pathBlock, pathProperty]
         });
 
         //Send sub request or add to cache
@@ -61,11 +59,14 @@ export class MalcolmConnection {
     }
 
     unsub(id) {
+
+        //make the unsubJson
         const unsubJSON = JSON.stringify({
             'typeid': unsubMethod,
             'id': id
         });
 
+        //Make sure the websocket can accept messages
         if(this.malcConnection.readyState===1) {
             this.malcConnection.send(unsubJSON);
         }
