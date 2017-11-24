@@ -24,7 +24,10 @@ function EPICSReducer(state = initialState, action) {
 
     case SUBSCRIBE_TO_PV: {
         if (state.connectionObject !== null) {
-            state.connectionObject.monitorPV(action.payload.component);
+            state.connectionObject.monitorPV(
+                action.payload.id,
+                action.payload.block,
+                action.payload.property);
         }
         return state;
     }

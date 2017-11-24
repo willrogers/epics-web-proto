@@ -16,7 +16,7 @@ export class ServerInterface {
     }
 
     //Listen to a PV
-    monitorPV(id, property, block) {
+    monitorPV(id, block, property) {
         this.serverConnection.subscribe(id, block, property);
     }
 

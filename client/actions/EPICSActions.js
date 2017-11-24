@@ -26,12 +26,17 @@ export function connectToServer() {
 }
 
 export function subscribeToPV(comp) {
+
+    const compId = comp.id;
+    const block = comp.props.block;
+    const property = comp.props.property
+
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,
         payload: {
-            id: comp.id,
-            block: comp.block,
-            property: comp.property
+            id: compId,
+            block: block,
+            property: property
         }
     });
 }
