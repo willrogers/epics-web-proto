@@ -6,8 +6,10 @@ export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 
-//Action creators, these package a change in state into
+
+//Action creators: These package a change-in-state into
 //an object to be sent around our redux loop to the reducer
+
 export function updatePV(newValue, pvName) {
     return store.dispatch({
         type: UPDATE_PV,
@@ -18,7 +20,6 @@ export function updatePV(newValue, pvName) {
     });
 }
 
-//No payload: Connection details are handled by plugin
 export function connectToServer(URL) {
     return store.dispatch({
         type: CREATE_CONNECTION,
