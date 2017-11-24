@@ -1,37 +1,45 @@
-
-//Server implementation/plugin is defined here
-import {MalcolmConnection} from './MalcolmPlugin.js';
 import {updatePV} from '../actions/EPICSActions.js';
 
+//Server implementation/plugin is defined here:
+import {MalcolmConnection} from './MalcolmPlugin.js';
+
+
+//A generic class to hook a server into EpicsWebProto. Exposes the methods
+//to obtain data from and present data to a server
 export class ServerInterface {
 
-    constructor() {
-        this.serverConnection = new MalcolmConnection(this.receiveUpdate);
+    //Create a new connection using the chosen plugin
+    constructor(webSocketURL) {
+
+        //Create your plugin as server connection and pass it the
+        //receiveUpdate callback
+        this.serverConnection = new MalcolmConnection(this.receiveUpdate, webSocketURL);
     }
 
-    monitorPV(component) {
-        // call the sub method for the given plugin and pass it the comp that
-        // wants to subscribe.
-        this.serverConnection.subscribe(component.id, component.props.block, component.props.property);
+    //Listen to a PV
+    monitorPV(id, block, property) {
+        this.serverConnection.subscribe(id, block, property);
     }
 
+    //Stop listening to a PV
     destroyMonitor(id) {
-        // call the unsub method for the given plugin and pass it the comp that
-        // wants to unsubscribe.
         this.serverConnection.unsub(id);
     }
 
+    //Get the desired PV
     getPV(desiredPV) {
         this.serverConnection.getPV(desiredPV);
     }
 
+    //Write to the desired PV
     putPV(newValue, writeToThisPV) {
         this.serverConnection.putPV(newValue, writeToThisPV);
     }
 
+    //Receive an update from Malcolm
     receiveUpdate(newValue, pvName) {
 
-        // Should send the information toward the action creator
+        // Send to action creator
         updatePV(newValue, pvName);
 
     }

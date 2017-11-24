@@ -7,18 +7,27 @@ import {
 
 import {ServerInterface} from '../client/connection/ServerInterface.js';
 
+//Initial state of our store
 const initialState = {
     epicsData: {},
-    connectionObject: new ServerInterface() // Can I make it here?
+    connectionObject: null
 };
 
 //Default params initialises state when nothing is passed
 function EPICSReducer(state = initialState, action) {
+
+    // The reducer takes our current state and an action, and returns
+    // a new state that reflects the changes we want to make, described
+    // in the action. Object.assign creates a blank object and copies
+    // properties over, allowing us to avoid mutating the state.
     switch(action.type) {
 
     case SUBSCRIBE_TO_PV: {
         if (state.connectionObject !== null) {
-            state.connectionObject.monitorPV(action.payload.component);
+            state.connectionObject.monitorPV(
+                action.payload.id,
+                action.payload.block,
+                action.payload.property);
         }
         return state;
     }
@@ -32,9 +41,7 @@ function EPICSReducer(state = initialState, action) {
 
     case UPDATE_PV: {
         const newEpicsData = Object.assign({}, state.epicsData);
-
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
-
         return Object.assign({}, state, {
             epicsData: newEpicsData
         });
@@ -43,12 +50,13 @@ function EPICSReducer(state = initialState, action) {
     case CREATE_CONNECTION: {
         if (state.connectionObject === null) {
             return Object.assign({}, state, {
-                connectionObject: new ServerInterface()
+                connectionObject: new ServerInterface(action.payload.webSocketURL)
             });
         }
         return state;
     }
 
+    //If nothing matches, return the default state.
     default: {
         return state;
     }

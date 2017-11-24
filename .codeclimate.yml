@@ -1,0 +1,25 @@
+
+engines:
+
+  eslint:
+    enabled: true
+    checks:
+      complexity:
+        enabled: true
+    config:
+      extensions:
+      - .js
+    ratings:
+      paths:
+      - client/**
+      - redux/**
+      - tests/**
+      - server/**
+      - "**.js"
+      - "**.yml"
+
+  duplication:
+    enabled: false
+    config:
+      languages:
+      - javascript
