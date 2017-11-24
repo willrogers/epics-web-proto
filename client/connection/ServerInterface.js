@@ -37,6 +37,7 @@ export class ServerInterface {
 
     //Receive an update from Malcolm
     receiveUpdate(newValue, pvName) {
+
         // Send to action creator
         updatePV(newValue, pvName);
 

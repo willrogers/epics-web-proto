@@ -11,7 +11,8 @@ describe('GaugeComponent', function() {
             width={'1000'}
             height={'150'}
             minVal={'0'}
-            maxVal={'100'}/>);
+            maxVal={'100'}
+        />);
 
     const deepGauge1 = mount(
         <GaugeComponent
@@ -47,7 +48,6 @@ describe('GaugeComponent', function() {
         expect(deepGauge1.instance().pipLocations[1]).to.equal(150);
         expect(deepGauge1.instance().pipLocations[2]).to.equal(175);
         expect(deepGauge1.instance().pipLocations[27]).to.equal(875);
-
         expect(deepGauge1.instance().pipLocations.length).to.equal(28);
         expect(deepGauge2.instance().pipLocations.length).to.equal(22);
     });

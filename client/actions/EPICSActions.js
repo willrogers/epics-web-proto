@@ -6,36 +6,33 @@ export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 
-//Action creators
+//Action creators, these package a change in state into
+//an object to be sent around our redux loop to the reducer
 export function updatePV(newValue, pvName) {
-    const updateAction = store.dispatch({
+    return store.dispatch({
         type: UPDATE_PV,
         payload: {pvName: pvName, pvValue: newValue}
     });
-    return updateAction;
 }
 
-export function connectToServer(websocket_url) {
-    const connectAction = store.dispatch({
+//No payload: Connection details are handled by plugin
+export function connectToServer() {
+    return store.dispatch({
         type: CREATE_CONNECTION,
-        payload: {url: websocket_url}
     });
-    return connectAction;
 }
 
 export function subscribeToPV(comp) {
-    const subscribeAction = store.dispatch({
+    return store.dispatch({
         type: SUBSCRIBE_TO_PV,
         payload: {component: comp}
     });
-    return subscribeAction;
 }
 
 export function unsubscribeToPV(id) {
-    const unsubscribeAction = store.dispatch({
+    return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
         payload: {unsubID: id}
     });
-    return unsubscribeAction;
 }
 

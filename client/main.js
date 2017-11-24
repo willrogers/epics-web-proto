@@ -4,12 +4,10 @@ import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
 import {connectToServer} from './actions/EPICSActions.js';
 
-const WEBSOCKET_ADDRESS = 'ws://pc0088:8080/ws';
-
 class App extends React.Component {
 
     componentWillMount() {
-        connectToServer(WEBSOCKET_ADDRESS);
+        connectToServer();
     }
 
     render() {
