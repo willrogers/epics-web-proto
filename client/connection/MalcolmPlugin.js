@@ -8,14 +8,22 @@ const returnMethod = 'malcolm:core/Return:1.0';
 
 export class MalcolmConnection {
 
+
     constructor(callback) {
+
+
+        //Callback supplied by serverInterface - allows for receipt
+        // of values from malc
         this.callback = callback;
+
         //Open the WS Connection
         this.malcConnection = new WebSocket(webSocketURL);
 
         //Create cache
         this.cachedSubscribeRequests = [];
 
+        //Create the map of pv ids to pc names, so we can determine what pv
+        // belongs to which subscription owner
         this.pvIds = {};
 
         /*When the websocket is open...*/
@@ -34,23 +42,29 @@ export class MalcolmConnection {
         };
     }
 
+    //To close the WebSocket and cease communication. Called on app shutdown
+    //
     disconnect() {
         this.malcConnection.close();
     }
 
-    subscribe(id, pathBlock, pathProperty) {
+    // ID: Identifier of the entity that is subscribing - who wants the info
+    // Block: Top level malcolm data structure
+    // Property: Refers to a specific part of the Block
+    subscribe(id, block, property) {
 
-        //
-        this.pvIds[id] = pathProperty;
+        //Associate this subscription ID with the name of the pv
+        //it is requesting (property)
+        this.pvIds[id] = property;
 
         //create subscriptionJSON
         const subscribeRequest = JSON.stringify({
             'typeid': subMethod,
             'id': id,
-            'path': [pathBlock, pathProperty]
+            'path': [block, property]
         });
 
-        //Send sub request or add to cache
+        //Send sub request, or add to cache if WS is not ready
         if (this.malcConnection.readyState === 1) {
             this.malcConnection.send(subscribeRequest);
         } else {
@@ -58,6 +72,7 @@ export class MalcolmConnection {
         }
     }
 
+    //Kill the subscription to malcolm. Called on page unload or refresh
     unsub(id) {
 
         //make the unsubJson
@@ -66,14 +81,16 @@ export class MalcolmConnection {
             'id': id
         });
 
-        //Make sure the websocket can accept messages
-        if(this.malcConnection.readyState===1) {
+        //Make sure the websocket can accept messages, if so, send one
+        if (this.malcConnection.readyState === 1) {
             this.malcConnection.send(unsubJSON);
         }
     }
 
-    //Pass to the action creator
+    //Invoke the callback supplied by ServerInterface (receiveUpdate)
+    //This is so that we can send values back from malcolm
     update(newVal, pvName) {
+        //Callback is ServerInterface.receiveUpdate()
         this.callback(newVal, pvName);
     }
 
