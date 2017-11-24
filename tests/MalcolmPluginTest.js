@@ -1,2 +1,2 @@
-import ServerInterface from './../client/connection/ServerInterface.js';
+import MalcolmConnection from './../client/connection/MalcolmPlugin.js';
 

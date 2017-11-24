@@ -1,8 +1,8 @@
 const subMethod = 'malcolm:core/Subscribe:1.0';
 const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
-const putMethod = 'malcolm:core/Put:1.0';
-const updateMethod = 'malcolm:core/Update:1.0';
-const returnMethod = 'malcolm:core/Return:1.0';
+// const putMethod = 'malcolm:core/Put:1.0';
+// const updateMethod = 'malcolm:core/Update:1.0';
+// const returnMethod = 'malcolm:core/Return:1.0';
 
 export class MalcolmConnection {
 
