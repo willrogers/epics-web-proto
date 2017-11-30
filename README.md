@@ -1,9 +1,4 @@
-///////////////////////////////////
-
-	Design Decisions & Concepts
-
-///////////////////////////////////
-
+EpicsWebProto
 CONTENTS:
 
 1.	INTRODUCTION & INSTALLATION

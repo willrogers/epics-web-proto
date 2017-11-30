@@ -26,13 +26,13 @@ export class ServerInterface {
     }
 
     //Get the desired PV
-    getPV(desiredPV) {
-        this.serverConnection.getPV(desiredPV);
+    getPV(id, block, property) {
+        this.serverConnection.getPV( id, block, property);
     }
 
     //Write to the desired PV
-    putPV(newValue, writeToThisPV) {
-        this.serverConnection.putPV(newValue, writeToThisPV);
+    putPV(id, block, property, value) {
+        this.serverConnection.putPV(id, block, property, value);
     }
 
     closeWebsocket() {
