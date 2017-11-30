@@ -57,13 +57,11 @@ export class MalcolmConnection {
                 'path': [block, property],
                 'value': val
             });
-
         } else if (typeid === unsubMethod) {
             request = JSON.stringify({
                 'typeid': typeid,
                 'id': id
             });
-
         } else /* typeid is sub or get, common structure */ {
             request = JSON.stringify({
                 'typeid': typeid,
