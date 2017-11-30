@@ -16,34 +16,36 @@ CONTENTS:
 8.	CONFIGURATION
 
 
-	1. INTRODUCTION & INSTALLATION:
+1. INTRODUCTION & INSTALLATION:
 
-		About the Project:
 
-			- EpicsWebProto
-				A prototype to explore and demonstrate a gui for reading and writing to EPICS process variables, via a web browser. The final goal being a control system web-application capable of displaying screens similar to the currently utilised Control System Studio and Extensible Display Manager. In effect control system app with the following benefits; portability, platform agnosticism, scalability, no user installation, and server-side updating.
 
-			- Use Cases
-				Some proposed use cases, that may or may not end up being feasible depending on the final decided functionality and security measures:
-					Control system on tablets
-					Remote access (subject to approval)
-					Machine status screens
-					Public engagement
+    About the Project:
 
-			- Installation & Start up (Linux)
-				This application requires the latest verion of Node js to be installed on the users machine.
+		EpicsWebProto
+		A prototype to explore and demonstrate a gui for reading and writing to EPICS process variables, via a web browser. The final goal being a control system web-application capable of displaying screens similar to the currently utilised Control System Studio and Extensible Display Manager. In effect a control system app with the following benefits; portability, platform agnosticism, scalability, no user installation, and server-side updating.
 
-					1. Ensure your server is running. If using Malcolm, navigate to the directory where you have Malcolm saved ./pymalcolm and enter the following command:
+		Use Cases
+		Some proposed use cases, that may or may not end up being feasible depending on the final decided functionality and security measures:
+			Control system on tablets
+			Remote access (subject to approval)
+			Machine status screens
+			Public engagement
 
-							./malcolm/imalcolm.py malcolm/modules/demo/MULTI-PV.yaml
+		Installation & Start up (Linux)
+			This application requires the latest verion of Node js to be installed on the users machine.
 
-					2. Using the command line, navigate to the directory where you have the application stored.
+				1. Ensure your server is running. If using Malcolm, navigate to the directory where you have Malcolm saved ./pymalcolm and enter the following command:
 
-					3. Enter the command:
+						./malcolm/imalcolm.py malcolm/modules/demo/MULTI-PV.yaml
 
-							npm install && npm start
+				2. Using the command line, navigate to the directory where you have the application stored.
 
-					4. Navigate to http://localhost:3000/ in your browser
+				3. Enter the command:
+
+						npm install && npm start
+
+				4. Navigate to http://localhost:3000/ in your browser
 
 
 
