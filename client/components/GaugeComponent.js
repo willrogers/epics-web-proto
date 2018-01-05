@@ -6,24 +6,33 @@ const canvasStyle = {border: '1px solid #000000'};
 export default class GaugeComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.defineClassConstants();
-        console.log("gaugecomp constructor")
+        this.ticker = 0;
     }
 
     componentDidMount() {
-            console.log("gaugecompdidmount")
-            //this.defineClassConstants();
+        this.mounted = true;
+        this.defineClassConstants();
+
+        this.ticker++;
+        console.log("ticker in didMount");
+        console.log(this.ticker);
     }
 
     //Currently not working because...  ? I dunno.
     componentDidUpdate() {
 
-        console.log("Context in componentDidUpdate(): ")
-        console.log(this.context);
+        this.ticker++;
+        console.log("ticker in didUpdate");
+        console.log(this.ticker);
 
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.drawGauge();
+        if(this.mounted === true){
+            console.log("The context should exist. Context in didUpdate");
+            console.log(this.context);
 
+            this.context = this.gaugeCanvas.getContext('2d');
+            this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
+            this.drawGauge();
+        }
     }
 
     drawGauge() {
@@ -85,14 +94,20 @@ export default class GaugeComponent extends React.Component {
     }
 
     defineClassConstants() {
+
+        this.ticker++;
+        console.log("ticker in defineConstants");
+        console.log(this.ticker);
+
         //Canvas definition
         this.context = this.gaugeCanvas.getContext('2d');
-        console.log("Context defined in defineClassConstants(): ")
-        console.log(this.context);
+        console.log("context in defineConstants: ")
+        console.log(this.context)
+        this.contextExists = true;
 
         //Internal Dimension definition
-        this.internalXAxis = this.canvas.width * 0.8;
-        this.xAxisBuffer = this.canvas.width * 0.1;
+        this.internalXAxis = this.gaugeCanvas.width * 0.8;
+        this.xAxisBuffer = this.gaugeCanvas.width * 0.1;
         this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
         this.onePipInPixels = 25;
 
@@ -133,7 +148,7 @@ export default class GaugeComponent extends React.Component {
     render() {
         return (
             <canvas
-                ref="gaugeCanvas"
+                ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}
                 width={this.props.width}
                 height={this.props.height}
                 style={canvasStyle}>
