@@ -7,10 +7,10 @@ const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
 
 export class MalcolmConnection {
 
-    constructor(callback, webSocketURL) {
+    constructor(callback, webSocket) {
 
         this.updateCallback = callback;  //serverInterface.receiveUpdate()
-        this.malcConnection = new WebSocket(webSocketURL);  //Create WS
+        this.webSocket = webSocket;  //Create WS
         this.cachedRequests = [];  // Requests made before WS open
         this.pvIds = {};  // Link the pv and id for tracking
         this.connect();
@@ -19,16 +19,16 @@ export class MalcolmConnection {
 
     //Open conn.
     connect() {
-        this.malcConnection.onopen = () => {
+        this.webSocket.onopen = () => {
             for (let i = 0; i < this.cachedRequests.length; i++) {
-                this.malcConnection.send(this.cachedRequests[i]);
+                this.webSocket.send(this.cachedRequests[i]);
             }
         };
     }
 
     registerListener() {
         //Create the listener for responses.
-        this.malcConnection.onmessage = (message) => {
+        this.webSocket.onmessage = (message) => {
             const response = JSON.parse(message.data);
             const newMalcolmValue = response.value.value;
             this.updateCallback(newMalcolmValue, this.pvIds[response.id]);
@@ -54,13 +54,13 @@ export class MalcolmConnection {
     }
     //Close the websocket connection
     disconnectWebSocket() {
-        this.malcConnection.close();
+        this.webSocket.close();
     }
 
     //Send to malcolm
     sendRequest(request) {
-        if (this.malcConnection.readyState === 1) {
-            this.malcConnection.send(request);
+        if (this.webSocket.readyState === 1) {
+            this.webSocket.send(request);
         } else {
             this.cachedRequests.push(request);
         }

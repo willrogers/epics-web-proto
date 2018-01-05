@@ -11,8 +11,9 @@ export class ServerInterface {
     //Create a new connection using the chosen plugin
     constructor(webSocketURL) {
 
+        this.webSocket = new WebSocket(webSocketURL);  //Create WS
         //Create your plugin and pass it the receiveUpdate callback
-        this.serverConnection = new MalcolmConnection(this.receiveUpdate, webSocketURL);
+        this.serverConnection = new MalcolmConnection(this.receiveUpdate, this.webSocket);
     }
 
     //Listen to a PV
@@ -27,7 +28,7 @@ export class ServerInterface {
 
     //Get the desired PV
     getPV(id, block, property) {
-        this.serverConnection.getPV( id, block, property);
+        this.serverConnection.getPV(id, block, property);
     }
 
     //Write to the desired PV

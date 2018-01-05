@@ -6,15 +6,24 @@ const canvasStyle = {border: '1px solid #000000'};
 export default class GaugeComponent extends React.Component {
     constructor(props) {
         super(props);
+        this.defineClassConstants();
+        console.log("gaugecomp constructor")
     }
 
     componentDidMount() {
-        this.defineClassConstants();
+            console.log("gaugecompdidmount")
+            //this.defineClassConstants();
     }
 
+    //Currently not working because...  ? I dunno.
     componentDidUpdate() {
+
+        console.log("Context in componentDidUpdate(): ")
+        console.log(this.context);
+
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawGauge();
+
     }
 
     drawGauge() {
@@ -24,8 +33,8 @@ export default class GaugeComponent extends React.Component {
         this.drawMarker(this.threeQuarterMark);
         this.drawMarker(this.finishMark);
         this.drawNeedle(this.props.EPICSValue);
-        for (let x in this.pipLocations) {
-            this.drawPip(this.pipLocations[x]);
+        for (let i in this.pipLocations) {
+            this.drawPip(this.pipLocations[i]);
         }
     }
 
@@ -77,7 +86,9 @@ export default class GaugeComponent extends React.Component {
 
     defineClassConstants() {
         //Canvas definition
-        this.context = this.canvas.getContext('2d');
+        this.context = this.gaugeCanvas.getContext('2d');
+        console.log("Context defined in defineClassConstants(): ")
+        console.log(this.context);
 
         //Internal Dimension definition
         this.internalXAxis = this.canvas.width * 0.8;
@@ -122,7 +133,7 @@ export default class GaugeComponent extends React.Component {
     render() {
         return (
             <canvas
-                ref={canvas => this.canvas = canvas}
+                ref="gaugeCanvas"
                 width={this.props.width}
                 height={this.props.height}
                 style={canvasStyle}>
