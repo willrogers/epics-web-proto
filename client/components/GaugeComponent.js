@@ -6,33 +6,17 @@ const canvasStyle = {border: '1px solid #000000'};
 export default class GaugeComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.ticker = 0;
     }
 
     componentDidMount() {
-        this.mounted = true;
         this.defineClassConstants();
-
-        this.ticker++;
-        console.log("ticker in didMount");
-        console.log(this.ticker);
     }
 
     //Currently not working because...  ? I dunno.
     componentDidUpdate() {
-
-        this.ticker++;
-        console.log("ticker in didUpdate");
-        console.log(this.ticker);
-
-        if(this.mounted === true){
-            console.log("The context should exist. Context in didUpdate");
-            console.log(this.context);
-
-            this.context = this.gaugeCanvas.getContext('2d');
-            this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
-            this.drawGauge();
-        }
+        this.context = this.gaugeCanvas.getContext('2d');
+        this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
+        this.drawGauge();
     }
 
     drawGauge() {
@@ -95,15 +79,8 @@ export default class GaugeComponent extends React.Component {
 
     defineClassConstants() {
 
-        this.ticker++;
-        console.log("ticker in defineConstants");
-        console.log(this.ticker);
-
         //Canvas definition
         this.context = this.gaugeCanvas.getContext('2d');
-        console.log("context in defineConstants: ")
-        console.log(this.context)
-        this.contextExists = true;
 
         //Internal Dimension definition
         this.internalXAxis = this.gaugeCanvas.width * 0.8;
