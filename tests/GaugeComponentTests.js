@@ -8,8 +8,8 @@ enzyme.configure({ adapter: new Adapter() });
 import {shallow, mount} from 'enzyme';
 import {expect} from 'chai';
 
-// describe('GaugeComponent', function() {
-//     const shallowGauge = shallow(
+describe('GaugeComponent', function() {
+// const shallowGauge = shallow(
 //         <GaugeComponent
 //             EPICSValue={'hello'}
 //             width={'1000'}
@@ -56,5 +56,5 @@ import {expect} from 'chai';
 //         expect(deepGauge2.instance().pipLocations.length).to.equal(22);
 //     });
 
-//});
+});
 

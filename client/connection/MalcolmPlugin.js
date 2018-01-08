@@ -19,6 +19,7 @@ export class MalcolmConnection {
 
     //Open conn.
     connect() {
+        console.log(this.webSocket);
         this.webSocket.onopen = () => {
             for (let i = 0; i < this.cachedRequests.length; i++) {
                 this.webSocket.send(this.cachedRequests[i]);
