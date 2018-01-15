@@ -36,10 +36,19 @@ const deepGauge1 = mount(
             maxVal={'120'}
         />);
 
-    //This type is slightly different as it is a composite component
+    //This type check is slightly different as is a composite component.
     //i.e a user-defined component
     it('Should render a gauge component', function() {
         expect(deepGauge1.type()).to.equal(GaugeComponent);
+        //console.log(deepGauge2.find('canvas'));
+    });
+
+    it('Should render a canvas', function(){
+       expect(deepGauge1.find('canvas')).to.have.length(1);
+    });
+
+    it('Should not render a heading', function(){
+        expect(deepGauge1.find('h1')).to.have.length(0);
     });
 
     it('Should create a node in the DOM', function() {
@@ -47,9 +56,9 @@ const deepGauge1 = mount(
     });
 
     it('Should store the quarterly markers correctly', function() {
-        expect(deepGauge2.instance().startMark).to.equal(100)
-        expect(deepGauge2.instance().halfMark).to.equal(500)
-        expect(deepGauge2.instance().threeQuarterMark).to.equal(700)
+        expect(deepGauge2.instance().startMark).to.equal(100);
+        expect(deepGauge2.instance().halfMark).to.equal(500);
+        expect(deepGauge2.instance().threeQuarterMark).to.equal(700);
         expect(deepGauge2.instance().finishMark).to.equal(900)
     });
 

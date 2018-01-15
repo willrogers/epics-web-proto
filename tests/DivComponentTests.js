@@ -16,7 +16,7 @@ describe('DivComponent', function() {
     });
 
     it ('Should ', function() {
-
+        //expect(shallowDiv.)
     });
 });
 
