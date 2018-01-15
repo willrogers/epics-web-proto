@@ -12,8 +12,10 @@ export default class GaugeComponent extends React.Component {
         this.defineClassConstants();
     }
 
+
     componentDidUpdate() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context = this.gaugeCanvas.getContext('2d');
+        this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
         this.drawGauge();
     }
 
@@ -24,8 +26,8 @@ export default class GaugeComponent extends React.Component {
         this.drawMarker(this.threeQuarterMark);
         this.drawMarker(this.finishMark);
         this.drawNeedle(this.props.EPICSValue);
-        for (let x in this.pipLocations) {
-            this.drawPip(this.pipLocations[x]);
+        for (let i in this.pipLocations) {
+            this.drawPip(this.pipLocations[i]);
         }
     }
 
@@ -76,12 +78,13 @@ export default class GaugeComponent extends React.Component {
     }
 
     defineClassConstants() {
+
         //Canvas definition
-        this.context = this.canvas.getContext('2d');
+        this.context = this.gaugeCanvas.getContext('2d');
 
         //Internal Dimension definition
-        this.internalXAxis = this.canvas.width * 0.8;
-        this.xAxisBuffer = this.canvas.width * 0.1;
+        this.internalXAxis = this.gaugeCanvas.width * 0.8;
+        this.xAxisBuffer = this.gaugeCanvas.width * 0.1;
         this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
         this.onePipInPixels = 25;
 
@@ -122,7 +125,7 @@ export default class GaugeComponent extends React.Component {
     render() {
         return (
             <canvas
-                ref={canvas => this.canvas = canvas}
+                ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}
                 width={this.props.width}
                 height={this.props.height}
                 style={canvasStyle}>

@@ -9,7 +9,7 @@ export class GaugeContainer extends SuperContainer {
 
     render() {
         /*I think we use state here, inherited from the SuperContainer,
-        ie not the react component inheritence that would normally use
+        ie not the react component inheritance that would normally use
         props */
         return(
             <GaugeComponent

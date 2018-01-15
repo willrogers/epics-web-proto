@@ -11,9 +11,9 @@ export class ServerInterface {
     //Create a new connection using the chosen plugin
     constructor(webSocketURL) {
 
-        //Create your plugin as server connection and pass it the
-        //receiveUpdate callback
-        this.serverConnection = new MalcolmConnection(this.receiveUpdate, webSocketURL);
+        this.webSocket = new WebSocket(webSocketURL);  //Create WS
+        //Create your plugin and pass it the receiveUpdate callback
+        this.serverConnection = new MalcolmConnection(this.receiveUpdate, this.webSocket);
     }
 
     //Listen to a PV
@@ -23,23 +23,26 @@ export class ServerInterface {
 
     //Stop listening to a PV
     destroyMonitor(id) {
-        this.serverConnection.unsub(id);
+        this.serverConnection.unsubscribe(id);
     }
 
     //Get the desired PV
-    getPV(desiredPV) {
-        this.serverConnection.getPV(desiredPV);
+    getPV(id, block, property) {
+        this.serverConnection.getPV(id, block, property);
     }
 
     //Write to the desired PV
-    putPV(newValue, writeToThisPV) {
-        this.serverConnection.putPV(newValue, writeToThisPV);
+    putPV(id, block, property, value) {
+        this.serverConnection.putPV(id, block, property, value);
+    }
+
+    closeWebsocket() {
+        this.serverConnection.disconnectWebSocket();
     }
 
     //Receive an update from Malcolm
     receiveUpdate(newValue, pvName) {
-
-        // Send to action creator
+        // Send to the action creator
         updatePV(newValue, pvName);
 
     }
