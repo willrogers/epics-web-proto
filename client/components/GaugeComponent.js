@@ -12,7 +12,7 @@ export default class GaugeComponent extends React.Component {
         this.defineClassConstants();
     }
 
-    //Currently not working because...  ? I dunno.
+
     componentDidUpdate() {
         this.context = this.gaugeCanvas.getContext('2d');
         this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);

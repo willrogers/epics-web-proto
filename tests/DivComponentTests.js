@@ -15,8 +15,5 @@ describe('DivComponent', function() {
         expect(shallowDiv.type()).to.equal('div');
     });
 
-    it ('Should ', function() {
-        //expect(shallowDiv.)
-    });
 });
 

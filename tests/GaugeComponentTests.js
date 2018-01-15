@@ -36,15 +36,13 @@ const deepGauge1 = mount(
             maxVal={'120'}
         />);
 
-    //This type check is slightly different as is a composite component.
-    //i.e a user-defined component
     it('Should render a gauge component', function() {
         expect(deepGauge1.type()).to.equal(GaugeComponent);
-        //console.log(deepGauge2.find('canvas'));
     });
 
     it('Should render a canvas', function(){
        expect(deepGauge1.find('canvas')).to.have.length(1);
+       // console.log(deepGauge1.instance().gaugeCanvas);
     });
 
     it('Should not render a heading', function(){
