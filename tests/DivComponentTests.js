@@ -14,5 +14,9 @@ describe('DivComponent', function() {
     it('Should render a div', function() {
         expect(shallowDiv.type()).to.equal('div');
     });
+
+    it ('Should ', function() {
+
+    });
 });
 

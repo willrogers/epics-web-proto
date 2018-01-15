@@ -36,18 +36,24 @@ const deepGauge1 = mount(
             maxVal={'120'}
         />);
 
-    it('Should render a canvas', function() {
-       // expect(deepGauge1.type()).to.equal('canvas');
+    //This type is slightly different as it is a composite component
+    //i.e a user-defined component
+    it('Should render a gauge component', function() {
+        expect(deepGauge1.type()).to.equal(GaugeComponent);
+    });
+
+    it('Should create a node in the DOM', function() {
+        expect(deepGauge2.exists()).to.equal(true);
     });
 
     it('Should store the quarterly markers correctly', function() {
-        expect(deepGauge2.instance().startMark).to.equal(100);
-        expect(deepGauge2.instance().halfMark).to.equal(500);
-        expect(deepGauge2.instance().threeQuarterMark).to.equal(700);
-        expect(deepGauge2.instance().finishMark).to.equal(900);
+        expect(deepGauge2.instance().startMark).to.equal(100)
+        expect(deepGauge2.instance().halfMark).to.equal(500)
+        expect(deepGauge2.instance().threeQuarterMark).to.equal(700)
+        expect(deepGauge2.instance().finishMark).to.equal(900)
     });
 
-    it('Should create and populate an array', function() {
+    it('Should create and populate an array of pip locations', function() {
         expect(deepGauge2.instance().pipLocations[0]).to.equal(125);
         expect(deepGauge2.instance().pipLocations[1]).to.equal(150);
         expect(deepGauge2.instance().pipLocations[2]).to.equal(175);
