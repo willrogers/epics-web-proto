@@ -43,9 +43,17 @@ export function subscribeToPV(comp) {
 export function unsubscribeToPV(id) {
     return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
-        payload:{
+        payload: {
             unsubID: id
         }
     });
+
 }
+
+export function updateWebSockStatus() {
+    return store.dispatch({
+
+    });
+}
+
 

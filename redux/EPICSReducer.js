@@ -41,6 +41,7 @@ function EPICSReducer(state = initialState, action) {
 
     case UPDATE_PV: {
         const newEpicsData = Object.assign({}, state.epicsData);
+        console.log(state);
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
         return Object.assign({}, state, {
             epicsData: newEpicsData
