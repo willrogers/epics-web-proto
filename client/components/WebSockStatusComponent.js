@@ -1,5 +1,5 @@
 import React from 'react';
-import {closeWebSocket} from '../actions/EPICSActions';
+import {closeWebSocket, unsubscribeToPV} from '../actions/EPICSActions';
 
 
 export default class WebSockStatusComponent extends React.Component {
@@ -15,6 +15,13 @@ export default class WebSockStatusComponent extends React.Component {
         );
     }
 
+    handleClick() {
+        console.log(this)
+        console.log(this.id)
+        unsubscribeToPV(super.id);
+        closeWebSocket();
+    }
+
     render() {
         return (
             <div>
@@ -27,7 +34,7 @@ export default class WebSockStatusComponent extends React.Component {
 
                 </svg>
 
-                <button onClick={()=> closeWebSocket()}>
+                <button onClick={()=> this.handleClick()}>
                     Disconnect
                 </button>
 
