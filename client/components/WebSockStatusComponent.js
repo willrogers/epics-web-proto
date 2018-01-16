@@ -1,4 +1,6 @@
 import React from 'react';
+import {closeWebSocket} from '../actions/EPICSActions';
+
 
 export default class WebSockStatusComponent extends React.Component {
     constructor(props){
@@ -6,24 +8,29 @@ export default class WebSockStatusComponent extends React.Component {
     }
 
     readyStatusText() {
-        return(
+        return (
             <text x="30" y="30" fill="black">
                 WebSocket readyState: {this.props.readyState}
             </text>
         );
     }
 
-    handleChange(event){
-
-    }
-
     render() {
         return (
             <div>
-            <svg width={this.props.width} height={this.props.height}>
-                {this.readyStatusText()}
-            </svg>
-            <button> Connect/Disconnect </button>
+
+                <svg
+                    width={this.props.width}
+                    height={this.props.height}>
+
+                    {this.readyStatusText()}
+
+                </svg>
+
+                <button onClick={()=> closeWebSocket()}>
+                    Disconnect
+                </button>
+
             </div>
         );
 

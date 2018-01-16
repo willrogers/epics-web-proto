@@ -24,6 +24,9 @@ export class MalcolmConnection {
                 this.webSocket.send(this.cachedRequests[i]);
                 updateWebSockStatus(this.webSocket.readyState);
             }
+        this.webSocket.onclose = () =>{
+            updateWebSockStatus(this.webSocket.readyState);
+        }
         };
     }
 

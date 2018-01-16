@@ -3,7 +3,8 @@ import {
     CREATE_CONNECTION,
     SUBSCRIBE_TO_PV,
     UNSUBSCRIBE_TO_PV,
-    UPDATE_WS_READYSTATE
+    UPDATE_WS_READYSTATE,
+    CLOSE_WEBSOCKET
 } from '../client/actions/EPICSActions.js';
 
 import {ServerInterface} from '../client/connection/ServerInterface.js';
@@ -60,10 +61,14 @@ function EPICSReducer(state = initialState, action) {
     }
 
     case UPDATE_WS_READYSTATE: {
-        console.log(state)
         return Object.assign({}, state, {
             wsReadyState: action.payload.wsStatus
         });
+    }
+
+    case CLOSE_WEBSOCKET: {
+        state.connectionObject.webSocket.close();
+        return state;
     }
 
     //If nothing matches, return the default state.
