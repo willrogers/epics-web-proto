@@ -21,7 +21,6 @@ class App extends React.Component {
                 <DivContainer block="SIGNAL" property="signal"/>
                 <DivContainer block="TEMPERATURE" property="temp1"/>
                 <GaugeContainer block="TEMPERATURE" property="temp1" width="1000" height='150' minVal='0' maxVal='100'/>
-                <WebSocketStatusContainer width="200" height="207"/>
             </div>
         );
     }
@@ -33,3 +32,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById('mount')
     );
 });
+
+
+//<WebSockStatusContainer width="200" height="207"/>
