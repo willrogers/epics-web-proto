@@ -1,3 +1,4 @@
+import {updateWebSockStatus} from '../actions/EPICSActions';
 
 /*Define malcolm message typeids*/
 const putMethod = 'malcolm:core/Put:1.0';
@@ -21,6 +22,7 @@ export class MalcolmConnection {
         this.webSocket.onopen = () => {
             for (let i = 0; i < this.cachedRequests.length; i++) {
                 this.webSocket.send(this.cachedRequests[i]);
+                updateWebSockStatus(this.webSocket.readyState);
             }
         };
     }

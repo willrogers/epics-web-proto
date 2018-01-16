@@ -14,11 +14,15 @@ export class WebSockStatusContainer extends SuperContainer{
 
     componentWillUnmount() {/*Override super*/}
 
+    // componentDidUpdate(){
+    //     console.log(store.getState().ws)
+    // }
+
     hookToStore() {
         store.subscribe(()=>{
             if (typeof store.getState() !== 'undefined') {
                 this.setState(
-                    {WebsocketStatus: store.getState().connectionObject.readyState}
+                    {readyState: store.getState().wsReadyState}
                 );
             }
         });

@@ -60,6 +60,7 @@ function EPICSReducer(state = initialState, action) {
     }
 
     case UPDATE_WS_READYSTATE: {
+        console.log(state)
         return Object.assign({}, state, {
             wsReadyState: action.payload.wsStatus
         });

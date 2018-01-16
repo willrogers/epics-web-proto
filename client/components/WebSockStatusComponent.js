@@ -13,11 +13,18 @@ export default class WebSockStatusComponent extends React.Component {
         );
     }
 
+    handleChange(event){
+
+    }
+
     render() {
         return (
+            <div>
             <svg width={this.props.width} height={this.props.height}>
                 {this.readyStatusText()}
             </svg>
+            <button> Connect/Disconnect </button>
+            </div>
         );
 
     }

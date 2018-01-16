@@ -5,6 +5,8 @@ export const UPDATE_PV = 'UPDATE_PV';
 export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
+export const UPDATE_WS_READYSTATE = 'UPDATE_WS_READYSTATE';
+
 
 
 //Action creators: These package a change-in-state into
