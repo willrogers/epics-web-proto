@@ -1,9 +1,9 @@
 import React from 'react';
 import WebSockStatusComponent from '../components/WebSockStatusComponent.js';
-import {SuperContainer} from './SuperContainer.js'
-import {store} from "../../redux/EPICSStore";
+// import {SuperContainer} from './SuperContainer.js'
+// import {store} from "../../redux/EPICSStore";
 
-export class WebSockStatusContainer extends SuperContainer {
+export class WebSockStatusContainer extends React.Component{
     constructor(props) {
         super(props);
         this.state = {WebsocketStatus: null}
@@ -11,7 +11,7 @@ export class WebSockStatusContainer extends SuperContainer {
 
 
     // This needs to listen to the store (currently does through supercontainer)
-    // and update on WebSocket readyState change. This method should override the super container.
+    // and update on WebSocket readyState change.
 
     hookToStore() {
         store.subscribe(()=>{

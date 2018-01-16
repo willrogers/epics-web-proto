@@ -50,9 +50,12 @@ export function unsubscribeToPV(id) {
 
 }
 
-export function updateWebSockStatus() {
+export function updateWebSockStatus(readyState) {
     return store.dispatch({
-
+        type: UPDATE_WS_READYSTATE,
+        payload: {
+            wsStatus: readyState
+        }
     });
 }
 
