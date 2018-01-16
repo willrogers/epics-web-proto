@@ -14,9 +14,6 @@ export class WebSockStatusContainer extends SuperContainer{
 
     componentWillUnmount() {/*Override super*/}
 
-    // componentDidUpdate(){
-    //     console.log(store.getState().ws)
-    // }
 
     hookToStore() {
         store.subscribe(()=>{

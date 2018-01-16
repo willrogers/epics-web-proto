@@ -13,6 +13,7 @@ export class SuperContainer extends React.Component {
         currentId++;
         this.state = {EPICSValue: null, PV: null};
         this.hookToStore();
+        console.log(this)
     }
 
     componentDidMount() {
@@ -36,7 +37,10 @@ export class SuperContainer extends React.Component {
         store.subscribe(()=>{
             if (typeof store.getState() !== 'undefined') {
                 this.setState(
-                    {EPICSValue: store.getState().epicsData[this.props.property]}
+                    {
+                        EPICSValue: store.getState().epicsData[this.props.property],
+                        PV: this.props.block
+                    }
                 );
             }
         });
