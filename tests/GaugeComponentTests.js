@@ -5,7 +5,7 @@ import * as enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 enzyme.configure({ adapter: new Adapter() });
 
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 import {expect} from 'chai';
 
 describe('GaugeComponent', function() {
@@ -42,7 +42,6 @@ const deepGauge1 = mount(
 
     it('Should render a canvas', function(){
        expect(deepGauge1.find('canvas')).to.have.length(1);
-       // console.log(deepGauge1.instance().gaugeCanvas);
     });
 
     it('Should not render a heading', function(){

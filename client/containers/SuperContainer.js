@@ -17,7 +17,9 @@ export class SuperContainer extends React.Component {
 
     componentDidMount() {
         subscribeToPV(this);
+
         let self = this;
+
         window.addEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
         });
@@ -25,6 +27,7 @@ export class SuperContainer extends React.Component {
 
     componentWillUnmount() {
         let self = this;
+
         window.removeEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
         });
@@ -36,7 +39,10 @@ export class SuperContainer extends React.Component {
         store.subscribe(()=>{
             if (typeof store.getState() !== 'undefined') {
                 this.setState(
-                    {EPICSValue: store.getState().epicsData[this.props.property]}
+                    {
+                        EPICSValue: store.getState().epicsData[this.props.property],
+                        PV: this.props.block
+                    }
                 );
             }
         });
@@ -48,4 +54,7 @@ export class SuperContainer extends React.Component {
 }
 
 //We expect the SuperContainer's props to the be strings
-SuperContainer.propTypes = {property: PropTypes.string};
+SuperContainer.propTypes = {
+    property: PropTypes.string,
+    block: PropTypes.string
+};

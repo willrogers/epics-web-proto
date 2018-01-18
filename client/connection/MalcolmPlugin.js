@@ -1,3 +1,4 @@
+import {updateWebSockStatus} from '../actions/EPICSActions';
 
 /*Define malcolm message typeids*/
 const putMethod = 'malcolm:core/Put:1.0';
@@ -8,7 +9,6 @@ const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
 export class MalcolmConnection {
 
     constructor(callback, webSocket) {
-
         this.updateCallback = callback;  //serverInterface.receiveUpdate()
         this.webSocket = webSocket;  //Create WS
         this.cachedRequests = [];  // Requests made before WS open
@@ -22,7 +22,11 @@ export class MalcolmConnection {
         this.webSocket.onopen = () => {
             for (let i = 0; i < this.cachedRequests.length; i++) {
                 this.webSocket.send(this.cachedRequests[i]);
+                updateWebSockStatus(this.webSocket.readyState);
             }
+            this.webSocket.onclose = () =>{
+                updateWebSockStatus(this.webSocket.readyState);
+            };
         };
     }
 

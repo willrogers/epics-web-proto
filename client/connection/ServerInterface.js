@@ -10,7 +10,6 @@ export class ServerInterface {
 
     //Create a new connection using the chosen plugin
     constructor(webSocketURL) {
-
         this.webSocket = new WebSocket(webSocketURL);  //Create WS
         //Create your plugin and pass it the receiveUpdate callback
         this.serverConnection = new MalcolmConnection(this.receiveUpdate, this.webSocket);
@@ -38,6 +37,13 @@ export class ServerInterface {
 
     closeWebsocket() {
         this.serverConnection.disconnectWebSocket();
+    }
+
+    destroyAllMonitors() {
+        this.pvsToKill = this.serverConnection.pvIds;
+        for(let i in this.pvsToKill) {
+            this.destroyMonitor(parseInt(i));
+        }
     }
 
     //Receive an update from Malcolm

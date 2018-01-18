@@ -2,7 +2,9 @@ import {
     UPDATE_PV,
     CREATE_CONNECTION,
     SUBSCRIBE_TO_PV,
-    UNSUBSCRIBE_TO_PV
+    UNSUBSCRIBE_TO_PV,
+    UPDATE_WS_READYSTATE,
+    CLOSE_WEBSOCKET
 } from '../client/actions/EPICSActions.js';
 
 import {ServerInterface} from '../client/connection/ServerInterface.js';
@@ -10,7 +12,8 @@ import {ServerInterface} from '../client/connection/ServerInterface.js';
 //Initial state of our store
 const initialState = {
     epicsData: {},
-    connectionObject: null
+    connectionObject: null,
+    wsReadyState: null
 };
 
 //Default params initialises state when nothing is passed
@@ -53,6 +56,18 @@ function EPICSReducer(state = initialState, action) {
                 connectionObject: new ServerInterface(action.payload.webSocketURL)
             });
         }
+        return state;
+    }
+
+    case UPDATE_WS_READYSTATE: {
+        return Object.assign({}, state, {
+            wsReadyState: action.payload.wsStatus
+        });
+    }
+
+    case CLOSE_WEBSOCKET: {
+        state.connectionObject.destroyAllMonitors();
+        state.connectionObject.closeWebsocket();
         return state;
     }
 

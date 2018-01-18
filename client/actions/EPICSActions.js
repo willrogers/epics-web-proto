@@ -5,6 +5,9 @@ export const UPDATE_PV = 'UPDATE_PV';
 export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
+export const UPDATE_WS_READYSTATE = 'UPDATE_WS_READYSTATE';
+export const CLOSE_WEBSOCKET = 'CLOSE_WEBSOCKET';
+
 
 
 //Action creators: These package a change-in-state into
@@ -43,9 +46,27 @@ export function subscribeToPV(comp) {
 export function unsubscribeToPV(id) {
     return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
-        payload:{
+        payload: {
             unsubID: id
         }
     });
+
 }
+
+export function updateWebSockStatus(readyState) {
+    return store.dispatch({
+        type: UPDATE_WS_READYSTATE,
+        payload: {
+            wsStatus: readyState
+        }
+    });
+}
+
+export function closeWebSocket() {
+    return store.dispatch({
+        type: CLOSE_WEBSOCKET
+    });
+}
+
+
 
