@@ -11,9 +11,9 @@ export class WebSockStatusContainer extends SuperContainer{
         this.hookToStore();
     }
 
-    componentDidMount() { }
+    componentDidMount() { /* Override */ }
 
-    componentWillUnmount() { }
+    componentWillUnmount() { /* Override */ }
 
     hookToStore() {
         store.subscribe(()=>{

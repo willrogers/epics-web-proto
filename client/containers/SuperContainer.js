@@ -23,32 +23,12 @@ export class SuperContainer extends React.Component {
         window.addEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
         });
-
-        window.addEventListener('close', function() {
-            console.log("WS close")
-            unsubscribeToPV(self.id);
-        });
-
-        window.addEventListener('offline', function() {
-            console.log("WS close")
-            unsubscribeToPV(self.id);
-        });
     }
 
     componentWillUnmount() {
         let self = this;
 
         window.removeEventListener('beforeunload', function() {
-            unsubscribeToPV(self.id);
-        });
-
-        window.addEventListener('close', function() {
-            console.log("WS close")
-            unsubscribeToPV(self.id);
-        });
-
-        window.addEventListener('offline', function() {
-            console.log("WS close")
             unsubscribeToPV(self.id);
         });
     }
