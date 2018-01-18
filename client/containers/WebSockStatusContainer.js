@@ -1,6 +1,7 @@
 import React from 'react';
 import WebSockStatusComponent from '../components/WebSockStatusComponent.js';
 import {SuperContainer} from './SuperContainer.js'
+
 import {store} from "../../redux/EPICSStore";
 
 export class WebSockStatusContainer extends SuperContainer{
@@ -10,10 +11,9 @@ export class WebSockStatusContainer extends SuperContainer{
         this.hookToStore();
     }
 
-    componentDidMount() {/*Override super*/}
+    componentDidMount() { }
 
-    componentWillUnmount() {/*Override super*/}
-
+    componentWillUnmount() { }
 
     hookToStore() {
         store.subscribe(()=>{

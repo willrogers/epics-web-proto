@@ -45,7 +45,6 @@ function EPICSReducer(state = initialState, action) {
     case UPDATE_PV: {
         const newEpicsData = Object.assign({}, state.epicsData);
         newEpicsData[action.payload.pvName] = action.payload.pvValue;
-
         return Object.assign({}, state, {
             epicsData: newEpicsData
         });
@@ -67,7 +66,8 @@ function EPICSReducer(state = initialState, action) {
     }
 
     case CLOSE_WEBSOCKET: {
-        state.connectionObject.webSocket.close();
+        state.connectionObject.destroyAllMonitors();
+        state.connectionObject.closeWebsocket();
         return state;
     }
 
