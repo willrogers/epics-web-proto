@@ -54,4 +54,7 @@ export class SuperContainer extends React.Component {
 }
 
 //We expect the SuperContainer's props to the be strings
-SuperContainer.propTypes = {property: PropTypes.string};
+SuperContainer.propTypes = {
+    property: PropTypes.string,
+    block: PropTypes.string
+};

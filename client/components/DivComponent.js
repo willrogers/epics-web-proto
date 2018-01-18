@@ -13,4 +13,7 @@ export default class DivComponent extends React.Component {
 }
 
 //We expect the DivComponent's props to the be numbers
-DivComponent.propTypes = { EPICSValue: PropTypes.number };
+DivComponent.propTypes = {
+    EPICSValue: PropTypes.number,
+    PV: PropTypes.string
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import {closeWebSocket} from '../actions/EPICSActions';
+import PropTypes from 'prop-types';
 
 
 export default class WebSockStatusComponent extends React.Component {
@@ -42,3 +43,9 @@ export default class WebSockStatusComponent extends React.Component {
 
     }
 }
+
+WebSockStatusComponent.propTypes = {
+    readyState: PropTypes.number,
+    width: PropTypes.string,
+    height: PropTypes.string
+};
