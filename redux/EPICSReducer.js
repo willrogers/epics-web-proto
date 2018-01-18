@@ -16,6 +16,8 @@ const initialState = {
     wsReadyState: null
 };
 
+
+
 //Default params initialises state when nothing is passed
 function EPICSReducer(state = initialState, action) {
 
