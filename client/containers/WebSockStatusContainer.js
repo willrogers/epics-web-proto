@@ -1,10 +1,10 @@
 import React from 'react';
 import WebSockStatusComponent from '../components/WebSockStatusComponent.js';
-import {SuperContainer} from './SuperContainer.js'
+import {SuperContainer} from './SuperContainer.js';
 
-import {store} from "../../redux/EPICSStore";
+import {store} from '../../redux/EPICSStore';
 
-export class WebSockStatusContainer extends SuperContainer{
+export class WebSockStatusContainer extends SuperContainer {
     constructor(props) {
         super(props);
         this.state = {readyState: null};
@@ -27,9 +27,9 @@ export class WebSockStatusContainer extends SuperContainer{
 
     render() {
         return <WebSockStatusComponent
-                    readyState={this.state.readyState}
-                    width={this.props.width}
-                    height={this.props.height}
-               />
+            readyState={this.state.readyState}
+            width={this.props.width}
+            height={this.props.height}
+        />;
     }
 }

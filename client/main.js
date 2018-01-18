@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
-import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js'
+import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js';
 import {connectToServer} from './actions/EPICSActions.js';
 
 //Define the destination to connect the WebSocket to

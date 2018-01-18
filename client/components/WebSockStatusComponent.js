@@ -3,8 +3,8 @@ import {closeWebSocket} from '../actions/EPICSActions';
 
 
 export default class WebSockStatusComponent extends React.Component {
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
     }
 
     readyStatusText() {

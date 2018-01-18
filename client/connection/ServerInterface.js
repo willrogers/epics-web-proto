@@ -39,9 +39,9 @@ export class ServerInterface {
         this.serverConnection.disconnectWebSocket();
     }
 
-    destroyAllMonitors(){
+    destroyAllMonitors() {
         this.pvsToKill = this.serverConnection.pvIds;
-        for(let i in this.pvsToKill){
+        for(let i in this.pvsToKill) {
             this.destroyMonitor(parseInt(i));
         }
     }
