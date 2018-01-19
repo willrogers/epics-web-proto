@@ -96,10 +96,8 @@ export class MalcolmConnection {
 
     //Check typeid, generate appropriate JSON.
     generateRequest(typeid, id, block, property, val) {
-        //Initialise the message as an empty JSON
-        let request = {};
 
-        //
+        let request = {};
         if (typeid === putMethod) {
             request = JSON.stringify({
                 'typeid': typeid,
