@@ -33,5 +33,3 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById('mount')
     );
 });
-
-//<WebSockStatusContainer width="200" height="207"/>

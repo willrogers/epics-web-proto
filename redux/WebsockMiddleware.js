@@ -4,19 +4,37 @@
 //back to action creator, to send to the store. If we don't recognise
 //the actionType here (in this case, we will be looking at the return from
 // an action that has previously gone through this middleware.)
-// hen we will pass it on to the standard reducer fr
+// Then we will pass it on to the standard reducer fr
 
+import {
+    CREATE_CONNECTION,
+    SUBSCRIBE_TO_PV,
+    UNSUBSCRIBE_TO_PV,
+    UPDATE_WS_READYSTATE,
+    CLOSE_WEBSOCKET
+} from '../client/actions/EPICSActions.js';
 
-// const websockMiddleware = store => next => action {
+import {ServerInterface} from '../client/connection/ServerInterface.js';
+
+export const websockMiddleware = store => next => action => {
+
+// switch(action.type) {
 //
-// }
+//     case SUBSCRIBE_TO_PV: {
+//         if (state.connectionObject !== null) {
+//             state.connectionObject.monitorPV(
+//                 action.payload.id,
+//                 action.payload.block,
+//                 action.payload.property);
+//         }
+//         return state;
+//     }
+//
 
 
-const websockMiddleware = function(middlewareAPI){
-    return function(next){
-        return next(action);
+    if (action.type === SUBSCRIBE_TO_PV) {
+        console.log("Reached the middleware")
+        store.dispatch()
     }
+
 };
-
-
-export default websockMiddleware()
