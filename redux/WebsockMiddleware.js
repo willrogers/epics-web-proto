@@ -32,9 +32,11 @@ export const websockMiddleware = store => next => action => {
 //
 
 
-    if (action.type === SUBSCRIBE_TO_PV) {
+    if (action.type === CLOSE_WEBSOCKET) {
         console.log("Reached the middleware")
         store.dispatch()
     }
 
+
+    next(action)
 };
