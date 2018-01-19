@@ -17,7 +17,7 @@ let connectionObject = null;
 //to pass an action to 'next' which is the next step in our
 //chain of middleware/reducers.
 
-const websockMiddleware = store => next => action => {
+const websockMiddleware = _store => next => action => {
 
     //Check the type of the action
     switch (action.type) {
