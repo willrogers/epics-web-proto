@@ -16,6 +16,7 @@ let connectionObject = null;
 // of the store dispatch (currently unutilised) and the ability
 //to pass an action to 'next' which is the next step in our
 //chain of middleware/reducers.
+
 const websockMiddleware = store => next => action => {
 
     //Check the type of the action

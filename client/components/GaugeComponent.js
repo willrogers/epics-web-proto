@@ -101,7 +101,7 @@ export default class GaugeComponent extends React.Component {
         this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
 
         //Style constants
-        this.onePipInPixels = 10;
+        this.onePipInPixels = 25;
         this.pipWidth = 0.5;
         this.markerWidth = 1;
         this.needleWidth = 1.5;
