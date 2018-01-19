@@ -16,27 +16,52 @@ import {
 
 import {ServerInterface} from '../client/connection/ServerInterface.js';
 
-export const websockMiddleware = store => next => action => {
+let connectionObject = null
 
-// switch(action.type) {
-//
-//     case SUBSCRIBE_TO_PV: {
-//         if (state.connectionObject !== null) {
-//             state.connectionObject.monitorPV(
-//                 action.payload.id,
-//                 action.payload.block,
-//                 action.payload.property);
-//         }
-//         return state;
-//     }
-//
+const websockMiddleware = store => next => action => {
 
+    switch (action.type) {
 
-    if (action.type === CLOSE_WEBSOCKET) {
-        console.log("Reached the middleware")
-        store.dispatch()
+        case CREATE_CONNECTION: {
+            if (connectionObject === null) {
+                connectionObject = new ServerInterface(action.payload.webSocketURL)
+            }
+            break;
+        }
+
+        case SUBSCRIBE_TO_PV: {
+            if (connectionObject !== null) {
+                connectionObject.monitorPV(
+                    action.payload.id,
+                    action.payload.block,
+                    action.payload.property);
+            }
+            break;
+        }
+
+        case UNSUBSCRIBE_TO_PV: {
+            if (connectionObject !== null) {
+                connectionObject.destroyMonitor(action.payload.unsubID);
+            }
+            break;
+        }
+
+        case CLOSE_WEBSOCKET: {
+            connectionObject.destroyAllMonitors();
+            connectionObject.closeWebsocket();
+            return state;
+        }
+
+        default: {
+            next(action)
+        }
     }
-
-
-    next(action)
 };
+
+export default websockMiddleware
+
+//
+// if (action.type === CLOSE_WEBSOCKET) {
+//     console.log("Reached the middleware")
+//     store.dispatch()
+// }

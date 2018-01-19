@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware} from 'redux';
 import EPICSReducer from './EPICSReducer.js';
-import {websockMiddleware} from './WebsockMiddleware.js';
+import websockMiddleware from './WebsockMiddleware.js';
 
 const middleware = applyMiddleware(websockMiddleware);
 
