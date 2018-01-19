@@ -1,5 +1,5 @@
 import React from 'react';
-import {store} from '../../redux/EPICSStore.js';
+import {store} from '../redux/EPICSStore.js';
 import {subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions';
 import PropTypes from 'prop-types';
 
@@ -17,9 +17,7 @@ export class SuperContainer extends React.Component {
 
     componentDidMount() {
         subscribeToPV(this);
-
         let self = this;
-
         window.addEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
         });
@@ -27,7 +25,6 @@ export class SuperContainer extends React.Component {
 
     componentWillUnmount() {
         let self = this;
-
         window.removeEventListener('beforeunload', function() {
             unsubscribeToPV(self.id);
         });

@@ -10,35 +10,45 @@ export class ServerInterface {
 
     //Create a new connection using the chosen plugin
     constructor(webSocketURL) {
-        this.webSocket = new WebSocket(webSocketURL);  //Create WS
+
+        //Create a websocket with the URL passed from top level
+        this.webSocket = new WebSocket(webSocketURL);
         //Create your plugin and pass it the receiveUpdate callback
+        //along with your websocket
         this.serverConnection = new MalcolmConnection(this.receiveUpdate, this.webSocket);
     }
 
-    //Listen to a PV
+    //Calls the plugin method with the specific Malcolm path
+    //required for subscription
     monitorPV(id, block, property) {
         this.serverConnection.subscribe(id, block, property);
     }
 
-    //Stop listening to a PV
+    //Calls the plugin method for unsubscribing to a PV, requires
+    //an id for the component which needs to stop subscribing.
     destroyMonitor(id) {
         this.serverConnection.unsubscribe(id);
     }
 
-    //Get the desired PV
+    //Call the plugin method to get a single reading of a PV.
+    //Useful for minimum and maximum values. Takes the malcolm path
+    //to the desired pv as a parameter
     getPV(id, block, property) {
         this.serverConnection.getPV(id, block, property);
     }
 
-    //Write to the desired PV
+    //Call the plugin method for writing a single value to a PV
     putPV(id, block, property, value) {
         this.serverConnection.putPV(id, block, property, value);
     }
 
+    //Call the plugin method for closing the websocket
     closeWebsocket() {
         this.serverConnection.disconnectWebSocket();
     }
 
+    //Kill all subscriptions. Loop through the map of subscriptions,
+    // taken from pvIds in malcolmPlugin
     destroyAllMonitors() {
         this.pvsToKill = this.serverConnection.pvIds;
         for(let i in this.pvsToKill) {
@@ -46,7 +56,7 @@ export class ServerInterface {
         }
     }
 
-    //Receive an update from Malcolm
+    //Receive an update from Malcolm, passed to malcolmConnection as a callback
     receiveUpdate(newValue, pvName) {
         // Send to the action creator
         updatePV(newValue, pvName);

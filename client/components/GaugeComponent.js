@@ -8,17 +8,22 @@ export default class GaugeComponent extends React.Component {
         super(props);
     }
 
+    //On startup, define the dimensions and metrics we need
+    //to build the graph
     componentDidMount() {
         this.defineClassConstants();
     }
 
-
+    //When we receive and update. Get hold of the canvas, clear
+    //it and then re-draw the gauge.
     componentDidUpdate() {
         this.context = this.gaugeCanvas.getContext('2d');
         this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
         this.drawGauge();
     }
 
+    //Create the gauge out of its constituent components
+    //Markers, pips and the needle.
     drawGauge() {
         this.drawMarker(this.startMark);
         this.drawMarker(this.quarterMark);
@@ -31,6 +36,7 @@ export default class GaugeComponent extends React.Component {
         }
     }
 
+    //Draw a single pip at the supplied location
     drawPip(pipLoc) {
         this.context.beginPath();
         this.context.linewidth = this.pipWidth;
@@ -58,6 +64,8 @@ export default class GaugeComponent extends React.Component {
         this.context.fillText('' + (this.calculateAnnoConversion(annoLoc)), annoLoc, 140);
     }
 
+    //Convert the pixel value used for drawing, into a
+    //numeric value that we can use for annotation of the markers.
     calculateAnnoConversion(annoPixel) {
         return (annoPixel - this.xAxisBuffer) / this.ratio;
     }
@@ -73,22 +81,27 @@ export default class GaugeComponent extends React.Component {
         this.context.closePath();
     }
 
+    //Calculate the needle location. Converts the epics data into a position
+    //in the gauge, based on the minimum and maximum possihle values and the
+    //size of the gauge.
     calculateNeedleLocation(eValue) {
         return((((eValue - this.minVal) / (this.maxVal - this.minVal)) * (this.internalXAxis)) + this.xAxisBuffer);
     }
 
+    //Calculate and define numerous constants that are used in drawing the
+    //gauge
     defineClassConstants() {
 
-        //Canvas definition
+        //Obtaining a reference for the canvas
         this.context = this.gaugeCanvas.getContext('2d');
 
         //Internal Dimension definition
         this.internalXAxis = this.gaugeCanvas.width * 0.8;
         this.xAxisBuffer = this.gaugeCanvas.width * 0.1;
         this.rightSideEnd = this.internalXAxis + this.xAxisBuffer;
-        this.onePipInPixels = 25;
 
         //Style constants
+        this.onePipInPixels = 10;
         this.pipWidth = 0.5;
         this.markerWidth = 1;
         this.needleWidth = 1.5;
@@ -96,7 +109,7 @@ export default class GaugeComponent extends React.Component {
         this.markerColour = '#000000';
         this.needleColour = '#ff0000';
 
-        //Gauge conversion stuff
+        //Gauge conversion constants
         this.minVal = this.props.minVal;
         this.maxVal = this.props.maxVal;
         this.ratio = this.internalXAxis / (this.maxVal - this.minVal);
@@ -108,7 +121,7 @@ export default class GaugeComponent extends React.Component {
         this.threeQuarterMark = (this.xAxisBuffer + this.internalXAxis * 0.75);
         this.finishMark = (this.internalXAxis + this.xAxisBuffer);
 
-        //define pipLocations
+        //define pipLocations and store them in an array for iteration
         this.pipLocations = [];
         for (let i = this.xAxisBuffer; i <= this.rightSideEnd; i += this.onePipInPixels) {
             if ((i !== this.startMark)
@@ -122,6 +135,7 @@ export default class GaugeComponent extends React.Component {
 
     }
 
+    //HTML for describing the gauge.
     render() {
         return (
             <canvas
@@ -134,6 +148,7 @@ export default class GaugeComponent extends React.Component {
     }
 }
 
+//Prop checking.
 GaugeComponent.propTypes = {EPICSValue: PropTypes.number};
 GaugeComponent.propTypes = {width: PropTypes.string};
 GaugeComponent.propTypes = {height: PropTypes.string};

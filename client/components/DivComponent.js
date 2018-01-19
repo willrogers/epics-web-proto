@@ -1,3 +1,4 @@
+//React API
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,12 +8,13 @@ export default class DivComponent extends React.Component {
         super(props);
     }
 
+    //Render a div that displays the desired information in text format
     render() {
         return(<div> The {this.props.PV} value is {this.props.EPICSValue} </div>);
     }
 }
 
-//We expect the DivComponent's props to the be numbers
+//We expect EPICSValues to be numbers, PVs to be strings
 DivComponent.propTypes = {
     EPICSValue: PropTypes.number,
     PV: PropTypes.string

@@ -1,4 +1,5 @@
-import {store} from '../../redux/EPICSStore.js';
+//Gives us the dispatch functionality
+import {store} from '../redux/EPICSStore.js';
 
 //Action types
 export const UPDATE_PV = 'UPDATE_PV';
@@ -8,11 +9,16 @@ export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 export const UPDATE_WS_READYSTATE = 'UPDATE_WS_READYSTATE';
 export const CLOSE_WEBSOCKET = 'CLOSE_WEBSOCKET';
 
+//Action creators: These package a change in state into
+//an object called an action.Then, this action is sent to
+// our middleware/reducer/store chain. THe type is a constant
+//used to identify the action in the middleware/reducer, the
+//payload is the data that we wish to send.
 
 
-//Action creators: These package a change-in-state into
-//an object to be sent around our redux loop to the reducer
-
+//This actions contains the name of a PV for which we wish
+//to update the state, along with the value that we need
+// to apply to it.
 export function updatePV(newValue, pvName) {
     return store.dispatch({
         type: UPDATE_PV,
@@ -23,6 +29,10 @@ export function updatePV(newValue, pvName) {
     });
 }
 
+//This action expresses our desire to make a connection to
+//a server via a websocket. The action contains the URL for
+//the desired port. In our app, we connect to a server called
+//Malcolm
 export function connectToServer(URL) {
     return store.dispatch({
         type: CREATE_CONNECTION,
@@ -32,6 +42,12 @@ export function connectToServer(URL) {
     });
 }
 
+//This actions signifies our wish to subscribe to a certain
+//PV on Malcolm. We supply it with a React component, it
+//then extracts the block and property from the components
+// props, which we explicitly specify in main,js at
+// instantiation. Then, the id is extracted from the
+// component object.
 export function subscribeToPV(comp) {
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,
@@ -43,6 +59,10 @@ export function subscribeToPV(comp) {
     });
 }
 
+//This action allows us to send a request to Malcolm
+//asking it to stop serving us a PV, based on the ID that
+//we keep associated with the component that is listening
+//to it.
 export function unsubscribeToPV(id) {
     return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
@@ -53,6 +73,9 @@ export function unsubscribeToPV(id) {
 
 }
 
+//This Action contains the readyState of the websocket
+//connection, which we use to monitor the status of the
+//websocket.
 export function updateWebSockStatus(readyState) {
     return store.dispatch({
         type: UPDATE_WS_READYSTATE,
@@ -62,6 +85,9 @@ export function updateWebSockStatus(readyState) {
     });
 }
 
+
+//This action contains no payload, it simply expresses
+//our wish to close the websocket connection.
 export function closeWebSocket() {
     return store.dispatch({
         type: CLOSE_WEBSOCKET
