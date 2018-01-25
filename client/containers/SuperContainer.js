@@ -20,7 +20,7 @@ export class SuperContainer extends React.Component {
     componentDidMount() {
         //The desired PV will be taken from the components props so we pass the container/compo.
         subscribeToPV(this);
-        //Assigning this to the object and not the global window object.
+        //Assigning 'this' to the object and not the global window object.
         let self = this;
         //In the event that the page unloads, unsubscribe the component.
         window.addEventListener('beforeunload', function() {

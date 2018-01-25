@@ -21,6 +21,14 @@ export class ServerInterface {
     //Calls the plugin method with the specific Malcolm path
     //required for subscription
     monitorPV(id, block, property) {
+
+        // subscriptionMap = connectionObject.serverConnection.pvIds;
+        // console.log(subscriptionMap);
+        // //If the property is in the map then no need to sub
+        // if(connectionObject.serverConnection.pvIds.has([action.payload.property])){
+        //     console.log("Hello!")
+        // }
+
         this.serverConnection.subscribe(id, block, property);
     }
 

@@ -11,6 +11,7 @@ import {ServerInterface} from '../connection/ServerInterface.js';
 
 //Instantiate the connectionObject
 let connectionObject = null;
+let subscriptionMap = {};
 
 //Initialise the middleware. This gives us the funciontality
 // of the store dispatch (currently unutilised) and the ability
