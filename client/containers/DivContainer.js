@@ -8,6 +8,7 @@ export class DivContainer extends SuperContainer {
         super(props);
     }
 
+    //Instantiate a DivComponent
     render() {
         return(
             <DivComponent EPICSValue={this.state.EPICSValue} PV={this.state.PV} />

@@ -1,4 +1,7 @@
+//Import the React API
 import React from 'react';
+
+//Import the desired components
 import GaugeComponent from '../components/GaugeComponent.js';
 import {SuperContainer} from './SuperContainer.js';
 
@@ -7,10 +10,8 @@ export class GaugeContainer extends SuperContainer {
         super(props);
     }
 
+    //GaugeCompo instantiation Specify the parameters to supply.
     render() {
-        /*I think we use state here, inherited from the SuperContainer,
-        ie not the react component inheritance that would normally use
-        props */
         return(
             <GaugeComponent
                 EPICSValue={this.state.EPICSValue}

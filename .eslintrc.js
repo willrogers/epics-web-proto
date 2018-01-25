@@ -30,6 +30,7 @@ module.exports = {
         "space-before-function-paren": [ "warn", "never" ],
         "space-before-blocks": [ "warn", "always" ],
         "no-trailing-spaces": [ "warn" ],
-        "no-var": ["warn"]
+        "no-var": ["warn"],
+        "no-unused-vars": [1, {"args": "all", "argsIgnorePattern": "^_"}]
     }
 };
