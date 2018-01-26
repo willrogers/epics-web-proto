@@ -56,7 +56,7 @@ export class MalcolmConnection {
 
     //Interface methods to hook to EpicsWebProto, called from ServerInterface
     subscribe(id, block, property) {
-        //If the PV we are subscribing to is unique
+        //If we are subscribing to a new PV
         if (!(Object.values(this.pvIds).includes(property))) {
 
             //Link an ID to the property of a malcolm part, used for tracking
