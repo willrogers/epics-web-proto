@@ -11,7 +11,8 @@ import {ServerInterface} from '../connection/ServerInterface.js';
 
 //Instantiate the connectionObject
 let connectionObject = null;
-let subscriptionMap = new Map();
+let subscriptionMap = {};
+let subscriptionID = 0
 
 //Initialise the middleware. This gives us the funciontality
 // of the store dispatch (currently unutilised) and the ability
@@ -35,29 +36,22 @@ const websockMiddleware = _store => next => action => {
         //Provided there is a connObj, call the monitorPV method of the
         //connObj and create a subscription to listen to a PV
         case SUBSCRIBE_TO_PV: {
-
-            if(!(subscriptionMap.has(action.payload.property))) {
-
+            //If subscriptionMap does not contain the PV, create it.
+            if(!(Object.keys(subscriptionMap).includes(action.payload.property))) {
                 if (connectionObject !== null) {
                     connectionObject.monitorPV(
-                        action.payload.id,
+                        subscriptionID,
                         action.payload.block,
                         action.payload.property);
                 }
-                console.log("If the sub map does NOT have the key: ");
-                console.log(action)
-                console.log(subscriptionMap)
-                subscriptionMap.set(action.payload.property, [action.payload.id])
-                console.log(subscriptionMap)
-                console.log("-----------------------------------");
-
+                //For malcolm
+                subscriptionID++
+                //Set PV - componentID pair
+                subscriptionMap[action.payload.property] = [action.payload.id];
+            //If the PV we want is in the Map...
             } else {
-                console.log("Else if: the sub map DOES have the key: ");
-                console.log(action);
-                console.log(subscriptionMap)
+                //...add new ID to existing IDs associated with that PV
                 subscriptionMap[action.payload.property].push(action.payload.id);
-                console.log(subscriptionMap);
-                console.log("-----------------------------------");
             }
             break;
         }
