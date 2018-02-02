@@ -11,8 +11,14 @@ import {ServerInterface} from '../connection/ServerInterface.js';
 
 //Instantiate the connectionObject
 let connectionObject = null;
-let subscriptionMap = {};
-let subscriptionID = 0
+
+//Tracks which component ID's are subscribed to which PVs.
+let pvToComponentMap = {};
+
+//A uniwue IDentifier for a PV to use with malcolm subscriptions
+let malcolmSubID = 0;
+//A map of which PV is associated with which which Malcolm ID
+let pvToMalcolmIDMap = {}
 
 //Initialise the middleware. This gives us the funciontality
 // of the store dispatch (currently unutilised) and the ability
@@ -37,21 +43,24 @@ const websockMiddleware = _store => next => action => {
         //connObj and create a subscription to listen to a PV
         case SUBSCRIBE_TO_PV: {
             //If subscriptionMap does not contain the PV, create it.
-            if(!(Object.keys(subscriptionMap).includes(action.payload.property))) {
+            if(!(Object.keys(pvToComponentMap).includes(action.payload.property))) {
                 if (connectionObject !== null) {
                     connectionObject.monitorPV(
-                        subscriptionID,
+                        malcolmSubID,
                         action.payload.block,
                         action.payload.property);
                 }
-                //For malcolm
-                subscriptionID++
+
                 //Set PV - componentID pair
-                subscriptionMap[action.payload.property] = [action.payload.id];
-            //If the PV we want is in the Map...
+                pvToComponentMap[action.payload.property] = [action.payload.id];
+
+                // Set the PV - malcID pair (for unsubbing)
+                pvToMalcolmIDMap[action.payload.property] = [malcolmSubID];
+                malcolmSubID++;
+
             } else {
                 //...add new ID to existing IDs associated with that PV
-                subscriptionMap[action.payload.property].push(action.payload.id);
+                pvToComponentMap[action.payload.property].push(action.payload.id);
             }
             break;
         }
@@ -59,9 +68,28 @@ const websockMiddleware = _store => next => action => {
         //Provided there is a connObj, destroy the subscription identified
         // by the supplied ID
         case UNSUBSCRIBE_TO_PV: {
-            if (connectionObject !== null) {
-                connectionObject.destroyMonitor(action.payload.unsubID);
-            }
+
+            //If the PVname that we are unsubbing from is in the map..
+            // for(let i in pvToComponentMap) {
+
+            const pvName = action.payload.pvName;
+            const unsubID = action.payload.unsubID;
+
+                if (Object.keys(pvToComponentMap).includes(pvName)) {
+                    for(let i in pvToComponentMap[pvName]) {
+                        if(unsubID === pvToComponentMap[pvName][i]) {
+                            let removeThis = pvToComponentMap[pvName].indexOf(unsubID);
+                            pvToComponentMap[pvName].splice(removeThis, 1);
+                        }
+                    }
+
+                    if (pvToComponentMap[pvName].length === 0) {
+                        if(connectionObject !== null){
+                            let id = parseInt(pvToMalcolmIDMap[pvName][0]);
+                            connectionObject.destroyMonitor(id);
+                        }
+                    }
+                }
             break;
         }
 

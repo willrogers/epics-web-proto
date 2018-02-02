@@ -24,7 +24,7 @@ export class SuperContainer extends React.Component {
         let self = this;
         //In the event that the page unloads, unsubscribe the component.
         window.addEventListener('beforeunload', function() {
-            unsubscribeToPV(self.id);
+            unsubscribeToPV(self);
         });
     }
 
@@ -32,7 +32,7 @@ export class SuperContainer extends React.Component {
     componentWillUnmount() {
         let self = this;
         window.removeEventListener('beforeunload', function() {
-            unsubscribeToPV(self.id);
+            unsubscribeToPV(self);
         });
     }
 

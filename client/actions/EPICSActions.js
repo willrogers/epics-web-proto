@@ -63,11 +63,12 @@ export function subscribeToPV(comp) {
 //asking it to stop serving us a PV, based on the ID that
 //we keep associated with the component that is listening
 //to it.
-export function unsubscribeToPV(id) {
+export function unsubscribeToPV(comp) {
     return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
         payload: {
-            unsubID: id
+            unsubID: comp.id,
+            pvName: comp.props.property
         }
     });
 
