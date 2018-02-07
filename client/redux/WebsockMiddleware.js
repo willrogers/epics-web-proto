@@ -3,7 +3,7 @@ import {
     CREATE_CONNECTION,
     SUBSCRIBE_TO_PV,
     UNSUBSCRIBE_TO_PV,
-    CLOSE_WEBSOCKET
+    UNSUBSCRIBE_ALL
 } from '../actions/EPICSActions.js';
 
 //Import the websocket functionality
@@ -15,7 +15,7 @@ let connectionObject = null;
 //Tracks which component ID's are subscribed to which PVs.
 let pvToComponentMap = {};
 
-//A uniwue IDentifier for a PV to use with malcolm subscriptions
+//A unique Identifier for a PV to use with malcolm subscriptions
 let malcolmSubID = 0;
 //A map of which PV is associated with which which Malcolm ID
 let pvToMalcolmIDMap = {};
@@ -69,13 +69,16 @@ const websockMiddleware = _store => next => action => {
     // by the supplied ID
     case UNSUBSCRIBE_TO_PV: {
 
-        //If the PVname that we are unsubbing from is in the map..
-        // for(let i in pvToComponentMap) {
-
         const pvName = action.payload.pvName;
         const unsubID = action.payload.unsubID;
 
+
+        //If the PVname that we are unsubbing from is in the map..
         if (Object.keys(pvToComponentMap).includes(pvName)) {
+
+
+
+
             for(let i in pvToComponentMap[pvName]) {
                 if(unsubID === pvToComponentMap[pvName][i]) {
                     const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
@@ -83,6 +86,7 @@ const websockMiddleware = _store => next => action => {
                 }
             }
 
+            //If there are no longer components listening to a PV.
             if (pvToComponentMap[pvName].length === 0) {
                 if(connectionObject !== null) {
                     //Should only ever be one element in each array, the 0th.
@@ -96,10 +100,16 @@ const websockMiddleware = _store => next => action => {
 
     //To close the websocket we first need to kill all of the
     //subscriptions.
-    case CLOSE_WEBSOCKET: {
+    case UNSUBSCRIBE_ALL: {
         if (connectionObject !== null) {
-            //connectionObject.destroyAllMonitors();
-            connectionObject.closeWebsocket();
+            for(let x in pvToComponentMap) {
+                for(let y in pvToComponentMap[x]) {
+                    const removeThis = pvToComponentMap[x].indexOf(y);
+                    pvToComponentMap[x].splice(removeThis, 1);
+                }
+                const id = pvToMalcolmIDMap[x][0];
+                connectionObject.destroyMonitor(id);
+            }
         }
         break;
     }

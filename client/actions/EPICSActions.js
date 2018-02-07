@@ -7,7 +7,7 @@ export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 export const UPDATE_WS_READYSTATE = 'UPDATE_WS_READYSTATE';
-export const CLOSE_WEBSOCKET = 'CLOSE_WEBSOCKET';
+export const UNSUBSCRIBE_ALL= 'UNSUBSCRIBE_ALL';
 
 //Action creators: These package a change in state into
 //an object called an action.Then, this action is sent to
@@ -89,9 +89,9 @@ export function updateWebSockStatus(readyState) {
 
 //This action contains no payload, it simply expresses
 //our wish to close the websocket connection.
-export function closeWebSocket() {
+export function unsubscribeAll() {
     return store.dispatch({
-        type: CLOSE_WEBSOCKET
+        type: UNSUBSCRIBE_ALL
     });
 }
 
