@@ -69,16 +69,12 @@ const websockMiddleware = _store => next => action => {
 
             const pvName = action.payload.pvName;
             const unsubID = action.payload.unsubID;
-
             //If the PVname that we are unsubbing from is in the map..
             if (Object.keys(pvToComponentMap).includes(pvName)) {
-
                 //Loop through each of the pvNames
                 for (let i in pvToComponentMap[pvName]) {
-
                     //If the component ID matches with one of the elements in the value array
                     if (unsubID === pvToComponentMap[pvName][i]) {
-
                         //Remove the element
                         const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
                         pvToComponentMap[pvName].splice(removeThis, 1);
@@ -86,12 +82,13 @@ const websockMiddleware = _store => next => action => {
                 }
                 //If there are no components listening to a PV.
                 if (pvToComponentMap[pvName].length === 0 ) {
-                    //Should only ever be one element in each array, the 0th.
-                    console.log("Size of array associated with: "+pvName+" in pvToComponentMap" );
-                    console.log(pvToComponentMap[pvName]);
-
-                    const id = pvToMalcolmIDMap[pvName][0];
-                    connectionObject.destroyMonitor(id);
+                    if (typeof pvToMalcolmIDMap[pvName][0] !== 'undefined') {
+                        //Should only ever be one element in each array, the 0th.
+                        const id = pvToMalcolmIDMap[pvName][0];
+                        connectionObject.destroyMonitor(id);
+                        //remove from malc map
+                        delete pvToMalcolmIDMap[pvName][0];
+                    }
                 }
             }
             break;
@@ -100,7 +97,6 @@ const websockMiddleware = _store => next => action => {
 
         //
         case UNSUBSCRIBE_ALL: {
-
             //Outer loop through the PVs
             for(let x in pvToComponentMap) {
                 //Inner loop through the component Ids for a given PV
@@ -111,13 +107,17 @@ const websockMiddleware = _store => next => action => {
                 }
                 //If there is a websocket open
                 if (connectionObject !== null ){
-                    //If the PV to malc stuff is still in the Map
-                    if (typeof pvToMalcolmIDMap[x] !== 'undefined') {
+                    //If there are no active subscriptions
+                    console.log(x);
+                    console.log(pvToMalcolmIDMap);
+                    console.log(pvToMalcolmIDMap[x][0]);
+                    if (typeof pvToMalcolmIDMap[x][0] !== 'undefined') {
                         //Close the subscription
                         const id = pvToMalcolmIDMap[x][0];
                         connectionObject.destroyMonitor(id);
                         //Remove from Malc map
                         delete pvToMalcolmIDMap[x][0];
+
                     }
                 }
             }
@@ -126,7 +126,7 @@ const websockMiddleware = _store => next => action => {
         }
 
         //If the action type doesn't match any of these cases, forward it
-        //to the next link the chain - currently this is our reducer.
+        //to the next link the chain - our reducer.
         default: {
             next(action);
         }
