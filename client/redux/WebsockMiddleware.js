@@ -115,7 +115,7 @@ const websockMiddleware = _store => next => action => {
         }
     }
 
-}
+};
 
 export default websockMiddleware;
 
@@ -125,10 +125,31 @@ function removeAndDeleteSub(pvName, mapToRemoveFrom, unsubID = 0) {
     if (connectionObject !== null) {
         if (typeof pvToMalcolmIDMap[pvName] !== 'undefined') {
 
-            // const removeThis = mapToRemoveFrom[pvName].indexOf(unsubID);
-            // mapToRemoveFrom[pvName].splice(removeThis, 1);
+            if (mapToRemoveFrom === pvToComponentMap) {
+                console.log("------------------------------------------------------------")
+                console.log("Removing ")
+                console.log(pvName)
+                console.log("From ")
+                console.log(pvToComponentMap)
 
-            delete mapToRemoveFrom[pvName][unsubID];
+                const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
+                pvToComponentMap[pvName].splice(removeThis, 1);
+
+                console.log(pvToComponentMap)
+
+            } else {
+                console.log("-----------------------")
+                console.log("Removing ")
+                console.log(pvName)
+                console.log("From ")
+                console.log(pvToMalcolmIDMap)
+
+                delete pvToMalcolmIDMap[pvName];
+
+                console.log(pvToMalcolmIDMap)
+            }
         }
     }
 }
+
+
