@@ -47,9 +47,11 @@ export class MalcolmConnection {
             //..extract the data from the message JSON
             const response = JSON.parse(message.data);
             //..extract the value from the data
-            const newMalcolmValue = response.value.value;
-            //..pass the value and its associated id back to EpicsWebProto
-            this.updateCallback(newMalcolmValue, this.pvIds[response.id]);
+            if(response.value !== null) {
+                const newMalcolmValue = response.value.value;
+                //..pass the value and its associated id back to EpicsWebProto
+                this.updateCallback(newMalcolmValue, this.pvIds[response.id]);
+            }
         };
     }
 
