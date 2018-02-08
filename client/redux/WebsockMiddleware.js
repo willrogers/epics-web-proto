@@ -53,7 +53,7 @@ const websockMiddleware = _store => next => action => {
             //Set PV - componentID pair
             pvToComponentMap[action.payload.property] = [action.payload.id];
             // Set the PV - malcID pair (for unsubbing)
-            pvToMalcolmIDMap[action.payload.property] = [malcolmSubID];
+            pvToMalcolmIDMap[action.payload.property] = malcolmSubID;
             malcolmSubID++;
         } else {
             //...add new ID to existing IDs associated with that PV
@@ -75,19 +75,21 @@ const websockMiddleware = _store => next => action => {
             for (let i in pvToComponentMap[pvName]) {
                 //If the component ID matches with one of the elements in the value array
                 if (unsubID === pvToComponentMap[pvName][i]) {
-                    //Remove the element from pv-comp map
-                    delete pvToComponentMap[pvName][unsubID];
+                    //Remove the element from pv-comp map. This one doesn't like
+                    // the delete keyword
+                    const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
+                    pvToComponentMap[pvName].splice(removeThis, 1);
                 }
             }
             //If there are no components listening to a PV.
             if (pvToComponentMap[pvName].length === 0 ) {
                 //If there is still an active subscription
-                if (typeof pvToMalcolmIDMap[pvName][0] !== 'undefined') {
+                if (typeof pvToMalcolmIDMap[pvName] !== 'undefined') {
                     //Should only ever be one element in each array, the 0th.
-                    const id = pvToMalcolmIDMap[pvName][0];
+                    const id = pvToMalcolmIDMap[pvName];
                     connectionObject.destroyMonitor(id);
                     //remove from malc map
-                    delete pvToMalcolmIDMap[pvName][0];
+                    delete pvToMalcolmIDMap[pvName];
                 }
             }
         }
@@ -107,12 +109,12 @@ const websockMiddleware = _store => next => action => {
             //If there is a WebSocket open
             if (connectionObject !== null ) {
                 //If there is an active subscription
-                if (typeof pvToMalcolmIDMap[x][0] !== 'undefined') {
+                if (typeof pvToMalcolmIDMap[x] !== 'undefined') {
                     //Close the subscription
-                    const id = pvToMalcolmIDMap[x][0];
+                    const id = pvToMalcolmIDMap[x];
                     connectionObject.destroyMonitor(id);
                     //Remove from pv-malc map
-                    delete pvToMalcolmIDMap[x][0];
+                    delete pvToMalcolmIDMap[x];
 
                 }
             }
@@ -130,3 +132,10 @@ const websockMiddleware = _store => next => action => {
 };
 
 export default websockMiddleware;
+
+//Helper function
+
+function removeAndDeleteSub(){
+
+
+}
