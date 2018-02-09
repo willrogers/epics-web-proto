@@ -82,11 +82,7 @@ const websockMiddleware = _store => next => action => {
                 }
             }
             if (pvToComponentMap[pvName].length === 0) {
-                delete pvToComponentMap[pvName];
-                //close sub
-                connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
-                //remove from malc map
-                removeAndDeleteSub(pvName, pvToMalcolmIDMap, unsubID);
+                closeSubscription(pvName);
             }
         }
         break;
@@ -95,18 +91,15 @@ const websockMiddleware = _store => next => action => {
     //For disconnecting
     case UNSUBSCRIBE_ALL: {
         //Outer loop through the PVs
-        for (let x in pvToComponentMap) {
+        for (let pvName in pvToComponentMap) {
             //Inner loop through the component Ids for a given PV
-            for (let y in pvToComponentMap[x]) {
+            for (let y in pvToComponentMap[pvName]) {
                 //remove it from PV map
-                removeAndDeleteSub(x, pvToComponentMap, y);
+                removeAndDeleteSub(pvName, pvToComponentMap, y);
             }
 
-            delete pvToComponentMap[x];
-            //Close the subscription
-            connectionObject.destroyMonitor(pvToMalcolmIDMap[x]);
-            //Remove from pv-malc map
-            removeAndDeleteSub(pvToMalcolmIDMap[x], pvToMalcolmIDMap);
+            closeSubscription(pvName);
+
         }
         break;
     }
@@ -120,6 +113,14 @@ const websockMiddleware = _store => next => action => {
 };
 
 export default websockMiddleware;
+
+
+function closeSubscription(pvName) {
+    if (Object.keys(pvToMalcolmIDMap).includes(pvName)) {
+        connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
+        delete pvToMalcolmIDMap[pvName];
+    }
+}
 
 
 //Helper function
