@@ -71,7 +71,7 @@ const websockMiddleware = _store => next => action => {
             const pvName = action.payload.pvName;
             const unsubID = action.payload.unsubID;
 
-            //If the PVname that we are unsubbing from is in the map..
+            //If the pvName that we are unsubbing from is in the map..
             if (Object.keys(pvToComponentMap).includes(pvName)) {
                 //Loop through each of the pvNames
                 for (let i in pvToComponentMap[pvName]) {
@@ -81,9 +81,12 @@ const websockMiddleware = _store => next => action => {
                         removeAndDeleteSub(pvName, pvToComponentMap, unsubID);
                     }
                 }
-                //If there are no components listening to a PV.
                 if (pvToComponentMap[pvName].length === 0) {
-                    //Should only ever be one element in each array, the 0th.
+                    delete pvToComponentMap[pvName];
+                    console.log("CompMap after PV removal in UNSUB_PV: ")
+                    console.log(pvToComponentMap)
+                    console.log("\n")
+                    //close sub
                     connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
                     //remove from malc map
                     removeAndDeleteSub(pvName, pvToMalcolmIDMap, unsubID);
@@ -101,6 +104,11 @@ const websockMiddleware = _store => next => action => {
                     //remove it from PV map
                     removeAndDeleteSub(x, pvToComponentMap, y);
                 }
+
+                delete pvToComponentMap[x];
+                console.log("CompMap after PV removal: ")
+                console.log(pvToComponentMap)
+                console.log("\n")
                 //Close the subscription
                 connectionObject.destroyMonitor(pvToMalcolmIDMap[x]);
                 //Remove from pv-malc map
@@ -122,31 +130,30 @@ export default websockMiddleware;
 
 //Helper function
 function removeAndDeleteSub(pvName, mapToRemoveFrom, unsubID = 0) {
-    if (connectionObject !== null) {
+    if (connectionObject.webSocket.readystate !== 1) {
         if (typeof pvToMalcolmIDMap[pvName] !== 'undefined') {
-
             if (mapToRemoveFrom === pvToComponentMap) {
-                console.log("------------------------------------------------------------")
-                console.log("Removing ")
-                console.log(pvName)
-                console.log("From ")
-                console.log(pvToComponentMap)
+                console.log("||||||||||||||||||");
+                console.log("Removing "+pvName+" from CompMap:");
+                console.log(pvToComponentMap);
 
                 const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
                 pvToComponentMap[pvName].splice(removeThis, 1);
 
-                console.log(pvToComponentMap)
-
+                console.log("CompMap after removal: ");
+                console.log(pvToComponentMap);
+                console.log("||||||||||||||||||");
+                console.log("\n")
             } else {
-                console.log("-----------------------")
-                console.log("Removing ")
-                console.log(pvName)
-                console.log("From ")
-                console.log(pvToMalcolmIDMap)
+                console.log("//////////////////");
+                console.log("Removing "+pvName+" from MalcMap: ");
+                console.log(pvToMalcolmIDMap);
 
                 delete pvToMalcolmIDMap[pvName];
-
-                console.log(pvToMalcolmIDMap)
+                console.log("MalcMap after removal: ");
+                console.log(pvToMalcolmIDMap);
+                console.log("//////////////////");
+                console.log("\n")
             }
         }
     }
