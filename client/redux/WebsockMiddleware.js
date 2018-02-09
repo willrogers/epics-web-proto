@@ -27,11 +27,8 @@ let pvToMalcolmIDMap = {};
 
 const websockMiddleware = _store => next => action => {
 
-    //Check the type of the action
     switch (action.type) {
 
-    //If no connObj exists, create it using the URL provided in the
-    //action.
     case CREATE_CONNECTION: {
         if (connectionObject === null) {
             connectionObject = new ServerInterface(action.payload.webSocketURL);
@@ -39,10 +36,8 @@ const websockMiddleware = _store => next => action => {
         break;
     }
 
-    //Provided there is a connObj, call the monitorPV method of the
-    //connObj and create a subscription to listen to a PV
     case SUBSCRIBE_TO_PV: {
-        //If subscriptionMap does not contain the PV, create it.
+        //If subscriptionMap does not contain the subscription, create it.
         if (!(Object.keys(pvToComponentMap).includes(action.payload.property))) {
             if (connectionObject !== null) {
                 connectionObject.monitorPV(
@@ -62,9 +57,6 @@ const websockMiddleware = _store => next => action => {
         break;
     }
 
-
-    //Provided there is a connObj, destroy the subscription identified
-    // by the supplied ID
     case UNSUBSCRIBE_TO_PV: {
 
         //Split out from action for readability
@@ -81,6 +73,8 @@ const websockMiddleware = _store => next => action => {
                     removeComponentFromPv(pvName, compId);
                 }
             }
+            //If there are no more components associated with the PV,
+            //close subscription
             if (pvToComponentMap[pvName].length === 0) {
                 closeSubscription(pvName);
             }
@@ -88,45 +82,56 @@ const websockMiddleware = _store => next => action => {
         break;
     }
 
-    //For disconnecting
     case UNSUBSCRIBE_ALL: {
-        //Outer loop through the PVs
+        //Outer loop through the PVs in pv-comp map
         for (let pvName in pvToComponentMap) {
             //Inner loop through the component Ids for a given PV
             for (let compId in pvToComponentMap[pvName]) {
-                //remove it from PV map
+                //remove each components from its associate PV
                 removeComponentFromPv(pvName, compId);
             }
-
+            //Empty the PV to Malc map and close the websocket
             closeSubscription(pvName);
-
         }
         break;
     }
     //If the action type doesn't match any of these cases, forward it
-    //to the next link the chain - our reducer.
+    //to our reducer.
     default: {
         next(action);
     }
     }
-
 };
 
 export default websockMiddleware;
 
 
+//Helper functions:
+//Remove a component from the list of active listeners of a given PV.
+function removeComponentFromPv(pvName, compId) {
+    const removeThis = pvToComponentMap[pvName].indexOf(compId);
+    pvToComponentMap[pvName].splice(removeThis, 1);
+
+}
+
+//If the PV - MalcolmID map contains information on a subscription, use that information
+//to close the subscription. Then, remove the closed subscription from the PV-MalcID map
 function closeSubscription(pvName) {
     if (Object.keys(pvToMalcolmIDMap).includes(pvName)) {
         connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
         delete pvToMalcolmIDMap[pvName];
     }
+    closeWebsocket();
+}
+
+//If there are no subscriptions, close the websocket.
+function closeWebsocket() {
+    if (Object.keys(pvToMalcolmIDMap).length === 0) {
+        connectionObject.closeWebsocket();
+    }
 }
 
 
-//Helper function
-function removeComponentFromPv(pvName, compId) {
-    const removeThis = pvToComponentMap[pvName].indexOf(compId);
-    pvToComponentMap[pvName].splice(removeThis, 1);
-}
+
 
 

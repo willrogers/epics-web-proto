@@ -10,7 +10,6 @@ const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
 export class MalcolmConnection {
 
     constructor(callback, webSocket) {
-
         this.updateCallback = callback; //serverInterface.receiveUpdate()
         this.webSocket = webSocket; //Create a local reference to the WebSocket held in ServerInterface
         this.cachedRequests = []; // Requests made before WS open
