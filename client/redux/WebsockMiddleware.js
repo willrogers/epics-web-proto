@@ -30,90 +30,91 @@ const websockMiddleware = _store => next => action => {
     //Check the type of the action
     switch (action.type) {
 
-    //If no connObj exists, create it using the URL provided in the
-    //action.
-    case CREATE_CONNECTION: {
-        if (connectionObject === null) {
-            connectionObject = new ServerInterface(action.payload.webSocketURL);
-        }
-        break;
-    }
-
-    //Provided there is a connObj, call the monitorPV method of the
-    //connObj and create a subscription to listen to a PV
-    case SUBSCRIBE_TO_PV: {
-        //If subscriptionMap does not contain the PV, create it.
-        if (!(Object.keys(pvToComponentMap).includes(action.payload.property))) {
-            if (connectionObject !== null) {
-                connectionObject.monitorPV(
-                    malcolmSubID,
-                    action.payload.block,
-                    action.payload.property);
+        //If no connObj exists, create it using the URL provided in the
+        //action.
+        case CREATE_CONNECTION: {
+            if (connectionObject === null) {
+                connectionObject = new ServerInterface(action.payload.webSocketURL);
             }
-            //Set PV - componentID pair
-            pvToComponentMap[action.payload.property] = [action.payload.id];
-            // Set the PV - malcID pair (for unsubbing)
-            pvToMalcolmIDMap[action.payload.property] = malcolmSubID;
-            malcolmSubID++;
-        } else {
-            //...add new ID to existing IDs associated with that PV
-            pvToComponentMap[action.payload.property].push(action.payload.id);
+            break;
         }
-        break;
-    }
+
+        //Provided there is a connObj, call the monitorPV method of the
+        //connObj and create a subscription to listen to a PV
+        case SUBSCRIBE_TO_PV: {
+            //If subscriptionMap does not contain the PV, create it.
+            if (!(Object.keys(pvToComponentMap).includes(action.payload.property))) {
+                if (connectionObject !== null) {
+                    connectionObject.monitorPV(
+                        malcolmSubID,
+                        action.payload.block,
+                        action.payload.property);
+                }
+                //Set PV - componentID pair
+                pvToComponentMap[action.payload.property] = [action.payload.id];
+                // Set the PV - malcID pair (for unsubbing)
+                pvToMalcolmIDMap[action.payload.property] = malcolmSubID;
+                malcolmSubID++;
+            } else {
+                //...add new ID to existing IDs associated with that PV
+                pvToComponentMap[action.payload.property].push(action.payload.id);
+            }
+            break;
+        }
 
 
-    //Provided there is a connObj, destroy the subscription identified
-    // by the supplied ID
-    case UNSUBSCRIBE_TO_PV: {
+        //Provided there is a connObj, destroy the subscription identified
+        // by the supplied ID
+        case UNSUBSCRIBE_TO_PV: {
 
-        //Split out from action for readability
-        const pvName = action.payload.pvName;
-        const unsubID = action.payload.unsubID;
+            //Split out from action for readability
+            const pvName = action.payload.pvName;
+            const unsubID = action.payload.unsubID;
 
-        //If the pvName that we are unsubbing from is in the map..
-        if (Object.keys(pvToComponentMap).includes(pvName)) {
-            //Loop through each of the pvNames
-            for (let i in pvToComponentMap[pvName]) {
-                //If the component ID matches with one of the elements in the value array
-                if (unsubID === pvToComponentMap[pvName][i]) {
-                    //Remove the element from pv-comp map.
-                    removeAndDeleteSub(pvName, pvToComponentMap, unsubID);
+            //If the pvName that we are unsubbing from is in the map..
+            if (Object.keys(pvToComponentMap).includes(pvName)) {
+                //Loop through each of the pvNames
+                for (let i in pvToComponentMap[pvName]) {
+                    //If the component ID matches with one of the elements in the value array
+                    if (unsubID === pvToComponentMap[pvName][i]) {
+                        //Remove the element from pv-comp map.
+                        removeAndDeleteSub(pvName, pvToComponentMap, unsubID);
+                    }
+                }
+                if (pvToComponentMap[pvName].length === 0) {
+                    delete pvToComponentMap[pvName];
+                    //close sub
+                    connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
+                    //remove from malc map
+                    removeAndDeleteSub(pvName, pvToMalcolmIDMap, unsubID);
                 }
             }
-            if (pvToComponentMap[pvName].length === 0) {
-                delete pvToComponentMap[pvName];
-                //close sub
-                connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
-                //remove from malc map
-                removeAndDeleteSub(pvName, pvToMalcolmIDMap, unsubID);
-            }
+            break;
         }
-        break;
-    }
 
-    //For disconnecting
-    case UNSUBSCRIBE_ALL: {
-        //Outer loop through the PVs
-        for (let x in pvToComponentMap) {
-            //Inner loop through the component Ids for a given PV
-            for (let y in pvToComponentMap[x]) {
-                //remove it from PV map
-                removeAndDeleteSub(x, pvToComponentMap, y);
+        //For disconnecting
+        case UNSUBSCRIBE_ALL: {
+            //Outer loop through the PVs
+            for (let x in pvToComponentMap) {
+                //Inner loop through the component Ids for a given PV
+                for (let y in pvToComponentMap[x]) {
+                    //remove it from PV map
+                    removeAndDeleteSub(x, pvToComponentMap, y);
+                }
+                
+                delete pvToComponentMap[x];
+                //Close the subscription
+                connectionObject.destroyMonitor(pvToMalcolmIDMap[x]);
+                //Remove from pv-malc map
+                removeAndDeleteSub(pvToMalcolmIDMap[x], pvToMalcolmIDMap);
             }
-            delete pvToComponentMap[x];
-            //Close the subscription
-            connectionObject.destroyMonitor(pvToMalcolmIDMap[x]);
-            //Remove from pv-malc map
-            removeAndDeleteSub(pvToMalcolmIDMap[x], pvToMalcolmIDMap);
+            break;
         }
-        break;
-    }
-    //If the action type doesn't match any of these cases, forward it
-    //to the next link the chain - our reducer.
-    default: {
-        next(action);
-    }
+        //If the action type doesn't match any of these cases, forward it
+        //to the next link the chain - our reducer.
+        default: {
+            next(action);
+        }
     }
 
 };
@@ -124,20 +125,14 @@ export default websockMiddleware;
 //Helper function
 function removeAndDeleteSub(pvName, mapToRemoveFrom, unsubID = 0) {
 
-    if (connectionObject.webSocket.readystate !== 1) {
+    if (mapToRemoveFrom === pvToComponentMap) {
 
-        if (typeof pvToMalcolmIDMap[pvName] !== 'undefined') {
+        const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
+        pvToComponentMap[pvName].splice(removeThis, 1);
 
-            if (mapToRemoveFrom === pvToComponentMap) {
+    } else {
 
-                const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
-                pvToComponentMap[pvName].splice(removeThis, 1);
-
-            } else {
-
-                delete pvToMalcolmIDMap[pvName];
-            }
-        }
+        delete pvToMalcolmIDMap[pvName];
     }
 }
 
