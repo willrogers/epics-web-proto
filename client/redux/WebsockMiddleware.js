@@ -83,9 +83,6 @@ const websockMiddleware = _store => next => action => {
                 }
                 if (pvToComponentMap[pvName].length === 0) {
                     delete pvToComponentMap[pvName];
-                    console.log("CompMap after PV removal in UNSUB_PV: ")
-                    console.log(pvToComponentMap)
-                    console.log("\n")
                     //close sub
                     connectionObject.destroyMonitor(pvToMalcolmIDMap[pvName]);
                     //remove from malc map
@@ -104,11 +101,7 @@ const websockMiddleware = _store => next => action => {
                     //remove it from PV map
                     removeAndDeleteSub(x, pvToComponentMap, y);
                 }
-
                 delete pvToComponentMap[x];
-                console.log("CompMap after PV removal: ")
-                console.log(pvToComponentMap)
-                console.log("\n")
                 //Close the subscription
                 connectionObject.destroyMonitor(pvToMalcolmIDMap[x]);
                 //Remove from pv-malc map
@@ -133,27 +126,10 @@ function removeAndDeleteSub(pvName, mapToRemoveFrom, unsubID = 0) {
     if (connectionObject.webSocket.readystate !== 1) {
         if (typeof pvToMalcolmIDMap[pvName] !== 'undefined') {
             if (mapToRemoveFrom === pvToComponentMap) {
-                console.log("||||||||||||||||||");
-                console.log("Removing "+pvName+" from CompMap:");
-                console.log(pvToComponentMap);
-
                 const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
                 pvToComponentMap[pvName].splice(removeThis, 1);
-
-                console.log("CompMap after removal: ");
-                console.log(pvToComponentMap);
-                console.log("||||||||||||||||||");
-                console.log("\n")
             } else {
-                console.log("//////////////////");
-                console.log("Removing "+pvName+" from MalcMap: ");
-                console.log(pvToMalcolmIDMap);
-
                 delete pvToMalcolmIDMap[pvName];
-                console.log("MalcMap after removal: ");
-                console.log(pvToMalcolmIDMap);
-                console.log("//////////////////");
-                console.log("\n")
             }
         }
     }
