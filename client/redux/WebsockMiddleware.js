@@ -69,16 +69,16 @@ const websockMiddleware = _store => next => action => {
 
         //Split out from action for readability
         const pvName = action.payload.pvName;
-        const unsubID = action.payload.unsubID;
+        const compId = action.payload.unsubID;
 
         //If the pvName that we are unsubbing from is in the map..
         if (Object.keys(pvToComponentMap).includes(pvName)) {
             //Loop through each of the pvNames
             for (let i in pvToComponentMap[pvName]) {
                 //If the component ID matches with one of the elements in the value array
-                if (unsubID === pvToComponentMap[pvName][i]) {
+                if (compId === pvToComponentMap[pvName][i]) {
                     //Remove the element from pv-comp map.
-                    removeAndDeleteSub(pvName, pvToComponentMap, unsubID);
+                    removeComponentFromPv(pvName, compId);
                 }
             }
             if (pvToComponentMap[pvName].length === 0) {
@@ -93,9 +93,9 @@ const websockMiddleware = _store => next => action => {
         //Outer loop through the PVs
         for (let pvName in pvToComponentMap) {
             //Inner loop through the component Ids for a given PV
-            for (let y in pvToComponentMap[pvName]) {
+            for (let compId in pvToComponentMap[pvName]) {
                 //remove it from PV map
-                removeAndDeleteSub(pvName, pvToComponentMap, y);
+                removeComponentFromPv(pvName, compId);
             }
 
             closeSubscription(pvName);
@@ -124,17 +124,9 @@ function closeSubscription(pvName) {
 
 
 //Helper function
-function removeAndDeleteSub(pvName, mapToRemoveFrom, unsubID = 0) {
-
-    if (mapToRemoveFrom === pvToComponentMap) {
-
-        const removeThis = pvToComponentMap[pvName].indexOf(unsubID);
-        pvToComponentMap[pvName].splice(removeThis, 1);
-
-    } else {
-
-        delete pvToMalcolmIDMap[pvName];
-    }
+function removeComponentFromPv(pvName, compId) {
+    const removeThis = pvToComponentMap[pvName].indexOf(compId);
+    pvToComponentMap[pvName].splice(removeThis, 1);
 }
 
 
