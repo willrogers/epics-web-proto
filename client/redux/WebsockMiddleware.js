@@ -106,12 +106,14 @@ const websockMiddleware = _store => next => action => {
 export default websockMiddleware;
 
 
+//
 //Helper functions:
+//
+
 //Remove a component from the list of active listeners of a given PV.
 function removeComponentFromPv(pvName, compId) {
     const removeThis = pvToComponentMap[pvName].indexOf(compId);
     pvToComponentMap[pvName].splice(removeThis, 1);
-
 }
 
 //If the PV - MalcolmID map contains information on a subscription, use that information
@@ -128,7 +130,7 @@ function closeSubscription(pvName) {
 function closeWebsocket() {
     if (Object.keys(pvToMalcolmIDMap).length === 0) {
         connectionObject.closeWebsocket();
-    }
+    } // else: there are still subs so keep it open
 }
 
 
