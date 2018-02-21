@@ -14,5 +14,4 @@ export class DivContainer extends SuperContainer {
             <DivComponent EPICSValue={this.state.EPICSValue} PV={this.state.PV} />
         );
     }
-
 }

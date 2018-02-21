@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class LabelComponent extends React.Component {
+export class LabelComponent extends React.Component {
 
     constructor(props) {
         super(props)
@@ -9,9 +9,17 @@ export default class LabelComponent extends React.Component {
 
     render() {
         return(
-            <div class="labelDiv">
-                <div> {this.props.labelText} </div>
-            </div>
+
+                <div>
+                <span
+
+                    style={{background:'#D3D3D3', outline:'2px solid black', offset:'10px'}}>
+                    {this.props.PV} Label: {"\n"}
+
+                </span>
+                </div>
+
+
         );
     }
 }

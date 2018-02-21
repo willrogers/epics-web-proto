@@ -1,11 +1,12 @@
 //Import React API
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 //Import the desired components
 import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
 import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js';
+import {LabelContainer} from './containers/LabelContainer.js';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
@@ -32,8 +33,10 @@ class App extends React.Component {
                 <DivContainer block="SIGNAL" property="signal"/>
                 <DivContainer block="SIGNAL" property="signal"/>
                 <DivContainer block="TEMPERATURE" property="temp1"/>
+                <LabelContainer block="TEMPERATURE" property="temp1" />
                 <GaugeContainer block="TEMPERATURE" property="temp1" width="500" height='150' minVal='0' maxVal='100'/>
                 <WebSockStatusContainer width="500" height="50"/>
+
             </div>
         );
     }
