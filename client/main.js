@@ -7,7 +7,6 @@ import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
 import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js';
 import {LabelContainer} from './containers/LabelContainer.js';
-import {WritableInputContainer} from './containers/WritableInputContainer.js'
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';

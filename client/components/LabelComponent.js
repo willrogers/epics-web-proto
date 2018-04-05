@@ -4,22 +4,26 @@ import PropTypes from 'prop-types';
 export class LabelComponent extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
         return(
 
-                <div>
+            <div>
                 <span
 
                     style={{background:'#D3D3D3', outline:'2px solid black', offset:'10px'}}>
-                    {this.props.PV} Label: {"\n"}
+                    {this.props.PV} Label: {'\n'}
 
                 </span>
-                </div>
+            </div>
 
 
         );
     }
 }
+
+LabelComponent.propTypes = {
+    PV: PropTypes.string
+};

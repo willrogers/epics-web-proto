@@ -4,7 +4,7 @@ import {SuperContainer} from './SuperContainer.js';
 
 export class LabelContainer extends SuperContainer {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
@@ -14,6 +14,6 @@ export class LabelContainer extends SuperContainer {
             // height={this.state.height}
             // width={this.state.width}
             // bgroundColour={this.state.bgroundColour}
-        />
-    };
+        />;
+    }
 }

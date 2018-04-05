@@ -7,14 +7,14 @@ export class WritableInputComponent extends React.Component {
         this.state = {inputValue: null};
     }
 
-    handleSubmit(){
-        console.log("submission")
+    handleSubmit() {
+        //Do stuff;
     }
 
-    render(){
+    render() {
         return(
             <form onSubmit={this.handleSubmit}>
-                <input type="number" onChange={this.handleChange} ref="textField" />
+                <input type="number" onChange={this.handleChange} />
                 <input type="submit" value="Submit" />
             </form>
         );
