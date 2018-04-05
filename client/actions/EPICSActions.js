@@ -1,5 +1,5 @@
 //Gives us the dispatch functionality
-import {store} from '../redux/EPICSStore.js';
+import {store} from '../redux/EPICSStore.js'; //removing makes the tests run.
 
 //Action types
 export const UPDATE_PV = 'UPDATE_PV';
@@ -7,7 +7,7 @@ export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
 export const UPDATE_WS_READYSTATE = 'UPDATE_WS_READYSTATE';
-export const CLOSE_WEBSOCKET = 'CLOSE_WEBSOCKET';
+export const UNSUBSCRIBE_ALL= 'UNSUBSCRIBE_ALL';
 
 //Action creators: These package a change in state into
 //an object called an action.Then, this action is sent to
@@ -47,7 +47,7 @@ export function connectToServer(URL) {
 //then extracts the block and property from the components
 // props, which we explicitly specify in main,js at
 // instantiation. Then, the id is extracted from the
-// component object.
+// component object.git add -u
 export function subscribeToPV(comp) {
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,
@@ -63,11 +63,12 @@ export function subscribeToPV(comp) {
 //asking it to stop serving us a PV, based on the ID that
 //we keep associated with the component that is listening
 //to it.
-export function unsubscribeToPV(id) {
+export function unsubscribeToPV(comp) {
     return store.dispatch({
         type: UNSUBSCRIBE_TO_PV,
         payload: {
-            unsubID: id
+            unsubID: comp.id,
+            pvName: comp.props.property
         }
     });
 
@@ -88,11 +89,13 @@ export function updateWebSockStatus(readyState) {
 
 //This action contains no payload, it simply expresses
 //our wish to close the websocket connection.
-export function closeWebSocket() {
+export function unsubscribeAll() {
     return store.dispatch({
-        type: CLOSE_WEBSOCKET
+        type: UNSUBSCRIBE_ALL
     });
 }
+
+
 
 
 

@@ -16,6 +16,6 @@ export default class DivComponent extends React.Component {
 
 //We expect EPICSValues to be numbers, PVs to be strings
 DivComponent.propTypes = {
-    EPICSValue: PropTypes.number,
+    EPICSValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     PV: PropTypes.string
 };
