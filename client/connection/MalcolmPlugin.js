@@ -122,6 +122,7 @@ export class MalcolmConnection {
                 'path': [block, property]
             });
         }
+        console.log(request);
         return request;
     }
 

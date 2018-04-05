@@ -50,6 +50,7 @@ const websockMiddleware = _store => next => action => {
             // Set the PV - malcID pair (for unsubbing)
             pvToMalcolmIDMap[action.payload.property] = malcolmSubID;
             malcolmSubID++;
+
         } else {
             //...add new ID to existing IDs associated with that PV
             pvToComponentMap[action.payload.property].push(action.payload.id);

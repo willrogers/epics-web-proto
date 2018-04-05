@@ -37,8 +37,6 @@ export default class App extends React.Component {
                 <LabelContainer block="TEMPERATURE" property="temp1" />
                 <GaugeContainer block="TEMPERATURE" property="temp1" width="500" height='150' minVal='0' maxVal='100'/>
                 <WebSockStatusContainer width="500" height="50"/>
-                <WritableInputContainer block="NOBLOCK" property="NOPROPERTY" />
-
             </div>
         );
     }

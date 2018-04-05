@@ -11,8 +11,13 @@ export class SuperContainer extends React.Component {
     constructor(props) {
         super(props);
         this.id = currentId;  //Assign the component an Id
+        console.log(currentId);
+        console.log(this.state);
         currentId++; //Increment the current id so the next comp id is unique
         this.state = {EPICSValue: null, PV: null}; //Initialise the internal state for display
+        console.log(this.state);
+        console.log("----------------------------");
+
         this.hookToStore(); // hook the container to the store.
     }
 
