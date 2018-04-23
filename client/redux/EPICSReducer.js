@@ -13,8 +13,6 @@ const initialState = {
 //Default params initialises state when nothing is passed
 function EPICSReducer(state = initialState, action) {
 
-    console.log(action);
-
     // The reducer takes our current state and an action, and returns
     // a new state that reflects the changes we want to make, described
     // in the action. Object.assign creates a blank object and copies
