@@ -7,6 +7,7 @@ import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
 import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js';
 import {LabelContainer} from './containers/LabelContainer.js';
+import {ReloadButtonContainer} from './containers/ReloadButtonContainer.js';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
@@ -36,6 +37,7 @@ export default class App extends React.Component {
                 <LabelContainer block="TEMPERATURE" property="temp1" />
                 <GaugeContainer block="TEMPERATURE" property="temp1" width="500" height='150' minVal='0' maxVal='100'/>
                 <WebSockStatusContainer width="500" height="50"/>
+                <ReloadButtonContainer block="none" property="none" />
             </div>
         );
     }

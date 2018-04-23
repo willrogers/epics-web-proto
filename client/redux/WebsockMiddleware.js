@@ -27,6 +27,7 @@ let pvToMalcolmIDMap = {};
 
 const websockMiddleware = _store => next => action => {
 
+    //To make a subscription we need both a block and a property
     switch (action.type) {
 
     case CREATE_CONNECTION: {
@@ -37,53 +38,60 @@ const websockMiddleware = _store => next => action => {
     }
 
     case SUBSCRIBE_TO_PV: {
-        //If subscriptionMap does not contain the subscription, create it.
-        if (!(Object.keys(pvToComponentMap).includes(action.payload.property))) {
-            if (connectionObject !== null) {
-                connectionObject.monitorPV(
-                    malcolmSubID,
-                    action.payload.block,
-                    action.payload.property);
-            }
-            //Set PV - componentID pair
-            pvToComponentMap[action.payload.property] = [action.payload.id];
-            // Set the PV - malcID pair (for unsubbing)
-            pvToMalcolmIDMap[action.payload.property] = malcolmSubID;
-            malcolmSubID++;
+        if (action.payload.block !== 'none') {
+            //If subscriptionMap does not contain the subscription, create it.
+            if (!(Object.keys(pvToComponentMap).includes(action.payload.property))) {
+                if (connectionObject !== null) {
+                    connectionObject.monitorPV(
+                        malcolmSubID,
+                        action.payload.block,
+                        action.payload.property);
+                }
+                //Set PV - componentID pair
+                pvToComponentMap[action.payload.property] = [action.payload.id];
+                // Set the PV - malcID pair (for unsubbing)
+                pvToMalcolmIDMap[action.payload.property] = malcolmSubID;
+                malcolmSubID++;
 
-        } else {
-            //...add new ID to existing IDs associated with that PV
-            pvToComponentMap[action.payload.property].push(action.payload.id);
+            } else {
+                //...add new ID to existing IDs associated with that PV
+                pvToComponentMap[action.payload.property].push(action.payload.id);
+            }
         }
         break;
+
     }
 
     case UNSUBSCRIBE_TO_PV: {
+        if (action.payload.block !== 'none') {
 
-        //Split out from action for readability
-        const pvName = action.payload.pvName;
-        const compId = action.payload.unsubID;
+            //Split out from action for readability
+            const pvName = action.payload.pvName;
+            const compId = action.payload.unsubID;
 
-        //If the pvName that we are unsubbing from is in the map..
-        if (Object.keys(pvToComponentMap).includes(pvName)) {
-            //Loop through each of the pvNames
-            for (let i in pvToComponentMap[pvName]) {
-                //If the component ID matches with one of the elements in the value array
-                if (compId === pvToComponentMap[pvName][i]) {
-                    //Remove the element from pv-comp map.
-                    removeComponentFromPv(pvName, compId);
+            //If the pvName that we are unsubbing from is in the map..
+            if (Object.keys(pvToComponentMap).includes(pvName)) {
+                //Loop through each of the pvNames
+                for (let i in pvToComponentMap[pvName]) {
+                    //If the component ID matches with one of the elements in the value array
+                    if (compId === pvToComponentMap[pvName][i]) {
+                        //Remove the element from pv-comp map.
+                        removeComponentFromPv(pvName, compId);
+                    }
+                }
+                //If there are no more components associated with the PV,
+                //close subscription
+                if (pvToComponentMap[pvName].length === 0) {
+                    closeSubscription(pvName);
                 }
             }
-            //If there are no more components associated with the PV,
-            //close subscription
-            if (pvToComponentMap[pvName].length === 0) {
-                closeSubscription(pvName);
-            }
+
         }
         break;
     }
 
     case UNSUBSCRIBE_ALL: {
+
         //Outer loop through the PVs in pv-comp map
         for (let pvName in pvToComponentMap) {
             //Inner loop through the component Ids for a given PV
