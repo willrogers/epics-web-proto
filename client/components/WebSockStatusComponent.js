@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //Import the closeWebsocket action.
-import {closeWebSocket} from '../actions/EPICSActions';
+import {unsubscribeAll} from '../actions/EPICSActions';
 
 
 export default class WebSockStatusComponent extends React.Component {
@@ -25,7 +25,7 @@ export default class WebSockStatusComponent extends React.Component {
 
     //Event handler to close the webSocket when a user presses the button
     handleClick() {
-        closeWebSocket();
+        unsubscribeAll();
     }
 
     //Create the webSocket status display. Tested with an svg for easy

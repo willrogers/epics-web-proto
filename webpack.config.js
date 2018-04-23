@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'development',
     context: path.join(__dirname, './client'),
     entry: [
         './main.js',
@@ -9,6 +10,7 @@ module.exports = {
         path: path.join(__dirname, './client'),
         filename: 'bundle.js',
     },
+    devtool: '#inline-source-map',
     module: {
         rules: [
             {

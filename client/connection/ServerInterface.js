@@ -47,15 +47,6 @@ export class ServerInterface {
         this.serverConnection.disconnectWebSocket();
     }
 
-    //Kill all subscriptions. Loop through the map of subscriptions,
-    // taken from pvIds in malcolmPlugin
-    destroyAllMonitors() {
-        this.pvsToKill = this.serverConnection.pvIds;
-        for(let i in this.pvsToKill) {
-            this.destroyMonitor(parseInt(i));
-        }
-    }
-
     //Receive an update from Malcolm, passed to malcolmConnection as a callback
     receiveUpdate(newValue, pvName) {
         // Send to the action creator

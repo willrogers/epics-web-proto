@@ -44,6 +44,7 @@ export class WebSockStatusContainer extends SuperContainer {
             readyState={this.state.readyState}
             width={this.props.width}
             height={this.props.height}
+            border={'30px solid black'}
         />;
     }
 }

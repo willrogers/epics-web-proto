@@ -10,7 +10,6 @@ const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
 export class MalcolmConnection {
 
     constructor(callback, webSocket) {
-
         this.updateCallback = callback; //serverInterface.receiveUpdate()
         this.webSocket = webSocket; //Create a local reference to the WebSocket held in ServerInterface
         this.cachedRequests = []; // Requests made before WS open
@@ -44,23 +43,29 @@ export class MalcolmConnection {
     registerListener() {
         //When we get a message from Malcolm..
         this.webSocket.onmessage = (message) => {
-
             //..extract the data from the message JSON
             const response = JSON.parse(message.data);
             //..extract the value from the data
-            const newMalcolmValue = response.value.value;
-            //..pass the value and its associated id back to EpicsWebProto
-            this.updateCallback(newMalcolmValue, this.pvIds[response.id]);
+            if(response.value !== null) {
+                const newMalcolmValue = response.value.value;
+                //..pass the value and its associated id back to EpicsWebProto
+                this.updateCallback(newMalcolmValue, this.pvIds[response.id]);
+            }
         };
     }
 
 
     //Interface methods to hook to EpicsWebProto, called from ServerInterface
     subscribe(id, block, property) {
-        //Link an ID to the property of a malcolm part, used for tracking
-        this.pvIds[id] = property;
-        //Send A request for subscription based on the supplied path.
-        this.sendRequest(this.generateRequest(subscribeMethod, id, block, property));
+        //If we are subscribing to a new PV
+        if (!(Object.values(this.pvIds).includes(property))) {
+
+            //Link an ID to the property of a malcolm part, used for tracking
+            this.pvIds[id] = property;
+
+            //Send A request for subscription based on the supplied path.
+            this.sendRequest(this.generateRequest(subscribeMethod, id, block, property));
+        }
     }
 
     //Send a request to kill the subscription with the given ID.
