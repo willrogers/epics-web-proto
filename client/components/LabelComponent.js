@@ -12,7 +12,7 @@ export class LabelComponent extends React.Component {
             <div>
                 <span
                     style={{background:'#D3D3D3', outline:'2px solid black', offset:'10px'}}>
-                    {this.props.PV} Label: {'\n'}
+                    {this.props.PV} : {'\n'}
                 </span>
             </div>
         );

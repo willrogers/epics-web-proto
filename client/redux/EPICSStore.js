@@ -11,6 +11,8 @@ import websockMiddleware from './WebsockMiddleware.js';
 // the file imported above.
 const middleware = applyMiddleware(websockMiddleware);
 
+const initialState = 0;
+
 //Export the store, which is a combination of our middleware and
 //reducer.
-export const store = createStore(EPICSReducer, middleware);
+export const store = createStore(EPICSReducer, initialState, middleware);
