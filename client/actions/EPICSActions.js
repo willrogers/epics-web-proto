@@ -47,7 +47,7 @@ export function connectToServer(URL) {
 //then extracts the block and property from the components
 // props, which we explicitly specify in main,js at
 // instantiation. Then, the id is extracted from the
-// component object.git add -u
+// component object.
 export function subscribeToPV(comp) {
     return store.dispatch({
         type: SUBSCRIBE_TO_PV,

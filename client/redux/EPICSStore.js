@@ -13,4 +13,4 @@ const middleware = applyMiddleware(websockMiddleware);
 
 //Export the store, which is a combination of our middleware and
 //reducer.
-export const store = createStore(middleware, EPICSReducer);
+export const store = createStore(EPICSReducer, middleware);

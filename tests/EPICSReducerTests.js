@@ -33,4 +33,10 @@ describe('EPICSReducer', () => {
         });
     });
 
+    it('returns current state if nothing changes', () => {
+
+
+
+    });
+
 });
