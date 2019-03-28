@@ -22,7 +22,6 @@ export class Epics2WebPlugin {
             }
 
             self.connection.onupdate = (message) => {
-                console.log('onupdate')
                 this.update(message.detail.value, message.detail.pv);
             };
         };
@@ -33,7 +32,6 @@ export class Epics2WebPlugin {
     }
 
     subscribe(id, pv) {
-        console.log(`subscribing to ${pv}`);
         if (! this.open) {
             this.cachedRequests.push(pv);
         } else {
@@ -46,7 +44,6 @@ export class Epics2WebPlugin {
     }
 
     update(newVal, pvName) {
-        console.log(`callback ${newVal}`);
         this.callback(newVal, pvName);
     }
 

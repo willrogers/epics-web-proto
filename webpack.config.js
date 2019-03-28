@@ -1,14 +1,15 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     context: path.join(__dirname, './client'),
     entry: [
-        './main.js',
+        './app.js',
     ],
     mode: 'development',
     output: {
-        path: path.join(__dirname, './client'),
-        filename: 'bundle.js',
+        path: path.join(__dirname, './dist'),
+        filename: '[name].js',
     },
     module: {
         rules: [
@@ -30,7 +31,7 @@ module.exports = {
     devServer: {
         hot: true
     },
-    output: {
-        filename: '[name].js'
-    }
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
 };
