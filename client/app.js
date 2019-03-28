@@ -30,9 +30,9 @@ class App extends React.Component {
         return(
             <div>
                 <LabelComponent x="0px" y="50px" label="SR-DI-DCCT-01:SIGNAL"/>
-                <DivComponent x="100px" y="50px" pv="SR-DI-DCCT-01:SIGNAL"/>
+                <DivComponent x="110px" y="50px" pv="SR-DI-DCCT-01:SIGNAL"/>
                 <LabelComponent x="0px" y="100px" label="SR23C-DI-DCCT-01:SIGNAL"/>
-                <DivComponent x="100px" y="100px" pv="SR23C-DI-DCCT-01:SIGNAL"/>
+                <DivComponent x="110px" y="100px" pv="SR23C-DI-DCCT-01:SIGNAL"/>
                 <GaugeComponent
                     pv="SR23C-DI-DCCT-01:SIGNAL"
                     width="300"

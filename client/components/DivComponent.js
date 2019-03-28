@@ -9,6 +9,7 @@ export default class DivComponent extends BaseComponent {
         super(props);
         this.styles['width'] = 100;
         this.styles['backgroundColor'] = 'lightgray';
+        this.styles['overflow'] = 'hidden';
     }
 
     //Render a div that displays the desired information in text format

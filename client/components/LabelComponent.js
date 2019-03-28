@@ -15,7 +15,9 @@ export default class LabelComponent extends React.Component {
             backgroundColor: 'lightgray',
             position: 'absolute',
             left: this.props.x,
-            top: this.props.y
+            top: this.props.y,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden'
         };
         return(<div style={styles}>{this.props.label}</div>);
     }
