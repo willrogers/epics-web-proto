@@ -1,4 +1,5 @@
 import jlab from '../external/epics2web.js';
+import {updateWebSockStatus} from "../actions/EPICSActions";
 
 export class Epics2WebPlugin {
 
@@ -16,6 +17,7 @@ export class Epics2WebPlugin {
         var self = this;
         this.connection.onopen = (event) => {
             this.open = true;
+            updateWebSockStatus("open")
 
             if (this.cachedRequests.length != 0) {
                 this.connection.monitorPvs(this.cachedRequests);
@@ -24,6 +26,9 @@ export class Epics2WebPlugin {
             self.connection.onupdate = (message) => {
                 this.update(message.detail.value, message.detail.pv);
             };
+        };
+        this.connection.onclose = (event) => {
+            updateWebSockStatus("closed");
         };
     }
 
@@ -47,5 +52,8 @@ export class Epics2WebPlugin {
         this.callback(newVal, pvName);
     }
 
+    disconnectWebSocket() {
+        this.connection.close();
+    }
 
 }

@@ -1,15 +1,31 @@
-//React API
+/* Example of an SVG-based widget. */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 //Import the closeWebsocket action.
 import {closeWebSocket} from '../actions/EPICSActions';
+import {store} from '../redux/EPICSStore';
+import {BaseComponent} from "./BaseComponent";
 
 
-export default class WebSockStatusComponent extends React.Component {
+export default class WebSockStatusComponent extends BaseComponent {
 
     constructor(props) {
         super(props);
+        this.state = {readyState: null};
+        this.hookToStore();
+    }
+
+    //Listen for changes to the wsReadyState in the store, copy it
+    //to the internal state
+    hookToStore() {
+        store.subscribe(()=>{
+            if (typeof store.getState() !== 'undefined') {
+                this.setState(
+                    {readyState: store.getState().wsReadyState}
+                );
+            }
+        });
     }
 
     //Define the status update that we want to display in the component.
@@ -18,7 +34,7 @@ export default class WebSockStatusComponent extends React.Component {
     getStatusText() {
         return (
             <text x="30" y="30" fill="black">
-                WebSocket readyState: {this.props.readyState}
+                WebSocket readyState: {this.state.readyState}
             </text>
         );
     }
@@ -33,7 +49,7 @@ export default class WebSockStatusComponent extends React.Component {
     // displays the return of getStatusText()
     render() {
         return (
-            <div>
+            <div style={this.styles}>
                 <svg width={this.props.width} height={this.props.height}> {this.getStatusText()} </svg>
                 <button onClick={ ()=> this.handleClick() }> Disconnect </button>
             </div>

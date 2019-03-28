@@ -1,7 +1,7 @@
 //React API
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from "../containers/BaseComponent";
+import {BaseComponent} from "./BaseComponent";
 
 export default class DivComponent extends BaseComponent {
 

@@ -15,7 +15,9 @@ export class BaseComponent extends React.Component {
         this.state = {EPICSValue: null, PV: null}; //Initialise the internal state for display
         this.hookToStore(); // hook the container to the store.
         this.styles = {
-            position: 'absolute'
+            position: 'absolute',
+            left: this.props.x,
+            top: this.props.y
         }
     }
 

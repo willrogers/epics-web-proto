@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {BaseComponent} from "./BaseComponent";
 
 
-export default class GaugeComponent extends React.Component {
+export default class GaugeComponent extends BaseComponent {
     constructor(props) {
         super(props);
         this.canvasStyle = {
@@ -37,7 +38,7 @@ export default class GaugeComponent extends React.Component {
         this.drawMarker(this.halfMark);
         this.drawMarker(this.threeQuarterMark);
         this.drawMarker(this.finishMark);
-        this.drawNeedle(this.props.EPICSValue);
+        this.drawNeedle(this.state.EPICSValue);
         for (let i in this.pipLocations) {
             this.drawPip(this.pipLocations[i]);
         }
@@ -144,6 +145,7 @@ export default class GaugeComponent extends React.Component {
 
     //HTML for describing the gauge.
     render() {
+        console.log(`rendering with EPICS state ${this.state.EPICSValue}`)
         return (
             <canvas
                 ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}
