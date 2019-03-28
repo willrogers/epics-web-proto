@@ -11,7 +11,7 @@ import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js';
 import {connectToServer} from './actions/EPICSActions.js';
 
 //Define the destination to connect the WebSocket to
-const webSocketURL = 'ws://pc0088:8080/ws';
+const webSocketURL = 'ws://localhost:8080/epics2web/monitor';
 
 class App extends React.Component {
 
@@ -28,11 +28,15 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <DivContainer block="ADC" property="adc"/>
-                <DivContainer block="SIGNAL" property="signal"/>
-                <DivContainer block="TEMPERATURE" property="temp1"/>
-                <GaugeContainer block="TEMPERATURE" property="temp1" width="500" height='150' minVal='0' maxVal='100'/>
-                <WebSockStatusContainer width="500" height="50"/>
+                <DivContainer pv="SR-DI-DCCT-01:SIGNAL"/>
+                <DivContainer pv="SR23C-DI-DCCT-01:SIGNAL"/>
+                <GaugeContainer
+                    pv="SR23C-DI-DCCT-01:SIGNAL"
+                    width="300"
+                    height="150"
+                    minVal="0"
+                    maxVal="0.1"
+                />
             </div>
         );
     }

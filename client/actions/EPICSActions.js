@@ -53,8 +53,7 @@ export function subscribeToPV(comp) {
         type: SUBSCRIBE_TO_PV,
         payload:{
             id: comp.id,
-            block: comp.props.block,
-            property: comp.props.property
+            pv: comp.props.pv
         }
     });
 }

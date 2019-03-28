@@ -37,8 +37,7 @@ const websockMiddleware = _store => next => action => {
         if (connectionObject !== null) {
             connectionObject.monitorPV(
                 action.payload.id,
-                action.payload.block,
-                action.payload.property);
+                action.payload.pv);
         }
         break;
     }

@@ -45,7 +45,7 @@ export class SuperContainer extends React.Component {
                 //..set the internal state to that of the appropriate store state.
                 this.setState(
                     {
-                        EPICSValue: store.getState().epicsData[this.props.property],
+                        EPICSValue: store.getState().epicsData[this.props.pv],
                         PV: this.props.block
                     }
                 );

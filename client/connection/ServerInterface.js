@@ -1,7 +1,7 @@
 import {updatePV} from '../actions/EPICSActions.js';
 
 //Server implementation/plugin is defined here:
-import {MalcolmConnection} from './MalcolmPlugin.js';
+import {Epics2WebPlugin} from './Epics2WebPlugin.js';
 
 
 //A generic class to hook a server into EpicsWebProto. Exposes the methods
@@ -12,16 +12,18 @@ export class ServerInterface {
     constructor(webSocketURL) {
 
         //Create a websocket with the URL passed from top level
-        this.webSocket = new WebSocket(webSocketURL);
+        console.log(`the url is ${webSocketURL}`);
+        //this.webSocket = new WebSocket(webSocketURL);
+        console.log('aaa');
         //Create your plugin and pass it the receiveUpdate callback
         //along with your websocket
-        this.serverConnection = new MalcolmConnection(this.receiveUpdate, this.webSocket);
+        this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, webSocketURL);
     }
 
     //Calls the plugin method with the specific Malcolm path
     //required for subscription
-    monitorPV(id, block, property) {
-        this.serverConnection.subscribe(id, block, property);
+    monitorPV(id, pv) {
+        this.serverConnection.subscribe(id, pv);
     }
 
     //Calls the plugin method for unsubscribing to a PV, requires

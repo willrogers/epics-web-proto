@@ -5,6 +5,7 @@ module.exports = {
     entry: [
         './main.js',
     ],
+    mode: 'development',
     output: {
         path: path.join(__dirname, './client'),
         filename: 'bundle.js',
@@ -26,4 +27,10 @@ module.exports = {
         modules: [path.join(__dirname, 'node_modules'),],
         extensions: ['.js', '.jsx',],
     },
+    devServer: {
+        hot: true
+    },
+    output: {
+        filename: '[name].js'
+    }
 };
