@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const canvasStyle = {border: '1px solid #000000'};
 
 export default class GaugeComponent extends React.Component {
     constructor(props) {
         super(props);
+        this.canvasStyle = {
+            border: '1px solid #000000',
+            position: 'absolute',
+            width: this.props.width,
+            height: this.props.height,
+            left: this.props.x,
+            top: this.props.y
+        };
     }
 
     //On startup, define the dimensions and metrics we need
@@ -142,7 +149,7 @@ export default class GaugeComponent extends React.Component {
                 ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}
                 width={this.props.width}
                 height={this.props.height}
-                style={canvasStyle}>
+                style={this.canvasStyle}>
             </canvas>
         );
     }

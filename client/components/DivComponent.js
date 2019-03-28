@@ -1,8 +1,9 @@
 //React API
 import React from 'react';
 import PropTypes from 'prop-types';
+import {SuperContainer} from "../containers/SuperContainer";
 
-export default class DivComponent extends React.Component {
+export default class DivComponent extends SuperContainer {
 
     constructor(props) {
         super(props);
@@ -10,7 +11,19 @@ export default class DivComponent extends React.Component {
 
     //Render a div that displays the desired information in text format
     render() {
-        return(<div> The {this.props.PV} value is {this.props.EPICSValue} </div>);
+        console.log(`component render called with ${this.state.EPICSValue}`)
+        let formattedString = '';
+        if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
+            formattedString = this.state.EPICSValue.toFixed(3);
+        }
+        let styles = {
+            width: 100,
+            backgroundColor: 'lightgray',
+            position: 'absolute',
+            left: this.props.x,
+            top: this.props.y
+        };
+        return(<div style={styles}>{formattedString}</div>);
     }
 }
 

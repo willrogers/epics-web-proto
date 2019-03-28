@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 //Import the desired components
 import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
+import LabelComponent from './components/LabelComponent.js';
+import DivComponent from './components/DivComponent.js';
 import {WebSockStatusContainer} from './containers/WebSockStatusContainer.js';
 
 //Import the action creator
@@ -28,12 +30,16 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <DivContainer pv="SR-DI-DCCT-01:SIGNAL"/>
-                <DivContainer pv="SR23C-DI-DCCT-01:SIGNAL"/>
+                <LabelComponent x="0px" y="50px" label="SR-DI-DCCT-01:SIGNAL"/>
+                <DivComponent x="100px" y="50px" pv="SR-DI-DCCT-01:SIGNAL"/>
+                <LabelComponent x="0px" y="100px" label="SR23C-DI-DCCT-01:SIGNAL"/>
+                <DivComponent x="100px" y="100px" pv="SR23C-DI-DCCT-01:SIGNAL"/>
                 <GaugeContainer
                     pv="SR23C-DI-DCCT-01:SIGNAL"
                     width="300"
                     height="150"
+                    x="50px"
+                    y="150px"
                     minVal="0"
                     maxVal="0.1"
                 />
