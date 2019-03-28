@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 //Import the desired components
-import {DivContainer} from './containers/DivContainer.js';
 import {GaugeContainer} from './containers/GaugeContainer.js';
 import LabelComponent from './components/LabelComponent.js';
 import DivComponent from './components/DivComponent.js';

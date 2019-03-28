@@ -14,6 +14,9 @@ export class BaseComponent extends React.Component {
         currentId++; //Increment the current id so the next comp id is unique
         this.state = {EPICSValue: null, PV: null}; //Initialise the internal state for display
         this.hookToStore(); // hook the container to the store.
+        this.styles = {
+            position: 'absolute'
+        }
     }
 
     //onMount, subscribe to a PV.

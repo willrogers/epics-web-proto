@@ -7,6 +7,8 @@ export default class DivComponent extends BaseComponent {
 
     constructor(props) {
         super(props);
+        this.styles['width'] = 100;
+        this.styles['backgroundColor'] = 'lightgray';
     }
 
     //Render a div that displays the desired information in text format
@@ -16,13 +18,10 @@ export default class DivComponent extends BaseComponent {
         if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
             formattedString = this.state.EPICSValue.toFixed(3);
         }
-        let styles = {
-            width: 100,
-            backgroundColor: 'lightgray',
-            position: 'absolute',
-            left: this.props.x,
-            top: this.props.y
-        };
+        console.log(this.styles)
+        var styles = Object.assign({}, this.styles)
+        styles['left'] = this.props.x;
+        styles['top'] = this.props.y;
         return(<div style={styles}>{formattedString}</div>);
     }
 }
