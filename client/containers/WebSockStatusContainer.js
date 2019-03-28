@@ -5,12 +5,12 @@ import React from 'react';
 import WebSockStatusComponent from '../components/WebSockStatusComponent.js';
 
 //Define extension
-import {SuperContainer} from './SuperContainer.js';
+import {BaseComponent} from './BaseComponent.js';
 
 //Redux API - allows us to subscribe to specific store changes
 import {store} from '../redux/EPICSStore';
 
-export class WebSockStatusContainer extends SuperContainer {
+export class WebSockStatusContainer extends BaseComponent {
 
     //Initialise the internal state and hook the container to the store.
     constructor(props) {
@@ -21,9 +21,9 @@ export class WebSockStatusContainer extends SuperContainer {
 
     //These lifecycle methods are to override the PV based behaviours
     //that we use for all other components, normally inherited from the
-    //SuperContainer.
-    componentDidMount() { /* Override SuperContainer*/ }
-    componentWillUnmount() { /* Override SuperContainer */ }
+    //BaseComponent.
+    componentDidMount() { /* Override BaseComponent*/ }
+    componentWillUnmount() { /* Override BaseComponent */ }
 
 
     //Listen for changes to the wsReadyState in the store, copy it

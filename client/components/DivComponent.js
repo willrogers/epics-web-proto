@@ -1,9 +1,9 @@
 //React API
 import React from 'react';
 import PropTypes from 'prop-types';
-import {SuperContainer} from "../containers/SuperContainer";
+import {BaseComponent} from "../containers/BaseComponent";
 
-export default class DivComponent extends SuperContainer {
+export default class DivComponent extends BaseComponent {
 
     constructor(props) {
         super(props);

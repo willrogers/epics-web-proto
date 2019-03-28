@@ -3,9 +3,9 @@ import React from 'react';
 
 //Import the desired components
 import GaugeComponent from '../components/GaugeComponent.js';
-import {SuperContainer} from './SuperContainer.js';
+import {BaseComponent} from './BaseComponent.js';
 
-export class GaugeContainer extends SuperContainer {
+export class GaugeContainer extends BaseComponent {
     constructor(props) {
         super(props);
     }

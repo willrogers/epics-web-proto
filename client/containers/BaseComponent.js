@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //Instantiate an Id for tracking the component
 let currentId = 0;
 
-export class SuperContainer extends React.Component {
+export class BaseComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -60,7 +60,7 @@ export class SuperContainer extends React.Component {
 }
 
 //Prop checking
-SuperContainer.propTypes = {
+BaseComponent.propTypes = {
     property: PropTypes.string,
     block: PropTypes.string
 };
