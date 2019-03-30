@@ -26,7 +26,10 @@ const websockMiddleware = _store => next => action => {
     //action.
     case CREATE_CONNECTION: {
         if (connectionObject === null) {
-            connectionObject = new ServerInterface(action.payload.webSocketURL);
+            connectionObject = new ServerInterface(
+                action.payload.webSocketURL,
+                action.payload.connectionPlugin
+            );
         }
         break;
     }

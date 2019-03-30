@@ -19,7 +19,6 @@ export default class DivComponent extends BaseComponent {
         if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
             formattedString = this.state.EPICSValue.toFixed(3);
         }
-        console.log(this.styles)
         var styles = Object.assign({}, this.styles)
         styles['left'] = this.props.x;
         styles['top'] = this.props.y;

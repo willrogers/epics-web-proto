@@ -51,7 +51,7 @@ export class BaseComponent extends React.Component {
                 this.setState(
                     {
                         EPICSValue: store.getState().epicsData[this.props.pv],
-                        PV: this.props.block
+                        PV: this.props.pv
                     }
                 );
             }

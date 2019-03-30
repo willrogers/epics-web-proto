@@ -2,6 +2,7 @@ import {updatePV} from '../actions/EPICSActions.js';
 
 //Server implementation/plugin is defined here:
 import {Epics2WebPlugin} from './Epics2WebPlugin.js';
+import {SimulatorPlugin} from './SimulatorPlugin';
 
 
 //A generic class to hook a server into EpicsWebProto. Exposes the methods
@@ -9,7 +10,7 @@ import {Epics2WebPlugin} from './Epics2WebPlugin.js';
 export class ServerInterface {
 
     //Create a new connection using the chosen plugin
-    constructor(webSocketURL) {
+    constructor(webSocketURL, pluginType) {
 
         //Create a websocket with the URL passed from top level
         console.log(`the url is ${webSocketURL}`);
@@ -17,7 +18,11 @@ export class ServerInterface {
         console.log('aaa');
         //Create your plugin and pass it the receiveUpdate callback
         //along with your websocket
-        this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, webSocketURL);
+        if (pluginType === 'simulator') {
+            this.serverConnection = new SimulatorPlugin(this.receiveUpdate);
+        } else if (pluginType === 'epics2web') {
+            this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, webSocketURL);
+        }
     }
 
     //Calls the plugin method with the specific Malcolm path
@@ -59,9 +64,9 @@ export class ServerInterface {
     }
 
     //Receive an update from Malcolm, passed to malcolmConnection as a callback
-    receiveUpdate(newValue, pvName) {
+    receiveUpdate(pvName, newValue) {
         // Send to the action creator
-        updatePV(newValue, pvName);
+        updatePV(pvName, newValue);
 
     }
 

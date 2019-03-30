@@ -11,7 +11,7 @@ export const CLOSE_WEBSOCKET = 'CLOSE_WEBSOCKET';
 
 //Action creators: These package a change in state into
 //an object called an action.Then, this action is sent to
-// our middleware/reducer/store chain. THe type is a constant
+//our middleware/reducer/store chain. THe type is a constant
 //used to identify the action in the middleware/reducer, the
 //payload is the data that we wish to send.
 
@@ -19,7 +19,7 @@ export const CLOSE_WEBSOCKET = 'CLOSE_WEBSOCKET';
 //This actions contains the name of a PV for which we wish
 //to update the state, along with the value that we need
 // to apply to it.
-export function updatePV(newValue, pvName) {
+export function updatePV(pvName, newValue) {
     return store.dispatch({
         type: UPDATE_PV,
         payload:{
@@ -33,11 +33,12 @@ export function updatePV(newValue, pvName) {
 //a server via a websocket. The action contains the URL for
 //the desired port. In our app, we connect to a server called
 //Malcolm
-export function connectToServer(URL) {
+export function connectToServer(URL, pluginType) {
     return store.dispatch({
         type: CREATE_CONNECTION,
         payload:{
-            webSocketURL: URL
+            webSocketURL: URL,
+            connectionPlugin: pluginType
         }
     });
 }

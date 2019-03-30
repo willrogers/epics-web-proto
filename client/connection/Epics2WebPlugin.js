@@ -24,7 +24,7 @@ export class Epics2WebPlugin {
             }
 
             self.connection.onupdate = (message) => {
-                this.update(message.detail.value, message.detail.pv);
+                this.update(message.detail.pv, message.detail.value);
             };
         };
         this.connection.onclose = (event) => {
@@ -48,8 +48,8 @@ export class Epics2WebPlugin {
         this.connection.clearPvs([id]);
     }
 
-    update(newVal, pvName) {
-        this.callback(newVal, pvName);
+    update(pvName, newVal) {
+        this.callback(pvName, newVal);
     }
 
     disconnectWebSocket() {

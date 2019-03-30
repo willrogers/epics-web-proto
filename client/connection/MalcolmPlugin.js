@@ -50,7 +50,7 @@ export class MalcolmConnection {
             //..extract the value from the data
             const newMalcolmValue = response.value.value;
             //..pass the value and its associated id back to EpicsWebProto
-            this.updateCallback(newMalcolmValue, this.pvIds[response.id]);
+            this.updateCallback(this.pvIds[response.id], newMalcolmValue);
         };
     }
 
