@@ -7,7 +7,7 @@ export class SimulatorPlugin {
         console.log(`Subscribing to ${pv}`);
         if (typeof pv != 'undefined') {
             setInterval(() => {
-                this.callback(pv, 0.06);
+                this.callback(pv, Math.random());
             }, 1000);
         }
     }
