@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 //Import the desired components
 import LabelComponent from './components/LabelComponent.js';
 import DivComponent from './components/DivComponent.js';
+import InputComponent from './components/InputComponent.js';
 import GaugeComponent from './components/GaugeComponent.js';
 import WebSockStatusComponent from "./components/WebSockStatusComponent";
 
@@ -30,18 +31,18 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <LabelComponent x="0px" y="50px" label="SR-DI-DCCT-01:SIGNAL"/>
-                <DivComponent x="110px" y="50px" pv="SR-DI-DCCT-01:SIGNAL"/>
-                <LabelComponent x="0px" y="100px" label="SR23C-DI-DCCT-01:SIGNAL"/>
-                <DivComponent x="110px" y="100px" pv="SR23C-DI-DCCT-01:SIGNAL"/>
+                <LabelComponent x="0px" y="50px" label="sim://sine"/>
+                <DivComponent x="110px" y="50px" pv="sim://sine"/>
+                <LabelComponent x="0px" y="100px" label="sim://random"/>
+                <InputComponent x="110px" y="100px" pv="sim://random"/>
                 <GaugeComponent
-                    pv="SR23C-DI-DCCT-01:SIGNAL"
+                    pv="sim://sine"
                     width="300"
                     height="150"
                     x="50px"
                     y="150px"
-                    minVal="0"
-                    maxVal="0.1"
+                    minVal="-1"
+                    maxVal="1"
                 />
                 <WebSockStatusComponent x="0px" y="300px" width="300px" height="50px"/>
             </div>

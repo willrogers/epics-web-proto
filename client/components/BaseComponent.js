@@ -1,6 +1,6 @@
 import React from 'react';
 import {store} from '../redux/EPICSStore.js';
-import {subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions';
+import {WRITE_PV, subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions';
 import PropTypes from 'prop-types';
 
 //Instantiate an Id for tracking the component
@@ -19,6 +19,7 @@ export class BaseComponent extends React.Component {
             left: this.props.x,
             top: this.props.y
         }
+        this.setValue = this.setValue.bind(this);
     }
 
     //onMount, subscribe to a PV.
@@ -56,6 +57,17 @@ export class BaseComponent extends React.Component {
                 );
             }
         });
+    }
+
+    setValue(newValue) {
+        let self = this;
+        store.dispatch({
+            type: WRITE_PV,
+            payload: {
+                pv: self.props.pv,
+                newValue: newValue
+            }
+        })
     }
 
     //No render required, takes place in child components.

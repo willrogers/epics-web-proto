@@ -2,6 +2,7 @@
 import {
     CREATE_CONNECTION,
     SUBSCRIBE_TO_PV,
+    WRITE_PV,
     UNSUBSCRIBE_TO_PV,
     CLOSE_WEBSOCKET
 } from '../actions/EPICSActions.js';
@@ -43,6 +44,10 @@ const websockMiddleware = _store => next => action => {
                 action.payload.pv);
         }
         break;
+    }
+
+    case WRITE_PV: {
+        connectionObject.putPV(action.payload.pv, action.payload.newValue)
     }
 
     //Provided there is a connObj, destroy the subscription identified

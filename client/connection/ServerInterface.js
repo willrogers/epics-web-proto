@@ -45,8 +45,8 @@ export class ServerInterface {
     }
 
     //Call the plugin method for writing a single value to a PV
-    putPV(id, block, property, value) {
-        this.serverConnection.putPV(id, block, property, value);
+    putPV(pv, value) {
+        this.serverConnection.putPV(pv, value);
     }
 
     //Call the plugin method for closing the websocket

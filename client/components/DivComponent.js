@@ -14,7 +14,6 @@ export default class DivComponent extends BaseComponent {
 
     //Render a div that displays the desired information in text format
     render() {
-        console.log(`component render called with ${this.state.EPICSValue}`)
         let formattedString = '';
         if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
             formattedString = this.state.EPICSValue.toFixed(3);

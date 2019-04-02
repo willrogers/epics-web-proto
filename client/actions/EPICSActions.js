@@ -3,6 +3,7 @@ import {store} from '../redux/EPICSStore.js';
 
 //Action types
 export const UPDATE_PV = 'UPDATE_PV';
+export const WRITE_PV = 'WRITE_PV';
 export const CREATE_CONNECTION = 'CREATE_CONNECTION';
 export const SUBSCRIBE_TO_PV = 'SUBSCRIBE_TO_PV';
 export const UNSUBSCRIBE_TO_PV = 'UNSUBSCRIBE_TO_PV';
