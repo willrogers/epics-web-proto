@@ -31,10 +31,10 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <LabelComponent x="0px" y="50px" label="sim://sine"/>
-                <DivComponent x="110px" y="50px" pv="sim://sine"/>
-                <LabelComponent x="0px" y="100px" label="sim://random"/>
-                <InputComponent x="110px" y="100px" pv="sim://random"/>
+                <LabelComponent x="0px" y="50px" label="loc://local"/>
+                <DivComponent x="110px" y="50px" pv="loc://local"/>
+                <LabelComponent x="0px" y="100px" label="loc://local"/>
+                <InputComponent x="110px" y="100px" pv="loc://local"/>
                 <GaugeComponent
                     pv="sim://sine"
                     width="300"

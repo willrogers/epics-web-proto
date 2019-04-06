@@ -19,6 +19,7 @@ export default class GaugeComponent extends BaseComponent {
     //On startup, define the dimensions and metrics we need
     //to build the graph
     componentDidMount() {
+        super.componentDidMount();
         this.defineClassConstants();
     }
 

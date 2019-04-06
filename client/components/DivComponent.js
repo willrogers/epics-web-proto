@@ -16,7 +16,13 @@ export default class DivComponent extends BaseComponent {
     render() {
         let formattedString = '';
         if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
-            formattedString = this.state.EPICSValue.toFixed(3);
+            let val = '';
+            if (typeof this.state.EPICSValue == "string") {
+                val = parseFloat(this.state.EPICSValue);
+            } else {
+                val = this.state.EPICSValue;
+            }
+            formattedString = val.toFixed(3);
         }
         var styles = Object.assign({}, this.styles)
         styles['left'] = this.props.x;

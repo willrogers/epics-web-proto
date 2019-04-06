@@ -32,6 +32,7 @@ export default class InputComponent extends BaseComponent {
             this.setValue(event.target.value);
             this.setState({'InputValue': ''})
             this.update = true;
+            event.target.blur();
         } else if (event.key === 'Escape' || event.key === 'Esc') {
             this.setState({'InputValue': ''});
             this.update = true;
@@ -50,6 +51,9 @@ export default class InputComponent extends BaseComponent {
     render() {
         let val = this.state.EPICSValue;
         if (typeof val != 'undefined' && val !== null && val !== '') {
+            if (typeof val == "string") {
+                val = parseFloat(val);
+            }
             val = val.toFixed(3);
         }
         if (! this.update) {
@@ -58,7 +62,6 @@ export default class InputComponent extends BaseComponent {
         if (typeof val === 'undefined') {
             val = '';
         }
-        console.log(`${this.update} ${val}`);
         return (
             <input type="text"
                    value={val}
