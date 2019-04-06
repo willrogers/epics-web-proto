@@ -13,26 +13,34 @@ export default class InputComponent extends BaseComponent {
         this.handleChange = this.handleChange.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onBlur = this.onBlur.bind(this);
-        this.onKeyPress = this.onKeyPress.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     onClick(event) {
         this.update = false;
-        event.target.select();
+        this.setState({'InputValue': ''})
     }
 
     onBlur(event) {
+        this.update = true;
     }
 
-    onKeyPress(event) {
+    onKeyDown(event) {
         this.value = event.target.value;
+        console.log(event.key);
         if (event.key === 'Enter') {
             this.setValue(event.target.value);
+            this.setState({'InputValue': ''})
             this.update = true;
+        } else if (event.key === 'Escape' || event.key === 'Esc') {
+            this.setState({'InputValue': ''});
+            this.update = true;
+            event.target.blur();
         }
     }
 
     handleChange(event) {
+        this.setState({'InputValue': event.target.value});
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -41,8 +49,14 @@ export default class InputComponent extends BaseComponent {
 
     render() {
         let val = this.state.EPICSValue;
+        if (typeof val != 'undefined' && val !== null && val !== '') {
+            val = val.toFixed(3);
+        }
         if (! this.update) {
-            val = this.value;
+            val = this.state.InputValue;
+        }
+        if (typeof val === 'undefined') {
+            val = '';
         }
         console.log(`${this.update} ${val}`);
         return (
@@ -51,7 +65,8 @@ export default class InputComponent extends BaseComponent {
                    onChange={this.handleChange}
                    onClick={this.onClick}
                    onBlur={this.onBlur}
-                   onKeyPress={this.onKeyPress}
+                   onKeyDown={this.onKeyDown}
+                   style={this.styles}
                    />
         );
     }
