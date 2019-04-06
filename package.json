@@ -15,14 +15,21 @@
   "keywords": [],
   "author": "Benedict Wagnall",
   "license": "ISC",
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  },
   "dependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "*",
+    "canvas": "^2.4.1",
     "css-loader": "^2.1.1",
     "express": "^4.16.4",
     "flux": "^3.1.3",
+    "jsdom": "^14.0.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -48,6 +55,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.7.1",
+    "jest-canvas-mock": "^2.0.0-beta.1",
     "karma": "^4.0.1",
     "karma-babel-preprocessor": "^8.0.0",
     "karma-chai": "^0.1.0",
