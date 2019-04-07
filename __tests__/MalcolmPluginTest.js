@@ -1,10 +1,5 @@
 import {MalcolmConnection} from './../client/connection/MalcolmPlugin.js';
-import {expect} from 'chai';
 import sinon from 'sinon';
-
-import * as enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-enzyme.configure({ adapter: new Adapter() });
 
 // This file includes tests on MalcolmConnection, which is not a react
 // component - the tests on this object are therefore using regular JS syntax

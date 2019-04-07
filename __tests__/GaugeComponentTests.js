@@ -1,15 +1,12 @@
 import GaugeComponent from '../client/components/GaugeComponent.js';
 import React from 'react';
 
-import * as enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-enzyme.configure({ adapter: new Adapter() });
-
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import {expect} from 'chai';
 
 describe('GaugeComponent', function() {
-const deepGauge1 = shallow(
+
+    const deepGauge1 = mount(
         <GaugeComponent
             EPICSValue={'hello'}
             width={'1000'}
@@ -18,7 +15,7 @@ const deepGauge1 = shallow(
             maxVal={'100'}
         />);
 
-    const deepGauge2 = shallow(
+    const deepGauge2 = mount(
         <GaugeComponent
             EPICSValue={'150'}
             width={'1000'}
@@ -27,7 +24,7 @@ const deepGauge1 = shallow(
             maxVal={'100'}
         />);
 
-    const deepGauge3 = shallow(
+    const deepGauge3 = mount(
         <GaugeComponent
             EPICSValue={'200'}
             width={'700'}
