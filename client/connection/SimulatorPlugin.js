@@ -4,7 +4,7 @@ export class SimulatorPlugin {
         this.localPvs = {};
     }
 
-    subscribe(id, pv) {
+    subscribe(_, pv) {
         console.log(`Subscribing to ${pv}`);
         if (typeof pv != 'undefined' && pv.startsWith('loc://')) {
             this.localPvs[pv] = 0;
@@ -16,7 +16,7 @@ export class SimulatorPlugin {
         }
     }
 
-    unsubscribe(id, pv) {
+    unsubscribe(_, pv) {
         console.log(`Unsubscribing from ${pv}`);
     }
 

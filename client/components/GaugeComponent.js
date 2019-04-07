@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from "./BaseComponent";
+import {BaseComponent} from './BaseComponent';
 
 
 export default class GaugeComponent extends BaseComponent {
@@ -146,7 +146,7 @@ export default class GaugeComponent extends BaseComponent {
 
     //HTML for describing the gauge.
     render() {
-        console.log(`rendering with EPICS state ${this.state.EPICSValue}`)
+        console.log(`rendering with EPICS state ${this.state.EPICSValue}`);
         return (
             <canvas
                 ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}

@@ -37,11 +37,11 @@ describe('GaugeComponent', function() {
         expect(deepGauge1.type()).to.equal(GaugeComponent);
     });
 
-    it('Should render a canvas', function(){
-       expect(deepGauge1.find('canvas')).to.have.length(1);
+    it('Should render a canvas', function() {
+        expect(deepGauge1.find('canvas')).to.have.length(1);
     });
 
-    it('Should not render a heading', function(){
+    it('Should not render a heading', function() {
         expect(deepGauge1.find('h1')).to.have.length(0);
     });
 
@@ -53,7 +53,7 @@ describe('GaugeComponent', function() {
         expect(deepGauge2.instance().startMark).to.equal(100);
         expect(deepGauge2.instance().halfMark).to.equal(500);
         expect(deepGauge2.instance().threeQuarterMark).to.equal(700);
-        expect(deepGauge2.instance().finishMark).to.equal(900)
+        expect(deepGauge2.instance().finishMark).to.equal(900);
     });
 
     it('Should create and populate an array of pip locations', function() {

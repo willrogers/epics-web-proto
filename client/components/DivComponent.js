@@ -1,7 +1,7 @@
 //React API
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from "./BaseComponent";
+import {BaseComponent} from './BaseComponent';
 
 export default class DivComponent extends BaseComponent {
 
@@ -17,14 +17,14 @@ export default class DivComponent extends BaseComponent {
         let formattedString = '';
         if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
             let val = '';
-            if (typeof this.state.EPICSValue == "string") {
+            if (typeof this.state.EPICSValue == 'string') {
                 val = parseFloat(this.state.EPICSValue);
             } else {
                 val = this.state.EPICSValue;
             }
             formattedString = val.toFixed(3);
         }
-        var styles = Object.assign({}, this.styles)
+        let styles = Object.assign({}, this.styles);
         styles['left'] = this.props.x;
         styles['top'] = this.props.y;
         return(<div style={styles}>{formattedString}</div>);

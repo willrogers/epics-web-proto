@@ -7,14 +7,14 @@ import LabelComponent from './components/LabelComponent.js';
 import DivComponent from './components/DivComponent.js';
 import InputComponent from './components/InputComponent.js';
 import GaugeComponent from './components/GaugeComponent.js';
-import WebSockStatusComponent from "./components/WebSockStatusComponent";
+import WebSockStatusComponent from './components/WebSockStatusComponent';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
 
 //Define the destination to connect the WebSocket to
 const webSocketURL = 'ws://localhost:8080/epics2web/monitor';
-const pluginType = 'simulator'
+const pluginType = 'simulator';
 
 class App extends React.Component {
 

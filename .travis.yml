@@ -6,4 +6,5 @@ node_js:
 
 script:
   - npm test
+  - npx eslint client __test__
 
