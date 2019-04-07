@@ -12,10 +12,6 @@ export class ServerInterface {
     //Create a new connection using the chosen plugin
     constructor(webSocketURL, pluginType) {
 
-        //Create a websocket with the URL passed from top level
-        console.log(`the url is ${webSocketURL}`);
-        //this.webSocket = new WebSocket(webSocketURL);
-        console.log('aaa');
         //Create your plugin and pass it the receiveUpdate callback
         //along with your websocket
         if (pluginType === 'simulator') {

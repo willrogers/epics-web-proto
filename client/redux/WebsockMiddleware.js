@@ -48,6 +48,7 @@ const websockMiddleware = _store => next => action => {
 
     case WRITE_PV: {
         connectionObject.putPV(action.payload.pv, action.payload.newValue);
+        break;
     }
 
     //Provided there is a connObj, destroy the subscription identified

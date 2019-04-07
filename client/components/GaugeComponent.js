@@ -146,7 +146,6 @@ export default class GaugeComponent extends BaseComponent {
 
     //HTML for describing the gauge.
     render() {
-        console.log(`rendering with EPICS state ${this.state.EPICSValue}`);
         return (
             <canvas
                 ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}
@@ -159,10 +158,11 @@ export default class GaugeComponent extends BaseComponent {
 }
 
 //Prop checking.
-GaugeComponent.propTypes = {EPICSValue: PropTypes.number};
-GaugeComponent.propTypes = {width: PropTypes.string};
-GaugeComponent.propTypes = {height: PropTypes.string};
-GaugeComponent.propTypes = {property: PropTypes.string};
-GaugeComponent.propTypes = {block: PropTypes.string};
-GaugeComponent.propTypes = {minVal: PropTypes.string};
-GaugeComponent.propTypes = {maxVal: PropTypes.string};
+GaugeComponent.propTypes = {
+    EPICSValue: PropTypes.number,
+    width: PropTypes.string,
+    height: PropTypes.string,
+    property: PropTypes.string,
+    minVal: PropTypes.string,
+    maxVal: PropTypes.string
+};

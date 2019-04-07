@@ -25,5 +25,7 @@ export default class LabelComponent extends React.Component {
 
 //We expect EPICSValues to be numbers, PVs to be strings
 LabelComponent.propTypes = {
-    label: PropTypes.string
+    label: PropTypes.string,
+    x: PropTypes.number,
+    y: PropTypes.number
 };

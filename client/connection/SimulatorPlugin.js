@@ -4,8 +4,7 @@ export class SimulatorPlugin {
         this.localPvs = {};
     }
 
-    subscribe(_, pv) {
-        console.log(`Subscribing to ${pv}`);
+    subscribe(_id, pv) {
         if (typeof pv != 'undefined' && pv.startsWith('loc://')) {
             this.localPvs[pv] = 0;
         }
@@ -16,19 +15,15 @@ export class SimulatorPlugin {
         }
     }
 
-    unsubscribe(_, pv) {
-        console.log(`Unsubscribing from ${pv}`);
+    unsubscribe(_id, _pv) {
     }
 
     disconnect() {
-        console.log('Disconnecting simulator');
     }
 
     putPV(pv, newValue) {
         if (pv.startsWith('loc://')) {
             this.localPvs[pv] = newValue.toString();
-        } else {
-            console.log(`Simulator: not writing PV ${pv}:${newValue}`);
         }
     }
 

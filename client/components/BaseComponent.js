@@ -79,5 +79,7 @@ export class BaseComponent extends React.Component {
 //Prop checking
 BaseComponent.propTypes = {
     property: PropTypes.string,
-    block: PropTypes.string
+    x: PropTypes.number,
+    y: PropTypes.number,
+    pv: PropTypes.string
 };

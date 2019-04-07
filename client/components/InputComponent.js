@@ -16,18 +16,17 @@ export default class InputComponent extends BaseComponent {
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
-    onClick(event) {
+    onClick(_event) {
         this.update = false;
         this.setState({'InputValue': ''});
     }
 
-    onBlur(event) {
+    onBlur(_event) {
         this.update = true;
     }
 
     onKeyDown(event) {
         this.value = event.target.value;
-        console.log(event.key);
         if (event.key === 'Enter') {
             this.setValue(event.target.value);
             this.setState({'InputValue': ''});
@@ -42,10 +41,6 @@ export default class InputComponent extends BaseComponent {
 
     handleChange(event) {
         this.setState({'InputValue': event.target.value});
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
     }
 
     render() {
