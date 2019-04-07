@@ -1,15 +1,9 @@
 # Basic Travis configuration.
 sudo: false
 language: node_js
-node_js: 
+node_js:
   - 11
-
-before_script:
-  -  export DISPLAY=:99.0
-  -  sh -e /etc/init.d/xvfb start
 
 script:
   - npm test
 
-addons:
-  firefox: latest
