@@ -159,7 +159,7 @@ export default class GaugeComponent extends BaseComponent {
 
 //Prop checking.
 GaugeComponent.propTypes = {
-    EPICSValue: PropTypes.number,
+    EPICSValue: PropTypes.string,
     width: PropTypes.string,
     height: PropTypes.string,
     property: PropTypes.string,
