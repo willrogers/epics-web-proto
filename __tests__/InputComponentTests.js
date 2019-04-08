@@ -47,7 +47,7 @@ describe('InputComponent', () => {
     it.each('should render EPICS value in correct format', values, (input, output) => {
         shallowInput.setState({'EPICSValue': input});
         expect(shallowInput.props().value).to.equal(output);
-    })
+    });
 
 });
 
