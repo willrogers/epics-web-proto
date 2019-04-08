@@ -18,7 +18,7 @@ export class BaseComponent extends React.Component {
             position: 'absolute',
             left: this.props.x,
             top: this.props.y
-        }
+        };
         this.setValue = this.setValue.bind(this);
     }
 
@@ -67,7 +67,7 @@ export class BaseComponent extends React.Component {
                 pv: self.props.pv,
                 newValue: newValue
             }
-        })
+        });
     }
 
     //No render required, takes place in child components.
@@ -79,5 +79,7 @@ export class BaseComponent extends React.Component {
 //Prop checking
 BaseComponent.propTypes = {
     property: PropTypes.string,
-    block: PropTypes.string
+    x: PropTypes.number,
+    y: PropTypes.number,
+    pv: PropTypes.string
 };

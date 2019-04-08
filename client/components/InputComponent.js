@@ -1,5 +1,5 @@
 import React from 'react';
-import {BaseComponent} from "./BaseComponent";
+import {BaseComponent} from './BaseComponent';
 
 
 export default class InputComponent extends BaseComponent {
@@ -16,21 +16,20 @@ export default class InputComponent extends BaseComponent {
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
-    onClick(event) {
+    onClick(_event) {
         this.update = false;
-        this.setState({'InputValue': ''})
+        this.setState({'InputValue': ''});
     }
 
-    onBlur(event) {
+    onBlur(_event) {
         this.update = true;
     }
 
     onKeyDown(event) {
         this.value = event.target.value;
-        console.log(event.key);
         if (event.key === 'Enter') {
             this.setValue(event.target.value);
-            this.setState({'InputValue': ''})
+            this.setState({'InputValue': ''});
             this.update = true;
             event.target.blur();
         } else if (event.key === 'Escape' || event.key === 'Esc') {
@@ -44,14 +43,10 @@ export default class InputComponent extends BaseComponent {
         this.setState({'InputValue': event.target.value});
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
-    }
-
     render() {
         let val = this.state.EPICSValue;
         if (typeof val != 'undefined' && val !== null && val !== '') {
-            if (typeof val == "string") {
+            if (typeof val == 'string') {
                 val = parseFloat(val);
             }
             val = val.toFixed(3);
@@ -64,13 +59,13 @@ export default class InputComponent extends BaseComponent {
         }
         return (
             <input type="text"
-                   value={val}
-                   onChange={this.handleChange}
-                   onClick={this.onClick}
-                   onBlur={this.onBlur}
-                   onKeyDown={this.onKeyDown}
-                   style={this.styles}
-                   />
+                value={val}
+                onChange={this.handleChange}
+                onClick={this.onClick}
+                onBlur={this.onBlur}
+                onKeyDown={this.onKeyDown}
+                style={this.styles}
+            />
         );
     }
 }

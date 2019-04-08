@@ -9,13 +9,13 @@ describe('MalcolmPlugin', function() {
     const spyCallback = sinon.spy();
     //This is just a real websocket, which doesn't feel right.
     const testWebSocket = new WebSocket('ws://pc0088:8080/ws');
-    const testPlugin = new MalcolmConnection(spyCallback, testWebSocket);
+    new MalcolmConnection(spyCallback, testWebSocket);
 
-    it('should be an object', function(){
+    it('should be an object', function() {
         // expect(typeof(testPlugin)==='object');
     });
 
-    it('should have a connect() method', function(){
+    it('should have a connect() method', function() {
         // expect(typeof(testPlugin.connect())==='function')
     });
 

@@ -3,6 +3,9 @@ node_modules
 bundle.js
 
 
+# Test coverage reports
+/coverage/
+
 # Vim temporary files
 *.swp
 *.swo

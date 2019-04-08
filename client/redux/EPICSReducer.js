@@ -35,7 +35,6 @@ function EPICSReducer(state = initialState, action) {
     //state that reflects the wsStatus, and use it to replace the
     //old state.
     case UPDATE_WS_READYSTATE: {
-        console.log('websocket status');
         return Object.assign({}, state, {
             wsReadyState: action.payload.wsStatus
         });

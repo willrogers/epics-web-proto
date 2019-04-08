@@ -13,9 +13,9 @@ module.exports = {
     ],
     "parserOptions": {
         "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
             "jsx": true
         },
+        "ecmaVersion": true,
         "sourceType": "module"
     },
     "plugins": [
@@ -32,5 +32,10 @@ module.exports = {
         "no-trailing-spaces": [ "warn" ],
         "no-var": ["warn"],
         "no-unused-vars": [1, {"args": "all", "argsIgnorePattern": "^_"}]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 };

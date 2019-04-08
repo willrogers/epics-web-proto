@@ -1,15 +1,21 @@
 # Basic Travis configuration.
 sudo: false
 language: node_js
-node_js: 
+node_js:
   - 11
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=c890f84e7995f1b7bc31f991f03f8cff581247e28ac223ce486782f8ae81690d
+
 before_script:
-  -  export DISPLAY=:99.0
-  -  sh -e /etc/init.d/xvfb start
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - npm test
+  - npx eslint client __tests__
 
-addons:
-  firefox: latest
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
