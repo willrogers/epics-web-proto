@@ -25,9 +25,9 @@ export default class GaugeComponent extends BaseComponent {
 
     //When we receive and update. Get hold of the canvas, clear
     //it and then re-draw the gauge.
-    componentDidUpdate() {
-        this.context = this.gaugeCanvas.getContext('2d');
-        this.context.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
+    componentDidUpdate(_prevProps, _prevState, _snapshot) {
+        this.context2d = this.gaugeCanvas.getContext('2d');
+        this.context2d.clearRect(0, 0, this.gaugeCanvas.width, this.gaugeCanvas.height);
         this.drawGauge();
     }
 
@@ -47,30 +47,30 @@ export default class GaugeComponent extends BaseComponent {
 
     //Draw a single pip at the supplied location
     drawPip(pipLoc) {
-        this.context.beginPath();
-        this.context.linewidth = this.pipWidth;
-        this.context.strokeStyle = this.pipColour;
-        this.context.moveTo(pipLoc, 100);
-        this.context.lineTo(pipLoc, 130);
-        this.context.stroke();
-        this.context.closePath();
+        this.context2d.beginPath();
+        this.context2d.linewidth = this.pipWidth;
+        this.context2d.strokeStyle = this.pipColour;
+        this.context2d.moveTo(pipLoc, 100);
+        this.context2d.lineTo(pipLoc, 130);
+        this.context2d.stroke();
+        this.context2d.closePath();
     }
 
     //Draw the marker at the supplied location, call annotate when done.
     drawMarker(markerLoc) {
-        this.context.beginPath();
-        this.context.lineWidth = this.markerWidth;
-        this.context.strokeStyle = this.markerColour;
-        this.context.moveTo(markerLoc, 50);
-        this.context.lineTo(markerLoc, 130);
-        this.context.stroke();
-        this.context.closePath();
+        this.context2d.beginPath();
+        this.context2d.lineWidth = this.markerWidth;
+        this.context2d.strokeStyle = this.markerColour;
+        this.context2d.moveTo(markerLoc, 50);
+        this.context2d.lineTo(markerLoc, 130);
+        this.context2d.stroke();
+        this.context2d.closePath();
         this.annotateMarker(markerLoc);
     }
 
     //Annotate the marker with the appropriate numeric value.
     annotateMarker(annoLoc) {
-        this.context.fillText('' + (this.calculateAnnoConversion(annoLoc)), annoLoc, 140);
+        this.context2d.fillText('' + (this.calculateAnnoConversion(annoLoc)), annoLoc, 140);
     }
 
     //Convert the pixel value used for drawing, into a
@@ -81,13 +81,13 @@ export default class GaugeComponent extends BaseComponent {
 
     //Draw the needle using the supplied EPICSValue
     drawNeedle(epicsVal) {
-        this.context.beginPath();
-        this.context.lineWidth = this.needleWidth;
-        this.context.strokeStyle = this.needleColour;
-        this.context.moveTo(this.calculateNeedleLocation(epicsVal), 130);
-        this.context.lineTo(this.calculateNeedleLocation(epicsVal), 10);
-        this.context.stroke();
-        this.context.closePath();
+        this.context2d.beginPath();
+        this.context2d.lineWidth = this.needleWidth;
+        this.context2d.strokeStyle = this.needleColour;
+        this.context2d.moveTo(this.calculateNeedleLocation(epicsVal), 130);
+        this.context2d.lineTo(this.calculateNeedleLocation(epicsVal), 10);
+        this.context2d.stroke();
+        this.context2d.closePath();
     }
 
     //Calculate the needle location. Converts the epics data into a position
@@ -102,7 +102,7 @@ export default class GaugeComponent extends BaseComponent {
     defineClassConstants() {
 
         //Obtaining a reference for the canvas
-        this.context = this.gaugeCanvas.getContext('2d');
+        this.context2d = this.gaugeCanvas.getContext('2d');
 
         //Internal Dimension definition
         this.internalXAxis = this.gaugeCanvas.width * 0.8;
