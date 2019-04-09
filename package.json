@@ -1,5 +1,5 @@
 {
-  "name": "EpicsWebProto",
+  "name": "epics-web-proto",
   "version": "0.0.1",
   "description": "Read data from EPICS, using React-Redux",
   "main": "index.js",
