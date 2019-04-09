@@ -5,10 +5,9 @@ jest.useFakeTimers();
 
 
 describe('SimulatorPlugin', () => {
-    const callbackSpy = jest.fn();
-
-    it('should construct', () => {
-        const simPlugin = new SimulatorPlugin(callbackSpy);
+    let callbackSpy;
+    beforeEach(() => {
+        callbackSpy = jest.fn();
     });
 
     it('should store zero in a local PV when subscribing', () => {
@@ -34,9 +33,9 @@ describe('SimulatorPlugin', () => {
     });
 
     const numericPvs = ['sim://sine', 'sim://random'];
-    it.each('should return a number from numeric PV', (pv) => {
+    it.each('should return a number from numeric PV', numericPvs, (pv) => {
         const simPlugin = new SimulatorPlugin(callbackSpy);
         expect(typeof simPlugin.getValue(pv)).toBe('number');
 
-    })
+    });
 });

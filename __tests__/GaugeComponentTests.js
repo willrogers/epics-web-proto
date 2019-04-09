@@ -3,6 +3,7 @@ import React from 'react';
 
 import {mount} from 'enzyme';
 
+
 describe('GaugeComponent', function() {
 
     const deepGauge1 = mount(

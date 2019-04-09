@@ -11,7 +11,7 @@ describe('InputComponent', () => {
     let shallowInput;
     beforeEach(() => {
         shallowInput = shallow(<InputComponent />);
-    })
+    });
 
     it('should render an input', () => {
         expect(shallowInput.type()).toEqual('input');

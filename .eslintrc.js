@@ -4,7 +4,8 @@ module.exports = {
         "commonjs": true,
         "es6": true,
         "mocha": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": [
         "eslint:recommended",
@@ -19,7 +20,7 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "eslint-plugin-react"
+        "react", "jest"
     ],
     "rules": {
         "indent": ["error", 4],
