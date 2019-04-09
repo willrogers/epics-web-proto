@@ -2,21 +2,20 @@ import InputComponent from '../client/components/InputComponent.js';
 import {BaseComponent} from '../client/components/BaseComponent.js';
 import React from 'react';
 
-import sinon from 'sinon';
 import {shallow} from 'enzyme';
-import {expect} from 'chai';
 
 
 describe('InputComponent', () => {
-    const setValueSpy = sinon.stub(BaseComponent.prototype, 'setValue');
-    const shallowInput = shallow(<InputComponent />);
-    shallowInput.simulate('change', {
-        target: {'value': 'hello'}
-    });
+    const setValueSpy = BaseComponent.prototype.setValue = jest.fn();
+
+    let shallowInput;
+    beforeEach(() => {
+        shallowInput = shallow(<InputComponent />);
+    })
 
     it('should render an input', () => {
-        expect(shallowInput.type()).to.equal('input');
-        expect(shallowInput.props().type).to.equal('text');
+        expect(shallowInput.type()).toEqual('input');
+        expect(shallowInput.props().type).toEqual('text');
     });
 
     it('should call setValue when enter pressed', () => {
@@ -27,11 +26,11 @@ describe('InputComponent', () => {
                 blur: () => {}
             },
         });
-        expect(setValueSpy).to.have.been.calledOnce;
+        expect(setValueSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should call blur when enter pressed', () => {
-        const blurSpy = sinon.spy();
+        const blurSpy = jest.fn();
         shallowInput.simulate('keyDown', {
             key: 'Escape',
             target: {
@@ -39,7 +38,7 @@ describe('InputComponent', () => {
                 blur: blurSpy
             },
         });
-        expect(blurSpy).to.have.been.calledOnce;
+        expect(blurSpy).toHaveBeenCalledTimes(1);
     });
 
     /* Parameterised tests. */

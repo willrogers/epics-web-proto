@@ -2,7 +2,6 @@ import GaugeComponent from '../client/components/GaugeComponent.js';
 import React from 'react';
 
 import {mount} from 'enzyme';
-import {expect} from 'chai';
 
 describe('GaugeComponent', function() {
 
@@ -34,35 +33,35 @@ describe('GaugeComponent', function() {
         />);
 
     it('Should render a gauge component', function() {
-        expect(deepGauge1.type()).to.equal(GaugeComponent);
+        expect(deepGauge1.type()).toEqual(GaugeComponent);
     });
 
     it('Should render a canvas', function() {
-        expect(deepGauge1.find('canvas')).to.have.length(1);
+        expect(deepGauge1.find('canvas')).toHaveLength(1);
     });
 
     it('Should not render a heading', function() {
-        expect(deepGauge1.find('h1')).to.have.length(0);
+        expect(deepGauge1.find('h1')).toHaveLength(0);
     });
 
     it('Should create a node in the DOM', function() {
-        expect(deepGauge2.exists()).to.equal(true);
+        expect(deepGauge2.exists()).toEqual(true);
     });
 
     it('Should store the quarterly markers correctly', function() {
-        expect(deepGauge2.instance().startMark).to.equal(100);
-        expect(deepGauge2.instance().halfMark).to.equal(500);
-        expect(deepGauge2.instance().threeQuarterMark).to.equal(700);
-        expect(deepGauge2.instance().finishMark).to.equal(900);
+        expect(deepGauge2.instance().startMark).toEqual(100);
+        expect(deepGauge2.instance().halfMark).toEqual(500);
+        expect(deepGauge2.instance().threeQuarterMark).toEqual(700);
+        expect(deepGauge2.instance().finishMark).toEqual(900);
     });
 
     it('Should create and populate an array of pip locations', function() {
-        expect(deepGauge2.instance().pipLocations[0]).to.equal(125);
-        expect(deepGauge2.instance().pipLocations[1]).to.equal(150);
-        expect(deepGauge2.instance().pipLocations[2]).to.equal(175);
-        expect(deepGauge2.instance().pipLocations[27]).to.equal(875);
-        expect(deepGauge2.instance().pipLocations.length).to.equal(28);
-        expect(deepGauge3.instance().pipLocations.length).to.equal(22);
+        expect(deepGauge2.instance().pipLocations[0]).toEqual(125);
+        expect(deepGauge2.instance().pipLocations[1]).toEqual(150);
+        expect(deepGauge2.instance().pipLocations[2]).toEqual(175);
+        expect(deepGauge2.instance().pipLocations[27]).toEqual(875);
+        expect(deepGauge2.instance().pipLocations.length).toEqual(28);
+        expect(deepGauge3.instance().pipLocations.length).toEqual(22);
     });
 
 });
