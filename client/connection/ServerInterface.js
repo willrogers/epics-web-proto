@@ -20,7 +20,6 @@ export class ServerInterface {
             this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, webSocketURL);
         }
     }
-
     //Calls the plugin method with the specific Malcolm path
     //required for subscription
     monitorPV(id, pv) {

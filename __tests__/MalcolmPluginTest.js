@@ -1,12 +1,11 @@
 import {MalcolmConnection} from './../client/connection/MalcolmPlugin.js';
-import sinon from 'sinon';
 
 // This file includes tests on MalcolmConnection, which is not a react
 // component - the tests on this object are therefore using regular JS syntax
 
 describe('MalcolmPlugin', function() {
 
-    const spyCallback = sinon.spy();
+    const spyCallback = jest.fn();
     //This is just a real websocket, which doesn't feel right.
     const testWebSocket = new WebSocket('ws://pc0088:8080/ws');
     new MalcolmConnection(spyCallback, testWebSocket);

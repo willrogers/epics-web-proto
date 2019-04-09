@@ -1,5 +1,5 @@
 {
-  "name": "EpicsWebProto",
+  "name": "epics-web-proto",
   "version": "0.0.1",
   "description": "Read data from EPICS, using React-Redux",
   "main": "index.js",
@@ -26,7 +26,6 @@
     "canvas": "^2.4.1",
     "css-loader": "^2.1.1",
     "express": "^4.16.4",
-    "flux": "^3.1.3",
     "prop-types": "latest",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -36,13 +35,13 @@
     "webpack-dev-middleware": "^3.6.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
@@ -50,9 +49,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.7.1",
     "jest-environment-jsdom-fourteen": "^0.1.0",
-    "mocha": "^6.0.2",
-    "sinon": "^7.3.1",
-    "sinon-chai": "^3.3.0",
     "webpack-cli": "^3.3.0"
   }
 }
