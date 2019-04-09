@@ -16,28 +16,34 @@ From the command line, enter the commands:
 
 Navigate to http://localhost:3000/ in your browser
 
+### Testing
+
+To install the test dependencies:
+
+	npm install --dev
+	npm test
+
+You can run the tests on every change:
+
+	npm run test:watch
 
 ### Dependencies
 
 App:
 
 * React
-* Redux: Not sure what this provides as it is mostly pattern
-* Flux: Provides the dispatcher functionality
+* Redux: This is largely a pattern, but provides the store functions.
 
 Development:
 
-* Webpack: Config located in './webpack.config.js'
-* Babel: Config located in './.babelrc'
+* Webpack: Config located in 'webpack.config.js'
+* Babel: Config located in '.babelrc'
 
 Testing:
 
-* Karma: Config located in './karma.conf.js'
-* Mocha
-* Chai
-* Eslint: Config located in './.eslintrc'
-* Sinon
-* Enzyme
+* Jest: Config located in 'jest.conf.js'
+* Eslint: Config located in './.eslintrc.js'
+* Enzyme: Set up in 'setupTests.js'
 
 
 ### Architecture
