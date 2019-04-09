@@ -33,9 +33,8 @@ describe('SimulatorPlugin', () => {
     });
 
     const numericPvs = ['sim://sine', 'sim://random'];
-    it.each('should return a number from numeric PV', numericPvs, (pv) => {
+    it.each(numericPvs)('should return a number from %s', (pv) => {
         const simPlugin = new SimulatorPlugin(callbackSpy);
-        expect(typeof simPlugin.getValue(pv)).toBe('number');
-
+        expect(typeof simPlugin.getValue(pv)).toEqual('number');
     });
 });

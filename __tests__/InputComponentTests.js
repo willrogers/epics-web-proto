@@ -43,9 +43,9 @@ describe('InputComponent', () => {
 
     /* Parameterised tests. */
     const values = [['10', '10.000'], ['1', '1.000'], ['-1', '-1.000']];
-    it.each('should render EPICS value in correct format', values, (input, output) => {
+    it.each(values)('should render EPICS value %s in correct format', (input, output) => {
         shallowInput.setState({'EPICSValue': input});
-        expect(shallowInput.props().value).to.equal(output);
+        expect(shallowInput.props().value).toEqual(output);
     });
 
 });
