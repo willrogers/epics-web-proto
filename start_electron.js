@@ -30,7 +30,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 10; i++) {
       const win = new BrowserWindow({
           width: 800, 
           height: 600, 
