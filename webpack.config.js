@@ -8,7 +8,7 @@ module.exports = {
     ],
     mode: 'development',
     output: {
-        path: path.join(__dirname, './dist'),
+        path: path.resolve(__dirname),
         filename: '[name].js',
     },
     module: {
