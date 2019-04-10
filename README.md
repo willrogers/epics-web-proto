@@ -9,12 +9,20 @@ expressed in ReactJS. It will show a single PV as text, in a div element.
 
 ### Setup
 
+#### Using node server
+
 From the command line, enter the commands:
 
     npm install
     npm start
 
 Navigate to http://localhost:3000/ in your browser
+
+#### Demo electron app
+
+From the command line, run:
+
+    npx electron .
 
 
 ### Dependencies
