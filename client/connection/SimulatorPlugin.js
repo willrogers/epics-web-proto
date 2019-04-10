@@ -1,4 +1,5 @@
 export class SimulatorPlugin {
+
     constructor(callback) {
         this.callback = callback;
         this.localPvs = {};
@@ -23,7 +24,7 @@ export class SimulatorPlugin {
 
     putPV(pv, newValue) {
         if (pv.startsWith('loc://')) {
-            this.localPvs[pv] = newValue.toString();
+            this.localPvs[pv] = newValue;
         }
     }
 
