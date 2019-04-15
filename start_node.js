@@ -6,11 +6,11 @@ const app = express();
 
 const compiler = webpack(webpackConfig);
 
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname));
 
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
-    filename: '[name].js',
+    filename: 'client/[name].js',
     publicPath: '/',
     stats: {
         colors: true,

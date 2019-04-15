@@ -9,6 +9,8 @@ expressed in ReactJS. It will show a single PV as text, in a div element.
 
 ### Setup
 
+#### Using node server
+
 From the command line, enter the commands:
 
     npm install
@@ -16,16 +18,22 @@ From the command line, enter the commands:
 
 Navigate to http://localhost:3000/ in your browser
 
+#### Demo electron app
+
+From the command line, run:
+
+    npx electron .
+
 ### Testing
 
 To install the test dependencies:
 
-	npm install --dev
-	npm test
+    npm install --dev
+    npm test
 
 You can run the tests on every change:
 
-	npm run test:watch
+    npm run test:watch
 
 ### Dependencies
 

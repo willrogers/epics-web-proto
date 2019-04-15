@@ -1,6 +1,6 @@
 # Npm files
 node_modules
-bundle.js
+main.js
 
 
 # Test coverage reports
