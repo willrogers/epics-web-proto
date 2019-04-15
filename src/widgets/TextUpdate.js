@@ -1,9 +1,9 @@
 //React API
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from './BaseComponent';
+import {BaseComponent} from '../components/BaseComponent';
 
-export default class DivComponent extends BaseComponent {
+export default class TextUpdate extends BaseComponent {
 
     constructor(props) {
         super(props);
@@ -15,7 +15,7 @@ export default class DivComponent extends BaseComponent {
     //Render a div that displays the desired information in text format
     render() {
         let formattedString = '';
-        if (typeof this.state.EPICSValue != 'undefined' && this.state.EPICSValue !== null) {
+        if (typeof this.props.value != 'undefined' && this.props.value !== null) {
             let val = '';
             if (typeof this.state.EPICSValue == 'string') {
                 val = parseFloat(this.state.EPICSValue);
@@ -32,7 +32,7 @@ export default class DivComponent extends BaseComponent {
 }
 
 //We expect EPICSValues to be numbers, PVs to be strings
-DivComponent.propTypes = {
-    EPICSValue: PropTypes.string,
+TextUpdate.propTypes = {
+    value: PropTypes.string,
     PV: PropTypes.string
 };
