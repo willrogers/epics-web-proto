@@ -1,5 +1,5 @@
-import {Epics2WebPlugin} from '../client/connection/Epics2WebPlugin';
-import jlab from '../client/external/epics2web';
+import {Epics2WebPlugin} from '../src/connection/Epics2WebPlugin';
+import jlab from '../src/external/epics2web';
 
 
 describe('Epics2WebPlugin', () => {

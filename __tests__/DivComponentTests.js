@@ -1,4 +1,4 @@
-import DivComponent from '../client/components/DivComponent.js';
+import DivComponent from '../src/components/DivComponent.js';
 import React from 'react';
 
 import {shallow} from 'enzyme';

@@ -1,4 +1,4 @@
-import {SimulatorPlugin} from '../client/connection/SimulatorPlugin.js';
+import {SimulatorPlugin} from '../src/connection/SimulatorPlugin.js';
 
 
 jest.useFakeTimers();

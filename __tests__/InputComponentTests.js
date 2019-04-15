@@ -1,5 +1,5 @@
-import InputComponent from '../client/components/InputComponent.js';
-import {BaseComponent} from '../client/components/BaseComponent.js';
+import InputComponent from '../src/components/InputComponent.js';
+import {BaseComponent} from '../src/components/BaseComponent.js';
 import React from 'react';
 
 import {shallow} from 'enzyme';

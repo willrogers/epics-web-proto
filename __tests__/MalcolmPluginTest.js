@@ -1,4 +1,4 @@
-import {MalcolmConnection} from './../client/connection/MalcolmPlugin.js';
+import {MalcolmConnection} from './../src/connection/MalcolmPlugin.js';
 
 // This file includes tests on MalcolmConnection, which is not a react
 // component - the tests on this object are therefore using regular JS syntax

@@ -1,4 +1,4 @@
-import GaugeComponent from '../client/components/GaugeComponent.js';
+import GaugeComponent from '../src/components/GaugeComponent.js';
 import React from 'react';
 
 import {mount} from 'enzyme';
