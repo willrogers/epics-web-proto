@@ -13,4 +13,5 @@ main.js
 # Webstorm temp files
 .idea/workspace.xml
 
-#
+# VS Code settings
+.vscode
