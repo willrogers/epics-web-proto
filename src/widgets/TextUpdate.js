@@ -1,9 +1,9 @@
 //React API
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from '../components/BaseComponent';
+import {EpicsContainer} from '../containers/EpicsContainer';
 
-export default class TextUpdate extends BaseComponent {
+export default class TextUpdate extends EpicsContainer {
 
     constructor(props) {
         super(props);

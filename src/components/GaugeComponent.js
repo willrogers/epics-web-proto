@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from './BaseComponent';
+import {EpicsContainer} from '../containers/EpicsContainer';
 
 
-export default class GaugeComponent extends BaseComponent {
+export default class GaugeComponent extends EpicsContainer {
     constructor(props) {
         super(props);
         this.canvasStyle = {

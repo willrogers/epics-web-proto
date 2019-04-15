@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //Instantiate an Id for tracking the component
 let currentId = 0;
 
-export class BaseComponent extends React.Component {
+export class EpicsContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -77,7 +77,7 @@ export class BaseComponent extends React.Component {
 }
 
 //Prop checking
-BaseComponent.propTypes = {
+EpicsContainer.propTypes = {
     property: PropTypes.string,
     x: PropTypes.number,
     y: PropTypes.number,

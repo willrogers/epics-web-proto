@@ -1,12 +1,12 @@
 import InputComponent from '../src/components/InputComponent.js';
-import {BaseComponent} from '../src/components/BaseComponent.js';
+import {EpicsContainer} from '../src/containers/EpicsContainer.js';
 import React from 'react';
 
 import {shallow} from 'enzyme';
 
 
 describe('InputComponent', () => {
-    const setValueSpy = BaseComponent.prototype.setValue = jest.fn();
+    const setValueSpy = EpicsContainer.prototype.setValue = jest.fn();
 
     let shallowInput;
     beforeEach(() => {

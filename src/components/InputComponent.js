@@ -1,8 +1,8 @@
 import React from 'react';
-import {BaseComponent} from './BaseComponent';
+import {EpicsContainer} from '../containers/EpicsContainer';
 
 
-export default class InputComponent extends BaseComponent {
+export default class InputComponent extends EpicsContainer {
 
     constructor(props) {
         super(props);

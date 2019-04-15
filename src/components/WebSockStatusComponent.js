@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 //Import the closeWebsocket action.
 import {closeWebSocket} from '../actions/EPICSActions';
 import {store} from '../redux/EPICSStore';
-import {BaseComponent} from './BaseComponent';
+import {EpicsContainer} from '../containers/EpicsContainer';
 
 
-export default class WebSockStatusComponent extends BaseComponent {
+export default class WebSockStatusComponent extends EpicsContainer {
 
     constructor(props) {
         super(props);
