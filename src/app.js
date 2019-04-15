@@ -13,7 +13,7 @@ import WebSocketStatus from './widgets/WebsocketStatus';
 import {connectToServer} from './actions/EPICSActions.js';
 
 //Define the destination to connect the WebSocket to
-const webSocketURL = 'ws://localhost:8080/epics2web/monitor';
+const websocketURL = 'ws://localhost:8080/epics2web/monitor';
 const pluginType = 'simulator';
 
 class App extends React.Component {
