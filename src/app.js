@@ -32,7 +32,7 @@ class App extends React.Component {
         return(
             <div>
                 <Label x="0px" y="50px" label="loc://local"/>
-                <TextUpdate x="110px" y="50px" pv="loc://local"/>
+                <TextUpdate x="110px" y="50px" pv="loc://local" precision="3" />
                 <Label Component x="0px" y="100px" label="loc://local"/>
                 <TextInput x="110px" y="100px" pv="loc://local"/>
                 <Gauge
