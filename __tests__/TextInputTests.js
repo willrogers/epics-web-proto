@@ -5,7 +5,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 
-describe('InputComponent', () => {
+describe('TextInput', () => {
     const setValueSpy = EpicsContainer.prototype.setValue = jest.fn();
 
     let shallowInput;

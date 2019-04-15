@@ -2,7 +2,7 @@ import React from 'react';
 import {EpicsContainer} from '../containers/EpicsContainer';
 
 
-export default class InputComponent extends EpicsContainer {
+export default class TextInput extends EpicsContainer {
 
     constructor(props) {
         super(props);
