@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class LabelComponent extends React.Component {
+export default class Label extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,7 +24,7 @@ export default class LabelComponent extends React.Component {
 }
 
 //We expect EPICSValues to be numbers, PVs to be strings
-LabelComponent.propTypes = {
+Label.propTypes = {
     label: PropTypes.string,
     x: PropTypes.number,
     y: PropTypes.number

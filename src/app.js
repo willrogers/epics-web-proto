@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 //Import the desired components
-import LabelComponent from './components/LabelComponent.js';
+import Label from './widgets/Label.js';
 import TextUpdate from './widgets/TextUpdate.js';
 import TextInput from './widgets/TextInput.js';
 import GaugeComponent from './components/GaugeComponent.js';
@@ -31,9 +31,9 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <LabelComponent x="0px" y="50px" label="loc://local"/>
+                <Label x="0px" y="50px" label="loc://local"/>
                 <TextUpdate x="110px" y="50px" pv="loc://local"/>
-                <LabelComponent x="0px" y="100px" label="loc://local"/>
+                <Label Component x="0px" y="100px" label="loc://local"/>
                 <TextInput x="110px" y="100px" pv="loc://local"/>
                 <GaugeComponent
                     pv="sim://sine"
