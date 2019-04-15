@@ -52,7 +52,7 @@ export class Epics2WebPlugin {
         this.callback(pvName, newVal);
     }
 
-    disconnectWebSocket() {
+    disconnectWebsocket() {
         this.connection.close();
     }
 

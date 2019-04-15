@@ -7,8 +7,8 @@ describe('MalcolmPlugin', function() {
 
     const spyCallback = jest.fn();
     //This is just a real websocket, which doesn't feel right.
-    const testWebSocket = new WebSocket('ws://pc0088:8080/ws');
-    new MalcolmConnection(spyCallback, testWebSocket);
+    const testWebsocket = new WebSocket('ws://pc0088:8080/ws');
+    new MalcolmConnection(spyCallback, testWebsocket);
 
     it('should be an object', function() {
         // expect(typeof(testPlugin)==='object');

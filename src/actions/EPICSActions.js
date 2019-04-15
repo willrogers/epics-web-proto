@@ -38,7 +38,7 @@ export function connectToServer(URL, pluginType) {
     return store.dispatch({
         type: CREATE_CONNECTION,
         payload:{
-            webSocketURL: URL,
+            websocketURL: URL,
             connectionPlugin: pluginType
         }
     });
@@ -89,7 +89,7 @@ export function updateWebSockStatus(readyState) {
 
 //This action contains no payload, it simply expresses
 //our wish to close the websocket connection.
-export function closeWebSocket() {
+export function closeWebsocket() {
     return store.dispatch({
         type: CLOSE_WEBSOCKET
     });

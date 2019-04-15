@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 import Label from './widgets/Label.js';
 import TextUpdate from './widgets/TextUpdate.js';
 import TextInput from './widgets/TextInput.js';
-import GaugeComponent from './components/GaugeComponent.js';
-import WebSockStatusComponent from './components/WebSockStatusComponent';
+import Gauge from './widgets/Gauge.js';
+import WebSocketStatus from './widgets/WebsocketStatus';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
@@ -22,7 +22,7 @@ class App extends React.Component {
     //This will open a websocket that connects to the specified
     //URL.
     componentWillMount() {
-        connectToServer(webSocketURL, pluginType);
+        connectToServer(websocketURL, pluginType);
     }
 
     //This specifies the components that we desire, along with supplying
@@ -35,7 +35,7 @@ class App extends React.Component {
                 <TextUpdate x="110px" y="50px" pv="loc://local"/>
                 <Label Component x="0px" y="100px" label="loc://local"/>
                 <TextInput x="110px" y="100px" pv="loc://local"/>
-                <GaugeComponent
+                <Gauge
                     pv="sim://sine"
                     width="300"
                     height="150"
@@ -44,7 +44,7 @@ class App extends React.Component {
                     minVal="-1"
                     maxVal="1"
                 />
-                <WebSockStatusComponent x="0px" y="300px" width="300px" height="50px"/>
+                <WebSocketStatus x="0px" y="300px" width="300px" height="50px"/>
             </div>
         );
     }

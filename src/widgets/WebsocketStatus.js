@@ -3,12 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //Import the closeWebsocket action.
-import {closeWebSocket} from '../actions/EPICSActions';
+import {closeWebsocket} from '../actions/EPICSActions';
 import {store} from '../redux/EPICSStore';
 import {EpicsContainer} from '../containers/EpicsContainer';
 
 
-export default class WebSockStatusComponent extends EpicsContainer {
+export default class WebsocketStatus extends EpicsContainer {
 
     constructor(props) {
         super(props);
@@ -34,17 +34,17 @@ export default class WebSockStatusComponent extends EpicsContainer {
     getStatusText() {
         return (
             <text x="30" y="30" fill="black">
-                WebSocket readyState: {this.state.readyState}
+                Websocket readyState: {this.state.readyState}
             </text>
         );
     }
 
-    //Event handler to close the webSocket when a user presses the button
+    //Event handler to close the websocket when a user presses the button
     handleClick() {
-        closeWebSocket();
+        closeWebsocket();
     }
 
-    //Create the webSocket status display. Tested with an svg for easy
+    //Create the websocket status display. Tested with an svg for easy
     //extension in future. SVG takes props from its container, and
     // displays the return of getStatusText()
     render() {
@@ -59,7 +59,7 @@ export default class WebSockStatusComponent extends EpicsContainer {
 }
 
 //Prop checking
-WebSockStatusComponent.propTypes = {
+WebsocketStatus.propTypes = {
     readyState: PropTypes.number,
     width: PropTypes.string,
     height: PropTypes.string

@@ -1,13 +1,13 @@
-import GaugeComponent from '../src/components/GaugeComponent.js';
+import Gauge from '../src/widgets/Gauge.js';
 import React from 'react';
 
 import {mount} from 'enzyme';
 
 
-describe('GaugeComponent', function() {
+describe('Gauge', function() {
 
     const deepGauge1 = mount(
-        <GaugeComponent
+        <Gauge
             EPICSValue={'hello'}
             width={'1000'}
             height={'150'}
@@ -16,7 +16,7 @@ describe('GaugeComponent', function() {
         />);
 
     const deepGauge2 = mount(
-        <GaugeComponent
+        <Gauge
             EPICSValue={'150'}
             width={'1000'}
             height={'150'}
@@ -25,7 +25,7 @@ describe('GaugeComponent', function() {
         />);
 
     const deepGauge3 = mount(
-        <GaugeComponent
+        <Gauge
             EPICSValue={'200'}
             width={'700'}
             height={'150'}
@@ -34,7 +34,7 @@ describe('GaugeComponent', function() {
         />);
 
     it('Should render a gauge component', function() {
-        expect(deepGauge1.type()).toEqual(GaugeComponent);
+        expect(deepGauge1.type()).toEqual(Gauge);
     });
 
     it('Should render a canvas', function() {

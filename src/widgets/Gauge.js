@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {EpicsContainer} from '../containers/EpicsContainer';
 
 
-export default class GaugeComponent extends EpicsContainer {
+export default class Gauge extends EpicsContainer {
     constructor(props) {
         super(props);
         this.canvasStyle = {
@@ -158,7 +158,7 @@ export default class GaugeComponent extends EpicsContainer {
 }
 
 //Prop checking.
-GaugeComponent.propTypes = {
+Gauge.propTypes = {
     EPICSValue: PropTypes.string,
     width: PropTypes.string,
     height: PropTypes.string,
