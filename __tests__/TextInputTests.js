@@ -1,4 +1,4 @@
-import InputComponent from '../src/components/InputComponent.js';
+import TextInput from '../src/widgets/TextInput.js';
 import {EpicsContainer} from '../src/containers/EpicsContainer.js';
 import React from 'react';
 
@@ -10,7 +10,7 @@ describe('InputComponent', () => {
 
     let shallowInput;
     beforeEach(() => {
-        shallowInput = shallow(<InputComponent />);
+        shallowInput = shallow(<TextInput />);
     });
 
     it('should render an input', () => {

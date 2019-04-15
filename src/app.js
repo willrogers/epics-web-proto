@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 //Import the desired components
 import LabelComponent from './components/LabelComponent.js';
 import TextUpdate from './widgets/TextUpdate.js';
-import InputComponent from './components/InputComponent.js';
+import TextInput from './widgets/TextInput.js';
 import GaugeComponent from './components/GaugeComponent.js';
 import WebSockStatusComponent from './components/WebSockStatusComponent';
 
@@ -34,7 +34,7 @@ class App extends React.Component {
                 <LabelComponent x="0px" y="50px" label="loc://local"/>
                 <TextUpdate x="110px" y="50px" pv="loc://local"/>
                 <LabelComponent x="0px" y="100px" label="loc://local"/>
-                <InputComponent x="110px" y="100px" pv="loc://local"/>
+                <TextInput x="110px" y="100px" pv="loc://local"/>
                 <GaugeComponent
                     pv="sim://sine"
                     width="300"
