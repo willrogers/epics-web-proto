@@ -6,6 +6,18 @@ import {WRITE_PV, subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions.
 //Instantiate an Id for tracking the component
 let currentId = 0;
 
+export function setEpicsValue(pv, value) {
+    console.log('dispatching ')
+    console.log({ pv: pv, newValue: value });
+    store.dispatch({
+        type: WRITE_PV,
+        payload: {
+            pv: pv,
+            newValue: value
+        }
+    });
+}
+
 export function epicsHoc(Widget) {
 
     class EpicsWidget extends React.Component {
@@ -14,7 +26,7 @@ export function epicsHoc(Widget) {
             super(props);
             this.id = currentId;  //Assign the component an Id
             currentId++; //Increment the current id so the next comp id is unique
-            this.state = {EPICSValue: null, PV: null}; //Initialise the internal state for display
+            this.state = {EPICSValue: '', PV: ''}; //Initialise the internal state for display
             this.hookToStore(); // hook the container to the store.
             this.setValue = this.setValue.bind(this);
         }
@@ -57,19 +69,12 @@ export function epicsHoc(Widget) {
         }
 
         setValue(newValue) {
-            let self = this;
-            store.dispatch({
-                type: WRITE_PV,
-                payload: {
-                    pv: self.props.pv,
-                    newValue: newValue
-                }
-            });
+            setEpicsValue(this.props.pv, newValue);
         }
 
-        //No render required, takes place in child components.
         render() {
-            return <Widget {...this.props} />;
+            console.log(this.state.EPICSValue);
+            return <Widget value={this.state.EPICSValue} {...this.props} />;
         }
     }
 

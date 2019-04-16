@@ -47,6 +47,7 @@ const websocketMiddleware = _store => next => action => {
     }
 
     case WRITE_PV: {
+        console.log(`writing pv ${action.payload.pv}`);
         connectionObject.putPV(action.payload.pv, action.payload.newValue);
         break;
     }

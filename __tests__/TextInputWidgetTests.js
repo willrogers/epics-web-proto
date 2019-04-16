@@ -46,7 +46,7 @@ describe('TextInputWidget', () => {
     });
 
     it('should restore text on blur', () => {
-        shallowInput.setState({value: 1});
+        shallowInput.setProps({value: 1});
         shallowInput.simulate('blur', {});
         expect(shallowInput.props().value).toEqual('1.000');
     });
@@ -54,7 +54,7 @@ describe('TextInputWidget', () => {
     /* Parameterised tests. */
     const values = [['10', '10.000'], ['1', '1.000'], ['-1', '-1.000']];
     it.each(values)('should render EPICS value %s in correct format', (input, output) => {
-        shallowInput.setState({'value': input});
+        shallowInput.setProps({'value': input});
         expect(shallowInput.props().value).toEqual(output);
     });
 
