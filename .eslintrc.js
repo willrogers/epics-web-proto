@@ -25,6 +25,7 @@ module.exports = {
     "rules": {
         "indent": ["error", 4],
         "react/jsx-uses-vars": ["error"],
+        "no-duplicate-imports": ["error"],
         "linebreak-style": [ "error", "unix" ],
         "quotes": [ "error", "single" ],
         "semi": [ "error", "always" ],

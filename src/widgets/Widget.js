@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 
 export function widgetHoc(Widget) {
 
-    // eslint-disable-next-line react/display-name
-    return class extends React.Component {
+    class WrappedWidget extends React.Component {
 
         constructor(props) {
             super(props);
@@ -18,15 +17,16 @@ export function widgetHoc(Widget) {
         render() {
             return <Widget {...this.new_props} />;
         }
+    }
+
+    WrappedWidget.propTypes = {
+        property: PropTypes.string,
+        x: PropTypes.number,
+        y: PropTypes.number,
+        pv: PropTypes.string
     };
+
+    return WrappedWidget;
 
 }
 
-
-//Prop checking
-widgetHoc.propTypes = {
-    property: PropTypes.string,
-    x: PropTypes.number,
-    y: PropTypes.number,
-    pv: PropTypes.string
-};

@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //Import the closeWebsocket action.
-import {closeWebsocket} from '../actions/EPICSActions';
-import {store} from '../redux/EPICSStore';
+import {closeWebsocket} from '../actions/EPICSActions.js';
+import {store} from '../redux/EPICSStore.js';
 import {widgetHoc} from './Widget.js';
 
 

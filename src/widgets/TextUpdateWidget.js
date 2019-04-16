@@ -13,8 +13,6 @@ export class RawTextUpdate extends React.Component {
         this.props.styles['width'] = 100;
         this.props.styles['backgroundColor'] = 'lightgray';
         this.props.styles['overflow'] = 'hidden';
-        this.props.styles['left'] = this.props.x;
-        this.props.styles['top'] = this.props.y;
     }
 
     //Render a div that displays the desired information in text format

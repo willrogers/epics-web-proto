@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {store} from '../redux/EPICSStore.js';
 import {WRITE_PV, subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions.js';
 
@@ -7,8 +8,7 @@ let currentId = 0;
 
 export function epicsHoc(Widget) {
 
-    // eslint-disable-next-line react/display-name
-    return class extends React.Component {
+    class EpicsWidget extends React.Component {
 
         constructor(props) {
             super(props);
@@ -71,5 +71,12 @@ export function epicsHoc(Widget) {
         render() {
             return <Widget {...this.props} />;
         }
+    }
+
+    EpicsWidget.propTypes = {
+        pv: PropTypes.string
     };
+
+    return EpicsWidget;
+
 }

@@ -11,7 +11,7 @@ export class RawTextInput extends React.Component {
         /* One argument: new value (string). */
         this.setValue = this.props.setValue;
         this.state = {'value': '', 'InputValue': ''};
-        this.styles = this.props.styles || {};
+        this.styles = this.props.styles;
         this.styles['width'] = 100;
         this.styles['backgroundColor'] = 'lightgray';
         this.update = true;
@@ -49,7 +49,7 @@ export class RawTextInput extends React.Component {
     }
 
     render() {
-        let val = this.state.value || '';
+        let val = this.state.value;
         if (val !== '') {
             if (typeof val == 'string') {
                 val = parseFloat(val);
@@ -74,11 +74,15 @@ export class RawTextInput extends React.Component {
 
 RawTextInput.propTypes = {
     value: PropTypes.string,
-    precision: PropTypes.number
+    InputValue: PropTypes.string,
+    setValue: PropTypes.func,
+    precision: PropTypes.number,
+    styles: PropTypes.object
 };
 RawTextInput.defaultProps = {
     value: '',
-    InputValue: ''
+    InputValue: '',
+    styles: {}
 };
 
 export const TextInputWidget = widgetHoc(RawTextInput);

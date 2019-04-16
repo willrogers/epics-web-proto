@@ -11,8 +11,8 @@ export class RawGaugeWidget extends React.Component {
             position: 'absolute',
             width: this.props.width,
             height: this.props.height,
-            left: this.props.x,
-            top: this.props.y
+            left: this.props.styles.x,
+            top: this.props.styles.y
         };
     }
 
@@ -165,7 +165,8 @@ RawGaugeWidget.propTypes = {
     height: PropTypes.string,
     property: PropTypes.string,
     minVal: PropTypes.string,
-    maxVal: PropTypes.string
+    maxVal: PropTypes.string,
+    styles: PropTypes.object
 };
 
 export const GaugeWidget = widgetHoc(RawGaugeWidget);
