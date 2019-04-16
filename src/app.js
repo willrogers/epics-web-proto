@@ -3,17 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 //Import the desired components
-import LabelComponent from './components/LabelComponent.js';
-import DivComponent from './components/DivComponent.js';
-import InputComponent from './components/InputComponent.js';
-import GaugeComponent from './components/GaugeComponent.js';
-import WebSockStatusComponent from './components/WebSockStatusComponent';
+import {Label} from './widgets/Label.js';
+import {Gauge, TextUpdate, TextInput} from './epics/EpicsWidgets.js';
+import {WebsocketStatus} from './widgets/WebsocketStatus.js';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
 
 //Define the destination to connect the WebSocket to
-const webSocketURL = 'ws://localhost:8080/epics2web/monitor';
+const websocketURL = 'ws://localhost:8080/epics2web/monitor';
 const pluginType = 'simulator';
 
 class App extends React.Component {
@@ -22,7 +20,7 @@ class App extends React.Component {
     //This will open a websocket that connects to the specified
     //URL.
     componentWillMount() {
-        connectToServer(webSocketURL, pluginType);
+        connectToServer(websocketURL, pluginType);
     }
 
     //This specifies the components that we desire, along with supplying
@@ -31,20 +29,21 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <LabelComponent x="0px" y="50px" label="loc://local"/>
-                <DivComponent x="110px" y="50px" pv="loc://local"/>
-                <LabelComponent x="0px" y="100px" label="loc://local"/>
-                <InputComponent x="110px" y="100px" pv="loc://local"/>
-                <GaugeComponent
+                <Label x={0} y={50} label="loc://local"/>
+                <TextUpdate x={110} y={50} pv="loc://local" precision={3} />
+                <TextUpdate x={170} y={50} pv="loc://local" />
+                <Label Component x={0} y={100} label="loc://local"/>
+                <TextInput x={110} y={100} pv="loc://local"/>
+                <Gauge
                     pv="sim://sine"
                     width="300"
                     height="150"
-                    x="50px"
-                    y="150px"
+                    x={50}
+                    y={150}
                     minVal="-1"
                     maxVal="1"
                 />
-                <WebSockStatusComponent x="0px" y="300px" width="300px" height="50px"/>
+                <WebsocketStatus x={0} y={300} width="300px" height="50px"/>
             </div>
         );
     }

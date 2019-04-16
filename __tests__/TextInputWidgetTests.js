@@ -1,16 +1,15 @@
-import InputComponent from '../client/components/InputComponent.js';
-import {BaseComponent} from '../client/components/BaseComponent.js';
+import {RawTextInput} from '../src/widgets/TextInputWidget.js';
 import React from 'react';
 
 import {shallow} from 'enzyme';
 
 
-describe('InputComponent', () => {
-    const setValueSpy = BaseComponent.prototype.setValue = jest.fn();
+describe('TextInputWidget', () => {
+    const setValueSpy = jest.fn();
 
     let shallowInput;
     beforeEach(() => {
-        shallowInput = shallow(<InputComponent />);
+        shallowInput = shallow(<RawTextInput setValue={setValueSpy} />);
     });
 
     it('should render an input', () => {
@@ -41,10 +40,21 @@ describe('InputComponent', () => {
         expect(blurSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('should clear text when clicked', () => {
+        shallowInput.simulate('click', {});
+        expect(shallowInput.props().value).toEqual('');
+    });
+
+    it('should restore text on blur', () => {
+        shallowInput.setState({value: 1});
+        shallowInput.simulate('blur', {});
+        expect(shallowInput.props().value).toEqual('1.000');
+    });
+
     /* Parameterised tests. */
     const values = [['10', '10.000'], ['1', '1.000'], ['-1', '-1.000']];
     it.each(values)('should render EPICS value %s in correct format', (input, output) => {
-        shallowInput.setState({'EPICSValue': input});
+        shallowInput.setState({'value': input});
         expect(shallowInput.props().value).toEqual(output);
     });
 

@@ -2,7 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class LabelComponent extends React.Component {
+import {widgetHoc} from './Widget.js';
+
+
+export class RawLabel extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,8 +27,10 @@ export default class LabelComponent extends React.Component {
 }
 
 //We expect EPICSValues to be numbers, PVs to be strings
-LabelComponent.propTypes = {
+RawLabel.propTypes = {
     label: PropTypes.string,
     x: PropTypes.number,
     y: PropTypes.number
 };
+
+export const Label = widgetHoc(RawLabel);

@@ -11,6 +11,7 @@ main.js
 *.swo
 
 # Webstorm temp files
-.idea/workspace.xml
+.idea
 
-#
+# VS Code settings
+.vscode

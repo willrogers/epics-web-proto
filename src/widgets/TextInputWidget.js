@@ -1,14 +1,19 @@
 import React from 'react';
-import {BaseComponent} from './BaseComponent';
+import PropTypes from 'prop-types';
+
+import {widgetHoc} from './Widget.js';
 
 
-export default class InputComponent extends BaseComponent {
+export class RawTextInput extends React.Component {
 
     constructor(props) {
         super(props);
+        /* One argument: new value (string). */
+        this.setValue = this.props.setValue;
+        this.state = {'value': '', 'InputValue': ''};
+        this.styles = this.props.styles;
         this.styles['width'] = 100;
         this.styles['backgroundColor'] = 'lightgray';
-        this.state = {'EPICSValue': '', 'InputValue': ''};
         this.update = true;
         this.handleChange = this.handleChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -44,8 +49,8 @@ export default class InputComponent extends BaseComponent {
     }
 
     render() {
-        let val = this.state.EPICSValue;
-        if (typeof val != 'undefined' && val !== null && val !== '') {
+        let val = this.state.value;
+        if (val !== '') {
             if (typeof val == 'string') {
                 val = parseFloat(val);
             }
@@ -53,9 +58,6 @@ export default class InputComponent extends BaseComponent {
         }
         if (! this.update) {
             val = this.state.InputValue;
-        }
-        if (typeof val === 'undefined') {
-            val = '';
         }
         return (
             <input type="text"
@@ -70,3 +72,17 @@ export default class InputComponent extends BaseComponent {
     }
 }
 
+RawTextInput.propTypes = {
+    value: PropTypes.string,
+    InputValue: PropTypes.string,
+    setValue: PropTypes.func,
+    precision: PropTypes.number,
+    styles: PropTypes.object
+};
+RawTextInput.defaultProps = {
+    value: '',
+    InputValue: '',
+    styles: {}
+};
+
+export const TextInputWidget = widgetHoc(RawTextInput);

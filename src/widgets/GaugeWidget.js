@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BaseComponent} from './BaseComponent';
+import {widgetHoc} from './Widget.js';
 
 
-export default class GaugeComponent extends BaseComponent {
+export class RawGaugeWidget extends React.Component {
     constructor(props) {
         super(props);
         this.canvasStyle = {
             border: '1px solid #000000',
-            position: 'absolute',
             width: this.props.width,
             height: this.props.height,
-            left: this.props.x,
-            top: this.props.y
+            position: this.props.styles.position,
+            left: this.props.styles.left,
+            top: this.props.styles.top
         };
     }
 
     //On startup, define the dimensions and metrics we need
     //to build the graph
     componentDidMount() {
-        super.componentDidMount();
         this.defineClassConstants();
+        this.drawGauge();
     }
 
     //When we receive and update. Get hold of the canvas, clear
@@ -31,6 +31,7 @@ export default class GaugeComponent extends BaseComponent {
         this.drawGauge();
     }
 
+
     //Create the gauge out of its constituent components
     //Markers, pips and the needle.
     drawGauge() {
@@ -39,7 +40,7 @@ export default class GaugeComponent extends BaseComponent {
         this.drawMarker(this.halfMark);
         this.drawMarker(this.threeQuarterMark);
         this.drawMarker(this.finishMark);
-        this.drawNeedle(this.state.EPICSValue);
+        this.drawNeedle(this.props.value);
         for (let i in this.pipLocations) {
             this.drawPip(this.pipLocations[i]);
         }
@@ -158,11 +159,18 @@ export default class GaugeComponent extends BaseComponent {
 }
 
 //Prop checking.
-GaugeComponent.propTypes = {
-    EPICSValue: PropTypes.string,
+RawGaugeWidget.propTypes = {
+    value: PropTypes.string,
     width: PropTypes.string,
     height: PropTypes.string,
     property: PropTypes.string,
     minVal: PropTypes.string,
-    maxVal: PropTypes.string
+    maxVal: PropTypes.string,
+    styles: PropTypes.object
 };
+
+RawGaugeWidget.defaultProps = {
+    styles: {}
+};
+
+export const GaugeWidget = widgetHoc(RawGaugeWidget);

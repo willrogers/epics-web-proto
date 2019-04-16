@@ -10,14 +10,14 @@ import {SimulatorPlugin} from './SimulatorPlugin';
 export class ServerInterface {
 
     //Create a new connection using the chosen plugin
-    constructor(webSocketURL, pluginType) {
+    constructor(websocketURL, pluginType) {
 
         //Create your plugin and pass it the receiveUpdate callback
         //along with your websocket
         if (pluginType === 'simulator') {
             this.serverConnection = new SimulatorPlugin(this.receiveUpdate);
         } else if (pluginType === 'epics2web') {
-            this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, webSocketURL);
+            this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, websocketURL);
         }
     }
     //Calls the plugin method with the specific Malcolm path
@@ -46,7 +46,7 @@ export class ServerInterface {
 
     //Call the plugin method for closing the websocket
     closeWebsocket() {
-        this.serverConnection.disconnectWebSocket();
+        this.serverConnection.disconnectWebsocket();
     }
 
     //Kill all subscriptions. Loop through the map of subscriptions,

@@ -3,12 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //Import the closeWebsocket action.
-import {closeWebSocket} from '../actions/EPICSActions';
-import {store} from '../redux/EPICSStore';
-import {BaseComponent} from './BaseComponent';
+import {closeWebsocket} from '../actions/EPICSActions.js';
+import {store} from '../redux/EPICSStore.js';
+import {widgetHoc} from './Widget.js';
 
 
-export default class WebSockStatusComponent extends BaseComponent {
+export class RawWebsocketStatus extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,22 +34,22 @@ export default class WebSockStatusComponent extends BaseComponent {
     getStatusText() {
         return (
             <text x="30" y="30" fill="black">
-                WebSocket readyState: {this.state.readyState}
+                Websocket readyState: {this.state.readyState}
             </text>
         );
     }
 
-    //Event handler to close the webSocket when a user presses the button
+    //Event handler to close the websocket when a user presses the button
     handleClick() {
-        closeWebSocket();
+        closeWebsocket();
     }
 
-    //Create the webSocket status display. Tested with an svg for easy
+    //Create the websocket status display. Tested with an svg for easy
     //extension in future. SVG takes props from its container, and
     // displays the return of getStatusText()
     render() {
         return (
-            <div style={this.styles}>
+            <div style={this.props.styles}>
                 <svg width={this.props.width} height={this.props.height}> {this.getStatusText()} </svg>
                 <button onClick={ ()=> this.handleClick() }> Disconnect </button>
             </div>
@@ -59,8 +59,11 @@ export default class WebSockStatusComponent extends BaseComponent {
 }
 
 //Prop checking
-WebSockStatusComponent.propTypes = {
+RawWebsocketStatus.propTypes = {
     readyState: PropTypes.number,
     width: PropTypes.string,
-    height: PropTypes.string
+    height: PropTypes.string,
+    styles: PropTypes.object
 };
+
+export const WebsocketStatus = widgetHoc(RawWebsocketStatus);

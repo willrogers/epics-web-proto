@@ -9,10 +9,10 @@ const unsubMethod = 'malcolm:core/Unsubscribe:1.0';
 
 export class MalcolmConnection {
 
-    constructor(callback, webSocket) {
+    constructor(callback, websocket) {
 
         this.updateCallback = callback; //serverInterface.receiveUpdate()
-        this.webSocket = webSocket; //Create a local reference to the WebSocket held in ServerInterface
+        this.websocket = websocket; //Create a local reference to the Websocket held in ServerInterface
         this.cachedRequests = []; // Requests made before WS open
         this.pvIds = {}; // Link the pv to an id for tracking
         this.connect(); //Start the connection
@@ -20,21 +20,21 @@ export class MalcolmConnection {
     }
 
 
-    //Event listeners for reacting to WebSocket connection behaviour
+    //Event listeners for reacting to Websocket connection behaviour
     connect() {
         //When the websocket opens..
-        this.webSocket.onopen = () => {
+        this.websocket.onopen = () => {
             //..loop through the cached requests..
             for (let i = 0; i < this.cachedRequests.length; i++) {
                 //..send the cached requests..
-                this.webSocket.send(this.cachedRequests[i]);
+                this.websocket.send(this.cachedRequests[i]);
                 //..send an action that contains the current state of the websocket
-                updateWebSockStatus(this.webSocket.readyState);
+                updateWebSockStatus(this.websocket.readyState);
             }
             //When the websocket closes..
-            this.webSocket.onclose = () =>{
+            this.websocket.onclose = () =>{
                 //..send an action that contains the current state of the websocker.
-                updateWebSockStatus(this.webSocket.readyState);
+                updateWebSockStatus(this.websocket.readyState);
             };
         };
     }
@@ -43,7 +43,7 @@ export class MalcolmConnection {
     //Creates an event listener for reacting to responses from Malcolm
     registerListener() {
         //When we get a message from Malcolm..
-        this.webSocket.onmessage = (message) => {
+        this.websocket.onmessage = (message) => {
 
             //..extract the data from the message JSON
             const response = JSON.parse(message.data);
@@ -78,16 +78,16 @@ export class MalcolmConnection {
         this.sendRequest(this.generateRequest(putMethod, id, block, property, value));
     }
     //Close the websocket connection
-    disconnectWebSocket() {
-        this.webSocket.close();
+    disconnectWebsocket() {
+        this.websocket.close();
     }
 
     //Send a request to malcolm
     sendRequest(request) {
         //If the websocket is open
-        if (this.webSocket.readyState === 1) {
+        if (this.websocket.readyState === 1) {
             //..send the request
-            this.webSocket.send(request);
+            this.websocket.send(request);
         } else {
             //if not, add the request to the cache of unsent requests.
             this.cachedRequests.push(request);

@@ -10,7 +10,7 @@ app.use(express.static(__dirname));
 
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
-    filename: 'client/[name].js',
+    filename: 'src/[name].js',
     publicPath: '/',
     stats: {
         colors: true,

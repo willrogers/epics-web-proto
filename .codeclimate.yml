@@ -11,10 +11,8 @@ engines:
       - .js
     ratings:
       paths:
-      - client/**
-      - redux/**
-      - tests/**
-      - server/**
+      - src/**
+      - __tests__/**
       - "**.js"
       - "**.yml"
 

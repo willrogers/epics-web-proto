@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    context: path.join(__dirname, './client'),
+    context: path.join(__dirname, './src'),
     entry: [
         './app.js',
     ],
@@ -16,7 +16,7 @@ module.exports = {
             {
                 /* These are the directories on which we run babel-loader */
                 test: /\.js$/,
-                include: [path.resolve(__dirname, 'client'), path.resolve(__dirname, 'tests')],
+                include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'tests')],
                 exclude: [/node_modules/],
                 use:['babel-loader']
             },
