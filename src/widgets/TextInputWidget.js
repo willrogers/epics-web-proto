@@ -8,7 +8,7 @@ export class RawTextInput extends React.Component {
 
     constructor(props) {
         super(props);
-        /* One argument: new value (string). */
+        /* Two arguments: pv (string), new value (string). */
         this.setValue = this.props.setValue;
         this.state = {'value': '', 'InputValue': ''};
         this.styles = this.props.styles;
@@ -33,7 +33,7 @@ export class RawTextInput extends React.Component {
     onKeyDown(event) {
         this.value = event.target.value;
         if (event.key === 'Enter') {
-            this.setValue(event.target.value);
+            this.setValue(this.props.pv, event.target.value);
             this.setState({'InputValue': ''});
             this.update = true;
             event.target.blur();
@@ -49,7 +49,12 @@ export class RawTextInput extends React.Component {
     }
 
     render() {
+        console.log(`render ${this.state.value}`);
+        console.log(`render ${this.props.value}`);
         let val = this.state.value;
+        if (this.update) {
+            val = this.props.value;
+        }
         if (val !== '') {
             if (typeof val == 'string') {
                 val = parseFloat(val);
@@ -73,6 +78,7 @@ export class RawTextInput extends React.Component {
 }
 
 RawTextInput.propTypes = {
+    pv: PropTypes.string,
     value: PropTypes.string,
     InputValue: PropTypes.string,
     setValue: PropTypes.func,
