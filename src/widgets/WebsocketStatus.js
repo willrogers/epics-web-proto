@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 //Import the closeWebsocket action.
 import {closeWebsocket} from '../actions/EPICSActions';
 import {store} from '../redux/EPICSStore';
-import {EpicsContainer} from '../containers/EpicsContainer';
+import {widgetHoc} from './Widget.js';
 
 
-export default class WebsocketStatus extends EpicsContainer {
+export class RawWebsocketStatus extends React.Component {
 
     constructor(props) {
         super(props);
@@ -59,8 +59,10 @@ export default class WebsocketStatus extends EpicsContainer {
 }
 
 //Prop checking
-WebsocketStatus.propTypes = {
+RawWebsocketStatus.propTypes = {
     readyState: PropTypes.number,
     width: PropTypes.string,
     height: PropTypes.string
 };
+
+export const WebsocketStatus = widgetHoc(RawWebsocketStatus);

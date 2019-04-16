@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {EpicsContainer} from '../containers/EpicsContainer';
+import {widgetHoc} from './Widget.js';
 
 
-export default class Gauge extends EpicsContainer {
+export class RawGaugeWidget extends React.Component {
     constructor(props) {
         super(props);
         this.canvasStyle = {
@@ -31,6 +31,7 @@ export default class Gauge extends EpicsContainer {
         this.drawGauge();
     }
 
+
     //Create the gauge out of its constituent components
     //Markers, pips and the needle.
     drawGauge() {
@@ -39,7 +40,7 @@ export default class Gauge extends EpicsContainer {
         this.drawMarker(this.halfMark);
         this.drawMarker(this.threeQuarterMark);
         this.drawMarker(this.finishMark);
-        this.drawNeedle(this.state.EPICSValue);
+        this.drawNeedle(this.props.value);
         for (let i in this.pipLocations) {
             this.drawPip(this.pipLocations[i]);
         }
@@ -158,11 +159,13 @@ export default class Gauge extends EpicsContainer {
 }
 
 //Prop checking.
-Gauge.propTypes = {
-    EPICSValue: PropTypes.string,
+RawGaugeWidget.propTypes = {
+    value: PropTypes.string,
     width: PropTypes.string,
     height: PropTypes.string,
     property: PropTypes.string,
     minVal: PropTypes.string,
     maxVal: PropTypes.string
 };
+
+export const GaugeWidget = widgetHoc(RawGaugeWidget);

@@ -3,11 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 //Import the desired components
-import Label from './widgets/Label.js';
-import TextUpdate from './widgets/TextUpdate.js';
-import TextInput from './widgets/TextInput.js';
-import Gauge from './widgets/Gauge.js';
-import WebSocketStatus from './widgets/WebsocketStatus';
+import {Label} from './widgets/Label.js';
+import {Gauge, TextUpdate, TextInput} from './epics/EpicsWidgets.js';
+import {WebsocketStatus} from './widgets/WebsocketStatus';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
@@ -44,7 +42,7 @@ class App extends React.Component {
                     minVal="-1"
                     maxVal="1"
                 />
-                <WebSocketStatus x="0px" y="300px" width="300px" height="50px"/>
+                <WebsocketStatus x="0px" y="300px" width="300px" height="50px"/>
             </div>
         );
     }

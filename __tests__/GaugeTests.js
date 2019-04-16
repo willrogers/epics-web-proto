@@ -1,4 +1,4 @@
-import Gauge from '../src/widgets/Gauge.js';
+import {Gauge} from '../src/epics/EpicsWidgets';
 import React from 'react';
 
 import {mount} from 'enzyme';
@@ -8,7 +8,7 @@ describe('Gauge', function() {
 
     const deepGauge1 = mount(
         <Gauge
-            EPICSValue={'hello'}
+            value={'hello'}
             width={'1000'}
             height={'150'}
             minVal={'0'}
@@ -17,7 +17,7 @@ describe('Gauge', function() {
 
     const deepGauge2 = mount(
         <Gauge
-            EPICSValue={'150'}
+            value={'150'}
             width={'1000'}
             height={'150'}
             minVal={'0'}
@@ -26,7 +26,7 @@ describe('Gauge', function() {
 
     const deepGauge3 = mount(
         <Gauge
-            EPICSValue={'200'}
+            value={'200'}
             width={'700'}
             height={'150'}
             minVal={'15'}
