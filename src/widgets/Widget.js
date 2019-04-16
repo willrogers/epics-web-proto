@@ -10,9 +10,12 @@ export function widgetHoc(Widget) {
             super(props);
             this.new_props = {};
             Object.assign(this.new_props, props);
-            this.new_props['position'] = 'absolute';
-            this.new_props['left'] = this.props.x;
-            this.new_props['top'] = this.props.y;
+            const styles = {
+                position: 'absolute',
+                left: this.props.x + 'px',
+                top: this.props.y + 'px'
+            };
+            this.new_props['styles'] =  styles;
         }
         render() {
             return <Widget {...this.new_props} />;

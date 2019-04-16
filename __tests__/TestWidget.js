@@ -13,9 +13,9 @@ describe('widgetHoc', () => {
     it('should convert position styles', () => {
         const WidgetComp = widgetHoc(Comp);
         const shallowWidget = shallow(<WidgetComp x={1} y={1}/>);
-        expect(shallowWidget.props().left).toEqual(1);
-        expect(shallowWidget.props().top).toEqual(1);
-        expect(shallowWidget.props().position).toEqual('absolute');
+        expect(shallowWidget.props().styles.left).toEqual('1px');
+        expect(shallowWidget.props().styles.top).toEqual('1px');
+        expect(shallowWidget.props().styles.position).toEqual('absolute');
     });
 
 });

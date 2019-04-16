@@ -10,9 +10,10 @@ export class RawTextUpdate extends React.Component {
 
     constructor(props) {
         super(props);
-        this.props.styles['width'] = 100;
-        this.props.styles['backgroundColor'] = 'lightgray';
-        this.props.styles['overflow'] = 'hidden';
+        this.styles = Object.assign({}, this.props.styles);
+        this.styles['width'] = 100;
+        this.styles['backgroundColor'] = 'lightgray';
+        this.styles['overflow'] = 'hidden';
     }
 
     //Render a div that displays the desired information in text format
@@ -23,7 +24,7 @@ export class RawTextUpdate extends React.Component {
             let val = parseFloat(this.props.value);
             formattedString = val.toFixed(prec);
         }
-        return(<div style={this.props.styles}>{formattedString}</div>);
+        return(<div style={this.styles}>{formattedString}</div>);
     }
 }
 

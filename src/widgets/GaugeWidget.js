@@ -8,11 +8,11 @@ export class RawGaugeWidget extends React.Component {
         super(props);
         this.canvasStyle = {
             border: '1px solid #000000',
-            position: 'absolute',
             width: this.props.width,
             height: this.props.height,
-            left: this.props.styles.x,
-            top: this.props.styles.y
+            position: this.props.styles.position,
+            left: this.props.styles.left,
+            top: this.props.styles.top
         };
     }
 
@@ -167,6 +167,10 @@ RawGaugeWidget.propTypes = {
     minVal: PropTypes.string,
     maxVal: PropTypes.string,
     styles: PropTypes.object
+};
+
+RawGaugeWidget.defaultProps = {
+    styles: {}
 };
 
 export const GaugeWidget = widgetHoc(RawGaugeWidget);

@@ -49,7 +49,7 @@ export class RawWebsocketStatus extends React.Component {
     // displays the return of getStatusText()
     render() {
         return (
-            <div style={this.styles}>
+            <div style={this.props.styles}>
                 <svg width={this.props.width} height={this.props.height}> {this.getStatusText()} </svg>
                 <button onClick={ ()=> this.handleClick() }> Disconnect </button>
             </div>
@@ -62,7 +62,8 @@ export class RawWebsocketStatus extends React.Component {
 RawWebsocketStatus.propTypes = {
     readyState: PropTypes.number,
     width: PropTypes.string,
-    height: PropTypes.string
+    height: PropTypes.string,
+    styles: PropTypes.object
 };
 
 export const WebsocketStatus = widgetHoc(RawWebsocketStatus);
