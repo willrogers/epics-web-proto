@@ -1,4 +1,4 @@
-import {Gauge} from '../src/epics/EpicsWidgets';
+import {RawGaugeWidget} from '../src/widgets/GaugeWidget.js';
 import React from 'react';
 
 import {mount} from 'enzyme';
@@ -7,7 +7,7 @@ import {mount} from 'enzyme';
 describe('Gauge', function() {
 
     const deepGauge1 = mount(
-        <Gauge
+        <RawGaugeWidget
             value={'hello'}
             width={'1000'}
             height={'150'}
@@ -16,7 +16,7 @@ describe('Gauge', function() {
         />);
 
     const deepGauge2 = mount(
-        <Gauge
+        <RawGaugeWidget
             value={'150'}
             width={'1000'}
             height={'150'}
@@ -25,7 +25,7 @@ describe('Gauge', function() {
         />);
 
     const deepGauge3 = mount(
-        <Gauge
+        <RawGaugeWidget
             value={'200'}
             width={'700'}
             height={'150'}
@@ -34,7 +34,7 @@ describe('Gauge', function() {
         />);
 
     it('Should render a gauge component', function() {
-        expect(deepGauge1.type()).toEqual(Gauge);
+        expect(deepGauge1.type()).toEqual(RawGaugeWidget);
     });
 
     it('Should render a canvas', function() {

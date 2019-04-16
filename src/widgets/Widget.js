@@ -9,35 +9,22 @@ export function widgetHoc(Widget) {
 
         constructor(props) {
             super(props);
-            this.styles = {
-                position: 'absolute',
-                left: this.props.x,
-                top: this.props.y
-            };
+            this.new_props = {};
+            Object.assign(this.new_props, props);
+            this.new_props['position'] = 'absolute';
+            this.new_props['left'] = this.props.x;
+            this.new_props['top'] = this.props.y;
         }
         render() {
-            return <Widget styles={this.styles} />;
+            return <Widget {...this.new_props} />;
         }
     };
 
 }
 
-export class Widget extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.styles = {
-            position: 'absolute',
-            left: this.props.x,
-            top: this.props.y
-        };
-    }
-
-}
-
 
 //Prop checking
-Widget.propTypes = {
+widgetHoc.propTypes = {
     property: PropTypes.string,
     x: PropTypes.number,
     y: PropTypes.number,

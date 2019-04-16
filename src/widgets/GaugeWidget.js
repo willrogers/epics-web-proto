@@ -19,8 +19,8 @@ export class RawGaugeWidget extends React.Component {
     //On startup, define the dimensions and metrics we need
     //to build the graph
     componentDidMount() {
-        super.componentDidMount();
         this.defineClassConstants();
+        this.drawGauge();
     }
 
     //When we receive and update. Get hold of the canvas, clear

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 //Import the desired components
 import {Label} from './widgets/Label.js';
 import {Gauge, TextUpdate, TextInput} from './epics/EpicsWidgets.js';
-import {WebsocketStatus} from './widgets/WebsocketStatus';
+import {WebsocketStatus} from './widgets/WebsocketStatus.js';
 
 //Import the action creator
 import {connectToServer} from './actions/EPICSActions.js';
