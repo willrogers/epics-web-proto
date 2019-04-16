@@ -3,32 +3,35 @@ import {SimulatorPlugin} from '../src/connection/SimulatorPlugin.js';
 
 jest.useFakeTimers();
 
+const LOC_PV_NAME = 'loc://dummypv';
 
 describe('SimulatorPlugin', () => {
     let callbackSpy;
+    let simPlugin;
     beforeEach(() => {
         callbackSpy = jest.fn();
+        simPlugin = new SimulatorPlugin(callbackSpy);
     });
 
     it('should store zero in a local PV when subscribing', () => {
-        const simPlugin = new SimulatorPlugin(callbackSpy);
-        const pvName = 'loc://dummypv';
-        simPlugin.subscribe('id', pvName);
-        expect(simPlugin.getValue(pvName)).toEqual(0);
+        simPlugin.subscribe('id', LOC_PV_NAME);
+        expect(simPlugin.getValue(LOC_PV_NAME)).toEqual(0);
     });
 
     it('should store a value in a local PV', () => {
-        const simPlugin = new SimulatorPlugin(callbackSpy);
-        const pvName = 'loc://dummypv';
         const value = 1;
-        simPlugin.putPV(pvName, value);
-        expect(simPlugin.getValue(pvName)).toEqual(value);
+        simPlugin.putPV(LOC_PV_NAME, value);
+        expect(simPlugin.getValue(LOC_PV_NAME)).toEqual(value);
+    });
+
+    it('should store a string in a local pv', () => {
+        const value = 'hello';
+        simPlugin.putPV(LOC_PV_NAME, value);
+        expect(simPlugin.getValue(LOC_PV_NAME)).toEqual(value);
     });
 
     it('should set a timer when subscribing to a pv', () => {
-        const simPlugin = new SimulatorPlugin(callbackSpy);
-        const pvName = 'dummypv';
-        simPlugin.subscribe('id', pvName);
+        simPlugin.subscribe('id', 'dummy_pv');
         expect(setInterval).toHaveBeenCalledTimes(1);
     });
 
