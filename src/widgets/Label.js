@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 import {widgetHoc} from './Widget.js';
 
 
+const DEFAULT_STYLES = {
+    'backgroundColor': 'lightgray',
+    'whiteSpace': 'nowrap',
+    'overflow': 'hidden'
+}
+
 export class RawLabel extends React.Component {
 
     constructor(props) {
@@ -13,16 +19,7 @@ export class RawLabel extends React.Component {
 
     //Render a div that displays the desired information in text format
     render() {
-        let styles = {
-            width: 100,
-            backgroundColor: 'lightgray',
-            position: 'absolute',
-            left: this.props.x,
-            top: this.props.y,
-            whiteSpace: 'nowrap',
-            overflow: 'hidden'
-        };
-        return(<div style={styles}>{this.props.label}</div>);
+        return(<div style={this.props.styles}>{this.props.label}</div>);
     }
 }
 
@@ -33,4 +30,4 @@ RawLabel.propTypes = {
     y: PropTypes.number
 };
 
-export const Label = widgetHoc(RawLabel);
+export const Label = widgetHoc(RawLabel, DEFAULT_STYLES);

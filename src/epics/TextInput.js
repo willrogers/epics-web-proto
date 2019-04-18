@@ -7,7 +7,6 @@ export class TextInput extends React.Component {
 
     render() {
         const EpicsTextInput = epicsHoc(TextInputWidget);
-        console.log(this.props);
-        return <EpicsTextInput setValue={setEpicsValue} value={this.props.EPICSValue} {...this.props} />;
+        return <EpicsTextInput setValue={setEpicsValue} {...this.props} />;
     }
 }

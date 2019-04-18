@@ -7,7 +7,8 @@ epics-web-proto is a prototype EPICS display manager that runs in a browser.
 It communicates over websockets to a server that interacts with the control
 system itself. It is based on React and Redux.
 
-It can be packaged into a native application using Electron.
+It can be packaged into a native application using Electron (see also
+[here](https://medium.com/commitlog/electron-is-cancer-b066108e6c32)).
 
 The goal is a control system web-application capable of displaying 
 screens similar to existing applications, but with the following benefits: 

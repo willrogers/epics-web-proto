@@ -7,8 +7,6 @@ import {WRITE_PV, subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions.
 let currentId = 0;
 
 export function setEpicsValue(pv, value) {
-    console.log('dispatching ')
-    console.log({ pv: pv, newValue: value });
     store.dispatch({
         type: WRITE_PV,
         payload: {
@@ -23,6 +21,7 @@ export function epicsHoc(Widget) {
     class EpicsWidget extends React.Component {
 
         constructor(props) {
+            console.log('epicsHoc constructor');
             super(props);
             this.id = currentId;  //Assign the component an Id
             currentId++; //Increment the current id so the next comp id is unique
@@ -73,7 +72,9 @@ export function epicsHoc(Widget) {
         }
 
         render() {
-            console.log(this.state.EPICSValue);
+            console.log('epicsHoc render');
+            console.log(this.props);
+            console.log(`EPICSValue ${this.state.EPICSValue}`);
             return <Widget value={this.state.EPICSValue} {...this.props} />;
         }
     }

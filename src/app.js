@@ -30,21 +30,21 @@ class App extends React.Component {
     render() {
         return(
             <div>
-                <Label x={0} y={50} label="loc://local"/>
-                <TextUpdate x={110} y={50} pv="loc://local" precision={3} />
-                <TextUpdate x={170} y={50} pv="loc://local" />
-                <Label Component x={0} y={100} label="loc://local"/>
-                <TextInput x={110} y={100} pv="loc://local"/>
+                <Label x={10} y={50} w={50} h={20} label="loc://local"/>
+                <TextUpdate x={110} y={50} w={50} h={20} pv="loc://local" precision={3} />
+                <TextUpdate x={200} y={50} w={50} h={20} pv="loc://local" />
+                <Label Component x={10} y={100} w={50} h={20} label="loc://local"/>
+                <TextInput x={110} y={100} w={50} h={20} pv="loc://local"/>
                 <Gauge
                     pv="sim://sine"
-                    width="300"
-                    height="150"
                     x={50}
                     y={150}
+                    w={300}
+                    h={150}
                     minVal="-1"
                     maxVal="1"
                 />
-                <WebsocketStatus x={0} y={300} width="300px" height="50px"/>
+                <WebsocketStatus x={0} y={300} w={50} h={20} w={300} height={50} />
             </div>
         );
     }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {widgetHoc} from './Widget.js';
 
+const DEFAULT_STYLES = {'backgroundColor': 'red'};
 
 export class RawTextInput extends React.Component {
 
@@ -11,9 +12,6 @@ export class RawTextInput extends React.Component {
         /* Two arguments: pv (string), new value (string). */
         this.setValue = this.props.setValue;
         this.state = {'value': '', 'InputValue': ''};
-        this.styles = this.props.styles;
-        this.styles['width'] = 100;
-        this.styles['backgroundColor'] = 'lightgray';
         this.update = true;
         this.handleChange = this.handleChange.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -49,6 +47,8 @@ export class RawTextInput extends React.Component {
     }
 
     render() {
+        //const styles = this.props.styles;
+        //styles['backgroundColor'] = 'red';
         let val = this.state.value;
         if (this.update) {
             val = this.props.value;
@@ -69,7 +69,7 @@ export class RawTextInput extends React.Component {
                 onClick={this.onClick}
                 onBlur={this.onBlur}
                 onKeyDown={this.onKeyDown}
-                style={this.styles}
+                style={this.props.styles}
             />
         );
     }
@@ -89,4 +89,4 @@ RawTextInput.defaultProps = {
     styles: {}
 };
 
-export const TextInputWidget = widgetHoc(RawTextInput);
+export const TextInputWidget = widgetHoc(RawTextInput, DEFAULT_STYLES);

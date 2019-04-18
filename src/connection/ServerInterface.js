@@ -61,6 +61,7 @@ export class ServerInterface {
     //Receive an update from Malcolm, passed to malcolmConnection as a callback
     receiveUpdate(pvName, newValue) {
         // Send to the action creator
+        console.log(`receive update ${newValue}`);
         updatePV(pvName, newValue);
 
     }
