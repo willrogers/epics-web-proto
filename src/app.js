@@ -44,7 +44,7 @@ class App extends React.Component {
                     minVal="-1"
                     maxVal="1"
                 />
-                <WebsocketStatus x={0} y={300} w={50} h={20} w={300} height={50} />
+                <WebsocketStatus x={0} y={300} w={50} h={20} />
             </div>
         );
     }

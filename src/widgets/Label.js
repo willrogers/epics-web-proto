@@ -9,7 +9,7 @@ const DEFAULT_STYLE = {
     'backgroundColor': 'lightgray',
     'whiteSpace': 'nowrap',
     'overflow': 'hidden'
-}
+};
 
 export class RawLabel extends React.Component {
 
@@ -26,6 +26,7 @@ export class RawLabel extends React.Component {
 //We expect EPICSValues to be numbers, PVs to be strings
 RawLabel.propTypes = {
     label: PropTypes.string,
+    style: PropTypes.object,
     x: PropTypes.number,
     y: PropTypes.number
 };

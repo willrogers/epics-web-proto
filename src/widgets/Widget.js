@@ -40,7 +40,8 @@ export function widgetHoc(Widget, defaultStyle) {
         y: PropTypes.number,
         h: PropTypes.number,
         w: PropTypes.number,
-        pv: PropTypes.string
+        pv: PropTypes.string,
+        style: PropTypes.object
     };
 
     return WrappedWidget;

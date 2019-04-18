@@ -12,7 +12,7 @@ describe('epicsHoc', () => {
 
     it('should wrap a component', () => {
         const EpicsComp = epicsHoc(Comp);
-        const shallowEpicsWidget = shallow(<EpicsComp />);
+        shallow(<EpicsComp />);
     });
 
 });

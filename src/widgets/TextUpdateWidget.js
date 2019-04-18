@@ -9,7 +9,7 @@ const PRECISION_NOT_SPECIFIED = -1;
 const DEFAULT_STYLE = {
     'backgroundColor': 'lightgray',
     'overflow': 'hidden'
-}
+};
 
 export class RawTextUpdate extends React.Component {
 
