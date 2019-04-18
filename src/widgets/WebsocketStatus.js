@@ -8,6 +8,8 @@ import {store} from '../redux/EPICSStore.js';
 import {widgetHoc} from './Widget.js';
 
 
+const DEFAULT_STYLE = {'border': '1px solid black'};
+
 export class RawWebsocketStatus extends React.Component {
 
     constructor(props) {
@@ -49,7 +51,7 @@ export class RawWebsocketStatus extends React.Component {
     // displays the return of getStatusText()
     render() {
         return (
-            <div style={this.props.styles}>
+            <div style={this.props.style}>
                 <svg width={this.props.width} height={this.props.height}> {this.getStatusText()} </svg>
                 <button onClick={ ()=> this.handleClick() }> Disconnect </button>
             </div>
@@ -63,7 +65,7 @@ RawWebsocketStatus.propTypes = {
     readyState: PropTypes.number,
     width: PropTypes.string,
     height: PropTypes.string,
-    styles: PropTypes.object
+    style: PropTypes.object
 };
 
-export const WebsocketStatus = widgetHoc(RawWebsocketStatus);
+export const WebsocketStatus = widgetHoc(RawWebsocketStatus, DEFAULT_STYLE);

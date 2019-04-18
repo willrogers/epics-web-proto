@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {widgetHoc} from './Widget.js';
 
 
-const DEFAULT_STYLES = {
+const DEFAULT_STYLE = {
     'backgroundColor': 'lightgray',
     'whiteSpace': 'nowrap',
     'overflow': 'hidden'
@@ -19,7 +19,7 @@ export class RawLabel extends React.Component {
 
     //Render a div that displays the desired information in text format
     render() {
-        return(<div style={this.props.styles}>{this.props.label}</div>);
+        return(<div style={this.props.style}>{this.props.label}</div>);
     }
 }
 
@@ -30,4 +30,4 @@ RawLabel.propTypes = {
     y: PropTypes.number
 };
 
-export const Label = widgetHoc(RawLabel, DEFAULT_STYLES);
+export const Label = widgetHoc(RawLabel, DEFAULT_STYLE);

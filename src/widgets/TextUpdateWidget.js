@@ -6,7 +6,7 @@ import {widgetHoc} from './Widget.js';
 
 const PRECISION_NOT_SPECIFIED = -1;
 
-const DEFAULT_STYLES = {
+const DEFAULT_STYLE = {
     'backgroundColor': 'lightgray',
     'overflow': 'hidden'
 }
@@ -25,20 +25,20 @@ export class RawTextUpdate extends React.Component {
             let val = parseFloat(this.props.value);
             formattedString = val.toFixed(prec);
         }
-        return(<div style={this.props.styles}>{formattedString}</div>);
+        return(<div style={this.props.style}>{formattedString}</div>);
     }
 }
 
 RawTextUpdate.propTypes = {
     value: PropTypes.string,
     precision: PropTypes.number,
-    styles: PropTypes.object
+    style: PropTypes.object
 };
 RawTextUpdate.defaultProps = {
     value: '',
     precision: PRECISION_NOT_SPECIFIED,
-    styles: {}
+    style: {}
 };
 
-export const TextUpdateWidget = widgetHoc(RawTextUpdate, DEFAULT_STYLES);
+export const TextUpdateWidget = widgetHoc(RawTextUpdate, DEFAULT_STYLE);
 

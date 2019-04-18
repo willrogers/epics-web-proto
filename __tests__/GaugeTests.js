@@ -13,7 +13,7 @@ describe('Gauge', function() {
             height={'150'}
             minVal={'0'}
             maxVal={'100'}
-            styles={{'x': 1, 'y': 1}}
+            style={{'x': 1, 'y': 1}}
         />);
 
     const deepGauge2 = mount(
@@ -23,7 +23,7 @@ describe('Gauge', function() {
             height={'150'}
             minVal={'0'}
             maxVal={'100'}
-            styles={{'x': 1, 'y': 1}}
+            style={{'x': 1, 'y': 1}}
         />);
 
     const deepGauge3 = mount(
@@ -33,7 +33,7 @@ describe('Gauge', function() {
             height={'150'}
             minVal={'15'}
             maxVal={'120'}
-            styles={{'x': 1, 'y': 1}}
+            style={{'x': 1, 'y': 1}}
         />);
 
     it('Should render a gauge component', function() {

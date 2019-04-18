@@ -25,7 +25,6 @@ export class SimulatorPlugin {
     putPV(pv, newValue) {
         if (pv.startsWith('loc://')) {
             this.localPvs[pv] = newValue;
-            console.log(this.localPvs);
         }
     }
 

@@ -4,33 +4,33 @@ import PropTypes from 'prop-types';
 import assign from 'lodash/assign';
 
 
-export function widgetHoc(Widget, defaultStyles) {
+export function widgetHoc(Widget, defaultStyle) {
 
     class WrappedWidget extends React.Component {
 
         constructor(props) {
             super(props);
-            this.defaultStyles = defaultStyles;
+            this.defaultStyle = defaultStyle;
             this.updateStyle = this.updateStyle.bind(this);
-            this.widgetStyles = {
+            this.widgetStyle = {
                 position: 'absolute',
                 left: this.props.x + 'px',
                 top: this.props.y + 'px',
                 height: this.props.h + 'px',
                 width: this.props.w + 'px'
             };
-            this.styles = {};
+            this.style = {};
         }
 
         updateStyle() {
-            assign(this.styles, this.defaultStyles);
-            assign(this.styles, this.props.styles);
-            assign(this.styles, this.widgetStyles);
+            assign(this.style, this.defaultStyle);
+            assign(this.style, this.props.style);
+            assign(this.style, this.widgetStyle);
         }
 
         render() {
             this.updateStyle();
-            return <Widget styles={this.styles} {...this.props} />;
+            return <Widget style={this.style} {...this.props} />;
         }
     }
 

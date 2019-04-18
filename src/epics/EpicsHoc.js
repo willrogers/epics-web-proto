@@ -21,7 +21,6 @@ export function epicsHoc(Widget) {
     class EpicsWidget extends React.Component {
 
         constructor(props) {
-            console.log('epicsHoc constructor');
             super(props);
             this.id = currentId;  //Assign the component an Id
             currentId++; //Increment the current id so the next comp id is unique
@@ -72,9 +71,6 @@ export function epicsHoc(Widget) {
         }
 
         render() {
-            console.log('epicsHoc render');
-            console.log(this.props);
-            console.log(`EPICSValue ${this.state.EPICSValue}`);
             return <Widget value={this.state.EPICSValue} {...this.props} />;
         }
     }
