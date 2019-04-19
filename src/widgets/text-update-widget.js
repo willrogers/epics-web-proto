@@ -1,4 +1,3 @@
-//React API
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -17,7 +16,6 @@ export class RawTextUpdate extends React.Component {
         super(props);
     }
 
-    //Render a div that displays the desired information in text format
     render() {
         let formattedString = this.props.value;
         if (this.props.precision !== PRECISION_NOT_SPECIFIED) {
