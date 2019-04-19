@@ -32,8 +32,7 @@ export function updatePV(pvName, newValue) {
 
 //This action expresses our desire to make a connection to
 //a server via a websocket. The action contains the URL for
-//the desired port. In our app, we connect to a server called
-//Malcolm
+//the desired port.
 export function connectToServer(URL, pluginType) {
     return store.dispatch({
         type: CREATE_CONNECTION,
@@ -45,7 +44,7 @@ export function connectToServer(URL, pluginType) {
 }
 
 //This actions signifies our wish to subscribe to a certain
-//PV on Malcolm. We supply it with a React component, it
+//PV. We supply it with a React component, it
 //then extracts the block and property from the components
 // props, which we explicitly specify in main,js at
 // instantiation. Then, the id is extracted from the
@@ -60,9 +59,9 @@ export function subscribeToPV(comp) {
     });
 }
 
-//This action allows us to send a request to Malcolm
-//asking it to stop serving us a PV, based on the ID that
-//we keep associated with the component that is listening
+//This action allows us to send a request to stop serving us a PV,
+//based on the ID that we keep associated with the component that
+//is listening
 //to it.
 export function unsubscribeToPV(id) {
     return store.dispatch({

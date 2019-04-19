@@ -6,14 +6,15 @@ import {widgetHoc} from './Widget.js';
 
 const PRECISION_NOT_SPECIFIED = -1;
 
+const DEFAULT_STYLE = {
+    'backgroundColor': 'lightgray',
+    'overflow': 'hidden'
+};
+
 export class RawTextUpdate extends React.Component {
 
     constructor(props) {
         super(props);
-        this.styles = Object.assign({}, this.props.styles);
-        this.styles['width'] = 100;
-        this.styles['backgroundColor'] = 'lightgray';
-        this.styles['overflow'] = 'hidden';
     }
 
     //Render a div that displays the desired information in text format
@@ -24,20 +25,20 @@ export class RawTextUpdate extends React.Component {
             let val = parseFloat(this.props.value);
             formattedString = val.toFixed(prec);
         }
-        return(<div style={this.styles}>{formattedString}</div>);
+        return(<div style={this.props.style}>{formattedString}</div>);
     }
 }
 
 RawTextUpdate.propTypes = {
     value: PropTypes.string,
     precision: PropTypes.number,
-    styles: PropTypes.object
+    style: PropTypes.object
 };
 RawTextUpdate.defaultProps = {
     value: '',
     precision: PRECISION_NOT_SPECIFIED,
-    styles: {}
+    style: {}
 };
 
-export const TextUpdateWidget = widgetHoc(RawTextUpdate);
+export const TextUpdateWidget = widgetHoc(RawTextUpdate, DEFAULT_STYLE);
 

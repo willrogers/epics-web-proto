@@ -20,8 +20,7 @@ export class ServerInterface {
             this.serverConnection = new Epics2WebPlugin(this.receiveUpdate, websocketURL);
         }
     }
-    //Calls the plugin method with the specific Malcolm path
-    //required for subscription
+    //Calls the plugin method for subscribing to a PV.
     monitorPV(id, pv) {
         this.serverConnection.subscribe(id, pv);
     }
@@ -33,8 +32,6 @@ export class ServerInterface {
     }
 
     //Call the plugin method to get a single reading of a PV.
-    //Useful for minimum and maximum values. Takes the malcolm path
-    //to the desired pv as a parameter
     getPV(id, block, property) {
         this.serverConnection.getPV(id, block, property);
     }
@@ -49,8 +46,7 @@ export class ServerInterface {
         this.serverConnection.disconnectWebsocket();
     }
 
-    //Kill all subscriptions. Loop through the map of subscriptions,
-    // taken from pvIds in malcolmPlugin
+    //Kill all subscriptions.
     destroyAllMonitors() {
         this.pvsToKill = this.serverConnection.pvIds;
         for(let i in this.pvsToKill) {
@@ -58,11 +54,10 @@ export class ServerInterface {
         }
     }
 
-    //Receive an update from Malcolm, passed to malcolmConnection as a callback
+    //Receive a PV update.
     receiveUpdate(pvName, newValue) {
         // Send to the action creator
         updatePV(pvName, newValue);
-
     }
 
 }

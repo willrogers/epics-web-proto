@@ -6,14 +6,6 @@ import {widgetHoc} from './Widget.js';
 export class RawGaugeWidget extends React.Component {
     constructor(props) {
         super(props);
-        this.canvasStyle = {
-            border: '1px solid #000000',
-            width: this.props.width,
-            height: this.props.height,
-            position: this.props.styles.position,
-            left: this.props.styles.left,
-            top: this.props.styles.top
-        };
     }
 
     //On startup, define the dimensions and metrics we need
@@ -152,7 +144,7 @@ export class RawGaugeWidget extends React.Component {
                 ref={gaugeCanvas => this.gaugeCanvas = gaugeCanvas}
                 width={this.props.width}
                 height={this.props.height}
-                style={this.canvasStyle}>
+                style={this.props.style}>
             </canvas>
         );
     }
@@ -166,11 +158,13 @@ RawGaugeWidget.propTypes = {
     property: PropTypes.string,
     minVal: PropTypes.string,
     maxVal: PropTypes.string,
-    styles: PropTypes.object
+    style: PropTypes.object
 };
 
 RawGaugeWidget.defaultProps = {
-    styles: {}
+    style: {}
 };
 
-export const GaugeWidget = widgetHoc(RawGaugeWidget);
+const DEFAULT_STYLE =  {'border': '1px solid #000000'};
+
+export const GaugeWidget = widgetHoc(RawGaugeWidget, DEFAULT_STYLE);
