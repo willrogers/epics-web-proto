@@ -75,7 +75,7 @@ export class RawTextInput extends React.Component {
 
 RawTextInput.propTypes = {
     pv: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     InputValue: PropTypes.string,
     setValue: PropTypes.func,
     precision: PropTypes.number,
