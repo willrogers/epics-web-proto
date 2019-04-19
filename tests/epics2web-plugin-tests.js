@@ -1,4 +1,4 @@
-import {Epics2WebPlugin} from '../src/connection/Epics2WebPlugin';
+import {Epics2WebPlugin} from '../src/connection/epics2web-plugin';
 import jlab from '../src/external/epics2web';
 
 

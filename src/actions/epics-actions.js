@@ -1,5 +1,5 @@
 //Gives us the dispatch functionality
-import {store} from '../redux/EPICSStore.js';
+import {store} from '../redux/epics-store';
 
 //Action types
 export const UPDATE_PV = 'UPDATE_PV';

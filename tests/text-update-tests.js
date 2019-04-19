@@ -1,4 +1,4 @@
-import {RawTextUpdate} from '../src/widgets/TextUpdateWidget.js';
+import {RawTextUpdate} from '../src/widgets/text-update-widget';
 import React from 'react';
 
 import {shallow} from 'enzyme';

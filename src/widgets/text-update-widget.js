@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {widgetHoc} from './Widget.js';
+import {widgetHoc} from './widget';
 
 const PRECISION_NOT_SPECIFIED = -1;
 
@@ -20,7 +20,7 @@ export class RawTextUpdate extends React.Component {
     //Render a div that displays the desired information in text format
     render() {
         let formattedString = this.props.value;
-        if (this.props.precision != PRECISION_NOT_SPECIFIED) {
+        if (this.props.precision !== PRECISION_NOT_SPECIFIED) {
             const prec = parseFloat(this.props.precision);
             let val = parseFloat(this.props.value);
             formattedString = val.toFixed(prec);

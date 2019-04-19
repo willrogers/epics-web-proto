@@ -1,5 +1,5 @@
 import React from 'react';
-import {widgetHoc, RELATIVE_LAYOUT} from '../src/widgets/Widget.js';
+import {widgetHoc, RELATIVE_LAYOUT} from '../src/widgets/widget';
 
 import {shallow} from 'enzyme';
 

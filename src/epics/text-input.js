@@ -1,6 +1,6 @@
 import React from 'react';
-import {TextInputWidget} from '../widgets/TextInputWidget.js';
-import {epicsHoc, setEpicsValue} from './EpicsHoc.js';
+import {TextInputWidget} from '../widgets/text-input-widget';
+import {epicsHoc, setEpicsValue} from './epics-hoc';
 
 
 export class TextInput extends React.Component {

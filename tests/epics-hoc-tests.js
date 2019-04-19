@@ -1,5 +1,5 @@
 import React from 'react';
-import {epicsHoc} from '../src/epics/EpicsHoc.js';
+import {epicsHoc} from '../src/epics/epics-hoc';
 
 import {shallow} from 'enzyme';
 

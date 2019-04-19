@@ -10,7 +10,9 @@ module.exports = {
     "extends": [
         "eslint:recommended",
         /* Avoid complaints about unused React import. */
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings"
     ],
     "parserOptions": {
         "ecmaFeatures": {

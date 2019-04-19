@@ -1,15 +1,12 @@
-//Import React API
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//Import the desired components
-import {Label} from './widgets/Label.js';
-import {Gauge, TextUpdate} from './epics/EpicsWidgets.js';
-import {TextInput} from './epics/TextInput.js';
-import {WebsocketStatus} from './widgets/WebsocketStatus.js';
+import {Label} from './widgets/label';
+import {Gauge, TextUpdate} from './epics/epics-widgets.js';
+import {TextInput} from './epics/text-input';
+import {WebsocketStatus} from './widgets/websocket-status';
 
-//Import the action creator
-import {connectToServer} from './actions/EPICSActions.js';
+import {connectToServer} from './actions/epics-actions';
 
 //Define the destination to connect the WebSocket to
 const websocketURL = 'ws://localhost:8080/epics2web/monitor';

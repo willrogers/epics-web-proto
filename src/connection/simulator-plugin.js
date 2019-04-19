@@ -6,10 +6,10 @@ export class SimulatorPlugin {
     }
 
     subscribe(_id, pv) {
-        if (typeof pv != 'undefined' && pv.startsWith('loc://')) {
+        if (typeof pv !== 'undefined' && pv.startsWith('loc://')) {
             this.localPvs[pv] = 0;
         }
-        if (typeof pv != 'undefined') {
+        if (typeof pv !== 'undefined') {
             setInterval(() => {
                 this.callback(pv, this.getValue(pv));
             }, 300);
