@@ -36,6 +36,7 @@
     "webpack-dev-middleware": "^3.6.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.7.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.3",
