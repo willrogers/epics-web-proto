@@ -2,10 +2,10 @@
   "name": "epics-web-proto",
   "version": "0.0.1",
   "description": "Read data from EPICS, using React-Redux",
-  "main": "start_electron.js",
+  "main": "start-electron.js",
   "scripts": {
     "compile": "webpack",
-    "start": "node start_node.js",
+    "start": "node start-node.js",
     "test": "jest",
     "test:verbose": "jest --verbose",
     "test:watch": "jest --watchAll",
@@ -36,12 +36,13 @@
     "webpack-dev-middleware": "^3.6.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.7.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-node": "^8.0.1",

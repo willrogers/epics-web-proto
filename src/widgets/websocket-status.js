@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //Import the closeWebsocket action.
-import {closeWebsocket} from '../actions/EPICSActions.js';
-import {store} from '../redux/EPICSStore.js';
-import {widgetHoc} from './Widget.js';
+import {closeWebsocket} from '../actions/epics-actions';
+import {store} from '../redux/epics-store';
+import {widgetHoc} from './widget';
 
 
 const DEFAULT_STYLE = {'border': '1px solid black'};

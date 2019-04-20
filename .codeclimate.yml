@@ -12,7 +12,7 @@ engines:
     ratings:
       paths:
       - src/**
-      - __tests__/**
+      - tests/**
       - "**.js"
       - "**.yml"
 

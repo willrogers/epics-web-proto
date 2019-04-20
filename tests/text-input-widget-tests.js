@@ -1,4 +1,4 @@
-import {RawTextInput} from '../src/widgets/TextInputWidget.js';
+import {RawTextInput} from '../src/widgets/text-input-widget';
 import React from 'react';
 
 import {shallow} from 'enzyme';

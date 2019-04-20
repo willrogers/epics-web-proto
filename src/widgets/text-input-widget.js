@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {widgetHoc} from './Widget.js';
+import {widgetHoc} from './widget';
 
 const DEFAULT_STYLE = {'backgroundColor': 'red'};
 
@@ -52,7 +52,7 @@ export class RawTextInput extends React.Component {
             val = this.props.value;
         }
         if (val !== '') {
-            if (typeof val == 'string') {
+            if (typeof val === 'string') {
                 val = parseFloat(val);
             }
             val = val.toFixed(3);
@@ -75,7 +75,7 @@ export class RawTextInput extends React.Component {
 
 RawTextInput.propTypes = {
     pv: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     InputValue: PropTypes.string,
     setValue: PropTypes.func,
     precision: PropTypes.number,

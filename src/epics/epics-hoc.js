@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {store} from '../redux/EPICSStore.js';
-import {WRITE_PV, subscribeToPV, unsubscribeToPV} from '../actions/EPICSActions.js';
+import {store} from '../redux/epics-store';
+import {WRITE_PV, subscribeToPV, unsubscribeToPV} from '../actions/epics-actions';
 
 //Instantiate an Id for tracking the component
 let currentId = 0;

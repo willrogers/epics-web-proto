@@ -1,8 +1,4 @@
-//Import the actionType constants
-import {
-    UPDATE_PV,
-    UPDATE_WS_READYSTATE,
-} from '../actions/EPICSActions.js';
+import {UPDATE_PV, UPDATE_WS_READYSTATE} from '../actions/epics-actions';
 
 //Initial state of our store, empty
 const initialState = {
@@ -11,7 +7,7 @@ const initialState = {
 };
 
 //Default params initialises state when nothing is passed
-function EPICSReducer(state = initialState, action) {
+function EpicsReducer(state = initialState, action) {
 
     // The reducer takes our current state and an action, and returns
     // a new state that reflects the changes we want to make, described
@@ -48,4 +44,4 @@ function EPICSReducer(state = initialState, action) {
     }
 }
 
-export default EPICSReducer;
+export default EpicsReducer;

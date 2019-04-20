@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {widgetHoc} from './Widget.js';
+import {widgetHoc} from './widget';
 
 
 const DEFAULT_STYLE = {

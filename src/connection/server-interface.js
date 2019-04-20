@@ -1,8 +1,6 @@
-import {updatePV} from '../actions/EPICSActions.js';
-
-//Server implementation/plugin is defined here:
-import {Epics2WebPlugin} from './Epics2WebPlugin.js';
-import {SimulatorPlugin} from './SimulatorPlugin';
+import {updatePV} from '../actions/epics-actions';
+import {Epics2WebPlugin} from './epics2web-plugin';
+import {SimulatorPlugin} from './simulator-plugin';
 
 
 //A generic class to hook a server into EpicsWebProto. Exposes the methods

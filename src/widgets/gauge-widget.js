@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {widgetHoc} from './Widget.js';
+import {widgetHoc} from './widget';
 
 
 export class RawGaugeWidget extends React.Component {

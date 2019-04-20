@@ -1,5 +1,5 @@
 import jlab from '../external/epics2web.js';
-import {updateWebSockStatus} from '../actions/EPICSActions';
+import {updateWebSockStatus} from '../actions/epics-actions';
 
 export class Epics2WebPlugin {
 
@@ -19,7 +19,7 @@ export class Epics2WebPlugin {
             this.open = true;
             updateWebSockStatus('open');
 
-            if (this.cachedRequests.length != 0) {
+            if (this.cachedRequests.length !== 0) {
                 this.connection.monitorPvs(this.cachedRequests);
             }
 

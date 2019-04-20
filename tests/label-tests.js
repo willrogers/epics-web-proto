@@ -1,4 +1,4 @@
-import {RawLabel} from '../src/widgets/Label.js';
+import {RawLabel} from '../src/widgets/label';
 import React from 'react';
 
 import {shallow} from 'enzyme';

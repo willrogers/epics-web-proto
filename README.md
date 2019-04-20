@@ -72,7 +72,7 @@ Testing:
 
 * Jest: Config located in 'jest.conf.js'
 * Eslint: Config located in './.eslintrc.js'
-* Enzyme: Set up in 'setupTests.js'
+* Enzyme: Set up in 'setup-tests.js'
 
 
 ### Architecture

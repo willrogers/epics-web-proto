@@ -5,10 +5,10 @@ import {
     WRITE_PV,
     UNSUBSCRIBE_TO_PV,
     CLOSE_WEBSOCKET
-} from '../actions/EPICSActions.js';
+} from '../actions/epics-actions';
 
 //Import the websocket functionality
-import {ServerInterface} from '../connection/ServerInterface.js';
+import {ServerInterface} from '../connection/server-interface';
 
 //Instantiate the connectionObject
 let connectionObject = null;

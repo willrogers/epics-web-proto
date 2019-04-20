@@ -1,4 +1,4 @@
-import {TextInput} from '../src/epics/TextInput.js';
+import {TextInput} from '../src/epics/text-input';
 import React from 'react';
 
 import {shallow} from 'enzyme';

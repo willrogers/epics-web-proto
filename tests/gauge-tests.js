@@ -1,4 +1,4 @@
-import {RawGaugeWidget} from '../src/widgets/GaugeWidget.js';
+import {RawGaugeWidget} from '../src/widgets/gauge-widget';
 import React from 'react';
 
 import {mount} from 'enzyme';
