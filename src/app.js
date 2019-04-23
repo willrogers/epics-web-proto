@@ -1,14 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {Label} from './widgets/label';
-import {Gauge, TextUpdate} from './epics/epics-widgets.js';
-import {TextInput} from './epics/text-input';
-import {WebsocketStatus} from './widgets/websocket-status';
+import {widgetFactory} from './widget-factory';
+import {Display} from './widgets/display';
 
 import {connectToServer} from './actions/epics-actions';
 
-//Define the destination to connect the WebSocket to
+
+const app = {
+    x: 0,
+    y: 0,
+    w: 500,
+    h: 300,
+    children: [
+        {
+            widgetType: 'Label',
+            x: 10,
+            y: 10,
+            w: 100,
+            h: 100,
+            label: 'hello'
+        },
+        {
+            widgetType: 'TextUpdate',
+            x: 110,
+            y: 10,
+            w: 100,
+            h: 100,
+            pv: 'loc://local'
+        }
+    ]
+};
+
+
 const websocketURL = 'ws://localhost:8080/epics2web/monitor';
 const pluginType = 'simulator';
 
@@ -25,24 +49,10 @@ class App extends React.Component {
     //them with parameters in the form of props. These props are then used
     //in the components themselves to inform their presentation.
     render() {
+        const children = app.children;
+        delete app.children;
         return(
-            <div>
-                <Label x={10} y={50} w={50} h={20} label="loc://local"/>
-                <TextUpdate x={110} y={50} w={50} h={20} pv="loc://local" precision={3} />
-                <TextUpdate x={200} y={50} w={50} h={20} pv="loc://local" />
-                <Label Component x={10} y={100} w={50} h={20} label="loc://local"/>
-                <TextInput x={110} y={100} w={50} h={20} pv="loc://local"/>
-                <Gauge
-                    pv="sim://sine"
-                    x={50}
-                    y={150}
-                    w={300}
-                    h={150}
-                    minVal="-1"
-                    maxVal="1"
-                />
-                <WebsocketStatus x={0} y={300} w={50} h={20} />
-            </div>
+            <Display factory={widgetFactory} children={children} {...app} />
         );
     }
 }
